@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SiparisTakip.Models
 {
-    public class ApplicationDbContex : DbContext
+    public class SiparisTakipDB : DbContext
     {
-        public ApplicationDbContex(DbContextOptions<ApplicationDbContex> options) : base(options)
+        public SiparisTakipDB(DbContextOptions<SiparisTakipDB> options) : base(options)
         {
 
         }

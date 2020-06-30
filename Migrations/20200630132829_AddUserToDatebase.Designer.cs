@@ -8,7 +8,7 @@ using SiparisTakip.Models;
 
 namespace SiparisTakip.Migrations
 {
-    [DbContext(typeof(ApplicationDbContex))]
+    [DbContext(typeof(SiparisTakipDB))]
     [Migration("20200630132829_AddUserToDatebase")]
     partial class AddUserToDatebase
     {

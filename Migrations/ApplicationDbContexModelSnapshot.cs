@@ -7,7 +7,7 @@ using SiparisTakip.Models;
 
 namespace SiparisTakip.Migrations
 {
-    [DbContext(typeof(ApplicationDbContex))]
+    [DbContext(typeof(SiparisTakipDB))]
     partial class ApplicationDbContexModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
