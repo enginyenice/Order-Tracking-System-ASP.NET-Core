@@ -20,6 +20,7 @@ namespace SiparisTakip.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 
