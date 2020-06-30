@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SiparisTakip.Models;
 
 namespace SiparisTakip.Migrations
 {
     [DbContext(typeof(SiparisTakipDB))]
-    partial class ApplicationDbContexModelSnapshot : ModelSnapshot
+    [Migration("20200630223626_userPermissionAdd")]
+    partial class userPermissionAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

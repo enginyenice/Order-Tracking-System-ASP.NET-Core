@@ -24,6 +24,7 @@ namespace SiparisTakip
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession();
             services.AddDbContext<Models.SiparisTakipDB>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
         }
@@ -47,7 +48,8 @@ namespace SiparisTakip
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseCookiePolicy();
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
