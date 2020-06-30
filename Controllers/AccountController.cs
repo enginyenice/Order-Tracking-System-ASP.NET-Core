@@ -19,14 +19,11 @@ namespace SiparisTakip.Controllers
             _siparisTakipDB = context;
         }
 
-
-
-
         public IActionResult Index()
         {
             return View();
         }
-
+        #region LoginPost
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult LoginPost(string userMail,string userPassword)
@@ -57,7 +54,8 @@ namespace SiparisTakip.Controllers
             }
             
         }
-
+        #endregion
+        #region RegisterPost
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult RegisterPost(string userMail,string userName, string userSurname ,string userPassword, string password)
@@ -83,5 +81,6 @@ namespace SiparisTakip.Controllers
             }
             return RedirectToAction(nameof(AccountController.Index), "Account");
         }
+        #endregion
     }
 }
