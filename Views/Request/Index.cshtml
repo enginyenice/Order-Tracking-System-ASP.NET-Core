@@ -14,6 +14,52 @@
         cursor: all-scroll;
     }
 </style>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Başlık</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col col-md-4">
+                    <img id="RequestImage" src="~/images/img.jpg" class="img-thumbnail">
+                    </div>
+                    <div class="col col-md-8">
+                        <p><strong>Talep Tarihi: </strong> <span id="requestDeliveryDate">requestDeliveryDate</span></p>
+                        <p><strong>Talep Eden Departman: </strong><span id="requestDepartment">requestDepartment</span></p>
+                        <p><strong>Açıklama: </strong><span id="requestDescription">requestDescription</span></p>
+                        <p><strong>Tahmini Fiyat: </strong><span id="requestEstimatedPrice">requestEstimatedPrice</span></p>
+                        <p><strong>Gider Yeri: </strong><span id="requestExpensePlace">requestExpensePlace</span></p>
+                        <p><strong>Ürün Özellikleri: </strong><span id="requestProductFeatures">requestProductFeatures</span></p>
+                        <p><strong>Proje: </strong><span id="requestProject">requestProject</span></p>
+                        <p><strong>Miktar: </strong><span id="requestQuantity">requestQuantity</span></p>
+                        <p><strong>Durum: </strong><span id="requestStatus">requestStatus</span></p>
+                        <p><strong>Cinsi: </strong><span id="requestSteff">requestSteff</span></p>
+                        <p><strong>Tedarik Firma 1: </strong><span id="requestSupplyCompany1">requestSupplyCompany1</span></p>                        </p>
+                        <p><strong>Tedarik Firma 2: </strong><span id="requestSupplyCompany2">requestSupplyCompany2</span></p>
+                        <p><strong>Tedarik Firma 3: </strong><span id="requestSupplyCompany3">requestSupplyCompany3</span></p>
+                        <p><strong>Müşteri Adı: </strong><span id="userName">userName</span></p>
+                        <p><strong>Müşteri Soyadı: </strong><span id="userSurname">userSurname</span></p>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
@@ -139,7 +185,43 @@
       },
         url: '@Url.Action("RequestInfo", "Request")',
                 success: function (result) {
+                    result = JSON.parse(result)
                     console.log(result);
+                    var date = new Date(result.requestDeliveryDate);
+                    let yr = date.getFullYear();
+                    let month = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth();
+                    let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+                    let newDate = day + '-' + month + '-' + yr;
+                    let status = result.requestStatus;
+                    let text = "";
+                    if (status == 0)
+                        text = `<span class="text-info"><strong>Onay Bekliyor</strong></span">`;
+                    else
+                        text = `<span class="text-success"><strong>Onaylandı</strong></span">`;
+
+                    let image = "~/images/" + result.requestImage;
+                    $("#RequestImage").attr('src', image);
+                    $("#requestDeliveryDate").text(newDate);
+                    $("#requestDepartment").text(result.requestDepartment);
+                    $("#requestDescription").text(result.requestDescription);
+                    $("#requestEstimatedPrice").text(result.requestEstimatedPrice);
+                    $("#requestExpensePlace").text(result.requestExpensePlace);
+                    $("#requestProductFeatures").text(result.requestProductFeatures);
+                    $("#requestProject").text(result.requestProject);
+                    $("#requestStatus").html(text);
+                    
+                    $("#requestQuantity").text(result.requestQuantity);
+                    $("#requestSteff").text(result.requestSteff);
+                    $("#requestSupplyCompany1").text(result.requestSupplyCompany1);
+                    $("#requestSupplyCompany2").text(result.requestSupplyCompany2);
+                    $("#requestSupplyCompany2").text(result.requestSupplyCompany3);
+                    $("#userName").text(result.user.userName);
+                    $("#userSurname").text(result.user.userSurname);
+                    
+
+                    
+
+                    $('.modal').modal('show');
     }
     });
 }
