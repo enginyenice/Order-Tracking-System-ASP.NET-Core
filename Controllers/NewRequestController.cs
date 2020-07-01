@@ -13,11 +13,14 @@ using SiparisTakip.Models.Tables;
 namespace SiparisTakip.Controllers
 {
 
-    public class YeniTalepController : Controller
+    public class NewRequestController : Controller
     {
+        [Obsolete]
         private readonly IHostingEnvironment _evrimoment;
         private readonly SiparisTakipDB _siparisTakipDB;
-        public YeniTalepController(SiparisTakipDB context, IHostingEnvironment evrimoment)
+
+        [Obsolete]
+        public NewRequestController(SiparisTakipDB context, IHostingEnvironment evrimoment)
         {
             _siparisTakipDB = context;
             _evrimoment = evrimoment;
@@ -31,6 +34,7 @@ namespace SiparisTakip.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Obsolete]
         public IActionResult CreateRequest(
             [Bind("requestDepartment", "requestSteff",
             "requestProject","requestProject",
@@ -47,10 +51,8 @@ namespace SiparisTakip.Controllers
                 string resimler = Path.Combine(_evrimoment.WebRootPath, "images");
                 if (request.ImageFile.Length > 0)
                 {
-                    using (var fileStream = new FileStream(Path.Combine(resimler, request.ImageFile.FileName), FileMode.Create))
-                    {
-                        request.ImageFile.CopyToAsync(fileStream);
-                    }
+                    using var fileStream = new FileStream(Path.Combine(resimler, request.ImageFile.FileName), FileMode.Create);
+                    request.ImageFile.CopyToAsync(fileStream);
                 }
 
 
@@ -66,21 +68,6 @@ namespace SiparisTakip.Controllers
             }
             return RedirectToAction("Index", "Account");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            return View();
         }
 
 
