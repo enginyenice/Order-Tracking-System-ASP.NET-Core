@@ -1,4 +1,17 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
+@{
+    string AktifKullaniciAdSoyad = "";
+    if (Context.Session.GetString("userName")!=null)
+    {
+        System.Globalization.CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+        System.Globalization.TextInfo textInfo = cultureInfo.TextInfo;
+        AktifKullaniciAdSoyad = textInfo.ToTitleCase(Context.Session.GetString("userName")) + " " + Context.Session.GetString("userSurname").ToUpper();
+    }
+}
+
+
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -39,7 +52,9 @@
                         </div>
                         <div class="profile_info">
                             <span>Hoş Geldin</span>
-                            <h2 >Kullanıcı Adı</h2>
+                            <h2>
+                                @AktifKullaniciAdSoyad
+                            </h2>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -50,13 +65,13 @@
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu ">
                         <div class="menu_section">
-                     
+
                             <ul class="nav side-menu">
                                 <li>
                                     <a><i class="fa fa-home"></i> Ana Sayfa </a>
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-edit"></i> Satın Alma Talebi Oluştur</a>
+                                    <a href="YeniTalep"><i class="fa fa-edit"></i> Satın Alma Talebi Oluştur</a>
                                 </li>
                                 <li>
                                     <a><i class="fa fa-desktop"></i>Onaylanan Talepler</a>
@@ -69,7 +84,7 @@
                     <!-- /sidebar menu -->
                     <!-- /menu footer buttons -->
                     <div class="sidebar-footer hidden-small" style="background: #172D44; height:40px;">
-            
+
                     </div>
                     <!-- /menu footer buttons -->
                 </div>
@@ -85,16 +100,17 @@
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style=" ">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/img.jpg" alt="">Kullanıcı Adı
+                                    <img src="images/img.jpg" alt="">
+                                    @AktifKullaniciAdSoyad
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="javascript:;"> Profil Bilgileri</a>                           
-                                    <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i> Çıkış Yap</a>
+                                    <a class="dropdown-item" href="javascript:;"> Profil Bilgileri</a>
+                                    <a class="dropdown-item" href="Account/DeleteSession"><i class="fa fa-sign-out pull-right"></i> Çıkış Yap</a>
                                 </div>
                             </li>
 
                             <li role="presentation" class="nav-item dropdown open" style=" ">
-                                <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false" >
+                                <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
                                     <i class="fa fa-envelope-o" style="padding-top:9px;"></i>
                                     <span class="badge bg-green" style="margin-top:9px;">6</span>
                                 </a>
@@ -148,7 +164,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                        
+
                                     </li>
                                 </ul>
                             </li>
@@ -179,9 +195,9 @@
     <script src="~/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="~/vendors/nprogress/nprogress.js"></script>
-
+    <script src="~/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
     <!-- Custom Theme Scripts -->
-    <script src="~/build/js/custom.min.js"></script>
+    <script src="~/build/js/custom.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
