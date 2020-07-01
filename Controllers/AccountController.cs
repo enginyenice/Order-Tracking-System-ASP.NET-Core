@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using SiparisTakip.Models;
+using System.Linq;
 
 namespace SiparisTakip.Controllers
 {
@@ -23,7 +18,9 @@ namespace SiparisTakip.Controllers
         {
             return View();
         }
+
         #region LoginPost
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult LoginPost(string userMail, string userPassword)
@@ -32,7 +29,6 @@ namespace SiparisTakip.Controllers
             result = _siparisTakipDB.Users.Where(u => u.userMail == userMail && u.userPassword == userPassword).Count();
             if (result > 0)
             {
-
                 var userProfile = _siparisTakipDB.Users.Select(User => User).Where(u => u.userMail == userMail && u.userPassword == userPassword).FirstOrDefault();
 
                 int SessionUserId = userProfile.userId;
@@ -54,37 +50,60 @@ namespace SiparisTakip.Controllers
                 TempData["InfoType"] = "warning";
                 return RedirectToAction(nameof(AccountController.Index), "Account");
             }
-
         }
-        #endregion
+
+        #endregion LoginPost
+
         #region RegisterPost
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult RegisterPost(string userMail, string userName, string userSurname, string userPassword, string password)
+        public IActionResult RegisterPost(string userMail, string REuserMail, string userName, string userSurname, string userPassword, string REuserPassword, string password)
         {
-            int result = 0;
-            result = _siparisTakipDB.Users.Where(u => u.userMail == userMail && u.userPassword == userPassword).Count();
-            if (result == 0)
+            if (REuserMail == userMail)
             {
-                User newUser = new User();
-                newUser.userMail = userMail;
-                newUser.userName = userName;
-                newUser.userSurname = userSurname;
-                newUser.userPassword = userPassword;
-                newUser.userPermission = "Customer";
-                _siparisTakipDB.Add(newUser);
-                _siparisTakipDB.SaveChanges();
-                TempData["Info"] = "Your account has been created";
-                TempData["InfoType"] = "success";
+                if (REuserPassword == userPassword)
+                {
+                    int result = 0;
+                    result = _siparisTakipDB.Users.Where(u => u.userMail == userMail && u.userPassword == userPassword).Count();
+                    if (result == 0)
+                    {
+                        User newUser = new User
+                        {
+                            userMail = userMail,
+                            userName = userName,
+                            userSurname = userSurname,
+                            userPassword = userPassword,
+                            userPermission = "Customer"
+                        };
+                        _siparisTakipDB.Add(newUser);
+                        _siparisTakipDB.SaveChanges();
+                        TempData["Info"] = "Hesap Başarıyla Oluşturuldu";
+                        TempData["InfoType"] = "success";
+                    
+                    }
+                    else
+                    {
+                        TempData["Info"] = "Bu Mail Hesabı Zaten Kayıtlı";
+                        TempData["InfoType"] = "danger";
+                    }
+                }
+                else
+                {
+                    TempData["Info"] = "Şifreler Uyuşmuyor";
+                    TempData["InfoType"] = "danger";
+                }
             }
             else
             {
-                TempData["Info"] = "E-mail address is registered in the system.";
+                TempData["Info"] = "E-Postalar Uyuşmuyor";
                 TempData["InfoType"] = "danger";
             }
-            return RedirectToAction(nameof(AccountController.Index), "Account");
+             return RedirectToAction(nameof(AccountController.Index), "Account");
         }
-        #endregion
+
+        #endregion RegisterPost
+
         public IActionResult DeleteSession()
         {
             HttpContext.Session.Remove("userId");
