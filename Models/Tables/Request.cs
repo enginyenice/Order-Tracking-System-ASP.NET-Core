@@ -29,10 +29,13 @@ namespace SiparisTakip.Models.Tables
         public string requestSupplyCompany3 { get; set; }
         public int requestStatus { get; set; } // 0 - Onay Bekliyor 1 - Tamamlandı
         public int userId { get; set; }
+        public virtual User user { get; set; }
+
 
         [NotMapped]
         public Microsoft.AspNetCore.Http.IFormFile ImageFile { get; set; }
         [NotMapped]
         public string date { get; set; }
+
     }
 }

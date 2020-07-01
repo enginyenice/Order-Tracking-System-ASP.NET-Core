@@ -44,7 +44,7 @@
                                 {
                                     if (item.requestStatus == 0)
                                     {
-                                        <li id="res-@item.requestId" class="list-group-item">@item.requestDepartment - @item.requestSteff - @item.requestProject</li>
+                                        <li id="res-@item.requestId" ondblclick="RequestDetails(@item.requestId)" class="list-group-item">@item.requestDepartment - @item.requestSteff - @item.requestProject</li>
                                     }
 
                                 }
@@ -59,7 +59,7 @@
                                 {
                                     if (item.requestStatus == 1)
                                     {
-                                        <li id="res-@item.requestId" class="list-group-item">@item.requestDepartment - @item.requestSteff - @item.requestProject</li>
+                                        <li id="res-@item.requestId" ondblclick="RequestDetails(@item.requestId)" class="list-group-item">@item.requestDepartment - @item.requestSteff - @item.requestProject</li>
                                     }
 
                                 }
@@ -123,9 +123,26 @@
     }
 });
 
-        
+
 
     }
+
+    function RequestDetails(id) {
+        let postData = {
+            'id': id
+        }
+            $.ajax({
+        type: "post",
+        data:postData,
+        headers: {
+        "RequestVerificationToken": '@GetAntiXsrfRequestToken()'
+      },
+        url: '@Url.Action("RequestInfo", "Request")',
+                success: function (result) {
+                    console.log(result);
+    }
+    });
+}
 
 
 

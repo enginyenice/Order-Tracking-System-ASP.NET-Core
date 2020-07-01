@@ -5,7 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SiparisTakip.Models;
 using SiparisTakip.Models.Tables;
@@ -43,10 +45,17 @@ namespace SiparisTakip.Controllers
             }
             return new JsonResult("success");
         }
+
+        public ActionResult RequestInfo(int id)
+        {
+            Request getRequest = _siparisTakipDB.Requests
+                .Include(m => m.user)
+                .First(m => m.requestId == id);
+
+
+            string getData = JsonConvert.SerializeObject(getRequest);
+            return new JsonResult(getData);
+        }
     }
 }
-public class Data
-{
-    public string data { get; set; }
-    public string status { get; set; }
-}
+
