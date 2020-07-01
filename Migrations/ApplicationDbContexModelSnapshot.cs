@@ -56,9 +56,6 @@ namespace SiparisTakip.Migrations
                     b.Property<string>("requestSpecies")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("requestStatus")
-                        .HasColumnType("int");
-
                     b.Property<string>("requestSteff")
                         .HasColumnType("nvarchar(max)");
 
@@ -78,7 +75,7 @@ namespace SiparisTakip.Migrations
 
                     b.HasIndex("userId");
 
-                    b.ToTable("Requests");
+                    b.ToTable("Request");
                 });
 
             modelBuilder.Entity("SiparisTakip.Models.User", b =>

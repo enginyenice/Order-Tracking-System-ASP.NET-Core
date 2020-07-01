@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SiparisTakip.Models.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +13,5 @@ namespace SiparisTakip.Models
 
         }
         public DbSet<User> Users { get; set; }
-        public DbSet<Request> Requests { get; set; }
     }
 }
