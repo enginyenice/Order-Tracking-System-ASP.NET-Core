@@ -24,6 +24,8 @@ namespace SiparisTakip
             services.AddDbContext<Models.SiparisTakipDB>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
 
+
+            // Life Circle Killer
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,
