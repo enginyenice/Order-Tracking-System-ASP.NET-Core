@@ -45,16 +45,13 @@ namespace SiparisTakip.Controllers
             }
             return new JsonResult("success");
         }
-
-        public ActionResult RequestInfo(int id)
+        [HttpPost]
+        public IActionResult RequestInfo(int id)
         {
-            Request getRequest = _siparisTakipDB.Requests
-                .Include(m => m.user)
-                .First(m => m.requestId == id);
+            Request getRequest = _siparisTakipDB.Requests.Include(m => m.User).First(n => n.requestId == id);
+            string getAllData = JsonConvert.SerializeObject(getRequest);
+            return new JsonResult(getAllData);
 
-
-            string getData = JsonConvert.SerializeObject(getRequest);
-            return new JsonResult(getData);
         }
     }
 }

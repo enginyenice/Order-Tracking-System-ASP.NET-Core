@@ -17,6 +17,5 @@ namespace SiparisTakip.Models
         public string userMail { get; set; }
         public string userPassword { get; set; }
         public string userPermission { get; set; }
-        public List<Request> requests { get; set; }
     }
 }
