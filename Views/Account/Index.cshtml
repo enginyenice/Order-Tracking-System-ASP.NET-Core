@@ -50,34 +50,36 @@
                 <section class="login_content">
                     @using (Html.BeginForm("LoginPost", "Account", FormMethod.Post, new { }))
                     {
-                        <h1>Login Form</h1>
+                        <h1>Giriş</h1>
                         <div>
                             <input type="email" name="userMail" class="form-control" placeholder="Mail" required="" />
                         </div>
                         <div>
-                            <input type="password" name="userPassword" class="form-control" placeholder="Password" required="" />
+                            <input type="password" name="userPassword" class="form-control" placeholder="Şifre" required="" />
                         </div>
-                        
-                            <button type="submit" class="btn-block btn btn-dark">Log In</button>
-                        
-                        <div>
-                            <a class="reset_pass" href="#">Lost your password?</a>
-                        </div>
+
+                        <button type="submit" class="btn-block btn btn-dark">Giriş Yap</button>
+
+                        <br>
+                        <a class="reset_pass" href="#">Şifremi Unuttum</a>
 
                         <div class="clearfix"></div>
-
+                        <br>
                         <div class="separator">
+                            <br>
                             <p class="change_link">
-                                New to site?
-                                <a href="#signup" class="to_register"> Create Account </a>
+                                <a href="#signup" class="to_register"> Hesap Oluştur </a>
                             </p>
 
                             <div class="clearfix"></div>
                             <br />
 
                             <div>
-                                <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                                <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                                <h1><img src="~/images/MainLogo.png"> Sipariş Portalı</h1>
+                                <p>
+                                    Copyright &copy;
+                                    StorkBilisim
+                                </p>
                             </div>
                         </div>
                     }
@@ -89,37 +91,46 @@
 
                     @using (Html.BeginForm("RegisterPost", "Account", FormMethod.Post, new { }))
                     {
-                        <h1>Create Account</h1>
+                        <h1>Hesap Oluştur</h1>
                         <div>
-                            <input type="text" name="userName" class="form-control" placeholder="User name" required="" />
+                            <input type="text" name="userName" class="form-control" placeholder="Ad" required="" />
                         </div>
                         <div>
-                            <input type="text" name="userSurname" class="form-control" placeholder="User surname" required="" />
+                            <input type="text" name="userSurname" class="form-control" placeholder="Soyad" required="" />
                         </div>
                         <div>
-                            <input type="email" name="userMail" class="form-control" placeholder="Email" required="" />
+                            <input type="email" name="userMail" class="form-control" placeholder="Mail" required="" />
                         </div>
                         <div>
-                            <input type="password" name="userPassword" class="form-control" placeholder="Password" required="" />
+                            <input type="email" name="REuserMail" class="form-control" placeholder="Mail Tekrar" required="" />
                         </div>
                         <div>
-                            <button type="submit" class="btn-block btn btn-dark">Register</button>
+                            <input type="password" name="userPassword" class="form-control" placeholder="Şifre" required="" />
+                        </div>
+                        <div>
+                            <input type="password" name="REuserPassword" class="form-control" placeholder="Şifre Tekrar" required="" />
+                        </div>
+                        <div>
+                            <button type="submit" class="btn-block btn btn-dark">Kayıt Ol</button>
                         </div>
 
                         <div class="clearfix"></div>
 
                         <div class="separator">
                             <p class="change_link">
-                                Already a member ?
-                                <a href="#signin" class="to_register"> Log in </a>
+                                Zaten üye misin ?
+                                <a href="#signin" class="to_register"> Giriş Yap </a>
                             </p>
 
                             <div class="clearfix"></div>
                             <br />
 
                             <div>
-                                <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                                <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                                <h1><img src="~/images/MainLogo.png"> Sipariş Portalı</h1>
+                                <p>
+                                    Copyright &copy;
+                                    StorkBilisim
+                                </p>
                             </div>
                         </div>
                     }
