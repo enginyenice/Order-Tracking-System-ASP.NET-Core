@@ -13,9 +13,23 @@ namespace SiparisTakip.Controllers
         {
             _siparisTakipDB = context;
         }
+        public bool SessionCont()
+        {
+
+            if (HttpContext != null)
+            {
+                if ((HttpContext.Session.GetString("userId")) == null)
+                {
+                    return true;
+                }
+            }
+            return false; ;
+        }
 
         public IActionResult Index()
         {
+            if (SessionCont() == false)
+                return RedirectToAction("Index", "Home");
             return View();
         }
 
@@ -25,6 +39,8 @@ namespace SiparisTakip.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult LoginPost(string userMail, string userPassword)
         {
+            if (SessionCont() == false)
+                return RedirectToAction("Index", "Home");
             int result = 0;
             result = _siparisTakipDB.Users.Where(u => u.userMail == userMail && u.userPassword == userPassword).Count();
             if (result > 0)
@@ -60,6 +76,8 @@ namespace SiparisTakip.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult RegisterPost(string userMail, string REuserMail, string userName, string userSurname, string userPassword, string REuserPassword, string password)
         {
+            if (SessionCont() == false)
+                return RedirectToAction("Index", "Home");
             if (REuserMail == userMail)
             {
                 if (REuserPassword == userPassword)

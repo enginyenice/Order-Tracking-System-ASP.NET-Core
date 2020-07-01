@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,20 +14,38 @@ namespace SiparisTakip.Controllers
     {
         private readonly SiparisTakipDB _context;
 
+        public bool SessionCont()
+        {
+
+            if (HttpContext != null)
+            {
+                if ((HttpContext.Session.GetString("userId")) != null)
+                {
+                    return true;
+                }
+            }
+            return false; ;
+        }
         public UsersController(SiparisTakipDB context)
         {
+
             _context = context;
         }
+
 
         // GET: Users
         public async Task<IActionResult> Index()
         {
+            if (SessionCont() == false)
+                return RedirectToAction("Index", "Account");
             return View(await _context.Users.ToListAsync());
         }
 
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (SessionCont() == false)
+                return RedirectToAction("Index", "Account");
             if (id == null)
             {
                 return NotFound();
@@ -45,6 +64,8 @@ namespace SiparisTakip.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
+            if (SessionCont() == false)
+                return RedirectToAction("Index", "Account");
             return View();
         }
 
@@ -67,6 +88,8 @@ namespace SiparisTakip.Controllers
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (SessionCont() == false)
+                return RedirectToAction("Index", "Account");
             if (id == null)
             {
                 return NotFound();

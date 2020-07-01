@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -21,8 +22,22 @@ namespace SiparisTakip.Controllers
         {
             _siparisTakipDB = context;
         }
+        public bool SessionCont()
+        {
+
+            if (HttpContext != null)
+            {
+                if ((HttpContext.Session.GetString("userId")) != null)
+                {
+                    return true;
+                }
+            }
+            return false; ;
+        }
         public IActionResult Index()
         {
+            if (SessionCont() == false)
+                return RedirectToAction("Index", "Account");
             return View(_siparisTakipDB.Requests.ToList());
         }
 
@@ -48,6 +63,8 @@ namespace SiparisTakip.Controllers
 
         public ActionResult RequestInfo(int id)
         {
+            if (SessionCont() == false)
+                return RedirectToAction("Index", "Account");
             Request getRequest = _siparisTakipDB.Requests
                 .Include(m => m.user)
                 .First(m => m.requestId == id);

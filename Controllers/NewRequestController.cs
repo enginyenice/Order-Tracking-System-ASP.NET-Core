@@ -25,9 +25,23 @@ namespace SiparisTakip.Controllers
             _siparisTakipDB = context;
             _evrimoment = evrimoment;
         }
+        public bool SessionCont()
+        {
+
+            if (HttpContext != null)
+            {
+                if ((HttpContext.Session.GetString("userId")) != null)
+                {
+                    return true;
+                }
+            }
+            return false; ;
+        }
 
         public IActionResult Index()
         {
+            if (SessionCont() == false)
+                return RedirectToAction("Index", "Account");
             return View();
         }
 
