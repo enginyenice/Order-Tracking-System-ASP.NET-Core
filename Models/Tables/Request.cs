@@ -27,6 +27,7 @@ namespace SiparisTakip.Models.Tables
         public string requestSupplyCompany1 { get; set; }
         public string requestSupplyCompany2 { get; set; }
         public string requestSupplyCompany3 { get; set; }
+        public int requestStatus { get; set; } // 0 - Onay Bekliyor 1 - Tamamlandı
         public int userId { get; set; }
 
         [NotMapped]
