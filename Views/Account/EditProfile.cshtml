@@ -1,0 +1,192 @@
+﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+
+@{
+    ViewData["Title"] = "Home Page";
+
+    string userName = Context.Session.GetString("userName");
+    string userSurname = Context.Session.GetString("userSurname");
+}
+
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Profil Düzenle</h3>
+            </div>
+            @if (ViewData["EditProfile"] != null)
+            {
+                <div class="alert alert-danger">asd</div>
+            }
+            <div class="title_right">
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Ad Soyad Düzenle </h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        @using (Html.BeginForm("EditUser", "Account", FormMethod.Post, new { }))
+                        {
+                            <div class="form-label-left input_mask">
+
+                                <div class="col-md-6 col-sm-6  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="userName" id="userName" placeholder="@userName">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6  form-group has-feedback">
+                                    <input type="text" class="form-control  has-feedback-left"  name="userSurname" id="userSurname" placeholder="@userSurname">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+
+
+                                <div class="form-group row text-right">
+                                    <div class="col-md-9 col-sm-9  offset-md-3">
+                                        <a href="Home" type="button" class="btn btn-primary">Geri</a>
+                                        <a onclick="profilYenile()" class="btn btn-success text-white">Güncelle</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Şifre Düzenle </h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        @using (Html.BeginForm("EditPassword", "Account", FormMethod.Post, new { }))
+                        {
+                            <div class="form-label-left input_mask">
+
+                                <div class="col-md-4 col-sm-4  form-group has-feedback">
+                                    <input type="text" id="password" name="password" class="form-control  has-feedback-left"  placeholder="Şifre">
+                                    <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="col-md-4 col-sm-4  form-group has-feedback">
+                                    <input type="text" id="newpassword" name="newpassword" class="form-control  has-feedback-left" placeholder="Yeni Şifre">
+                                    <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="col-md-4 col-sm-4  form-group has-feedback">
+                                    <input type="text" id="newpassword2" name="newpassword2" class="form-control  has-feedback-left"  placeholder="Yeni Şifre Tekrari">
+                                    <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+
+
+                                <div class="form-group row text-right">
+                                    <div class="col-md-9 col-sm-9  offset-md-3">
+                                        <a href="Home" type="button" class="btn btn-primary">Geri</a>
+                                        <a onclick="sifreYenile()" class="btn btn-success text-white">Güncelle</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let userName = "";
+    let userSurname = "";
+    let password;
+    let newpassword;
+    let newpassword2;
+    $("#userName").change(function () {
+        userName = $("#userName").val();
+    });
+    $("#userSurname").change(function () {
+        userSurname = $("#userSurname").val();
+    });
+    $("#password").change(function () {
+        password = $("#password").val();
+    });
+    $("#newpassword").change(function () {
+        newpassword = $("#newpassword").val();
+    });
+    $("#newpassword2").change(function () {
+        newpassword2 = $("#newpassword2").val();
+    });
+
+    function sifreYenile() {
+        let postData = {
+            'password': password,
+            'newpassword': newpassword,
+            'newpassword2': newpassword2
+        }
+
+    $.ajax({
+        type: "post",
+        data:postData,
+    headers: {
+        "RequestVerificationToken": '@GetAntiXsrfRequestToken()'
+    },
+    url: '@Url.Action("EditPassword", "Account")',
+        success: function (result) {
+            result = JSON.parse(result);
+        var res = result.split("|");
+        new PNotify({
+            title: 'Profil Güncelleme',
+            text: res[0],
+            type: res[1],
+            styling: 'bootstrap3'
+        });
+    }
+});
+    }
+    function profilYenile() {
+        let postData = {
+            'userName': userName,
+            'userSurname': userSurname
+        }
+
+    $.ajax({
+        type: "post",
+        data:postData,
+    headers: {
+        "RequestVerificationToken": '@GetAntiXsrfRequestToken()'
+    },
+    url: '@Url.Action("EditUser", "Account")',
+        success: function (result) {
+            result = JSON.parse(result);
+        var res = result.split("|");
+        new PNotify({
+            title: 'Profil Güncelleme',
+            text: res[0],
+            type: res[1],
+            styling: 'bootstrap3'
+        });
+    }
+});
+    }
+
+</script>

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using SiparisTakip.Models;
+using System;
 using System.Linq;
 
 namespace SiparisTakip.Controllers
@@ -121,6 +123,112 @@ namespace SiparisTakip.Controllers
         }
 
         #endregion RegisterPost
+
+        #region EditProfile
+
+        public IActionResult EditProfile()
+        {
+            if (SessionCont() == true)
+                return RedirectToAction("Index", "Account");
+           
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditProfile(string userMail, string userPassword)
+        {
+
+            return RedirectToAction(nameof(AccountController.Index), "Account");
+        }
+        #endregion
+
+        #region EditUser
+        public ActionResult EditUser(string userName, string userSurname)
+        {
+            string hataMesaji, status = "danger";
+            if(userName != null && userSurname != null) { 
+            if(userName.Length > 3 && userSurname.Length > 3)
+            {
+                int userId = Int32.Parse(HttpContext.Session.GetString("userId"));
+                User BilgiDegistir = _siparisTakipDB.Users.SingleOrDefault(k => k.userId == userId);
+                BilgiDegistir.userName = userName;
+                BilgiDegistir.userSurname = userSurname;
+                _siparisTakipDB.SaveChanges();
+                HttpContext.Session.SetString("userName", userName);
+                HttpContext.Session.SetString("userSurname", userSurname);
+                hataMesaji = "Profil güncellendi";
+                status = "success";
+
+            } else
+            {
+                hataMesaji = "Ad ve Soyad en az 3 karakter olmalıdır";
+                status = "danger";
+            }
+            }else
+            {
+                hataMesaji = "Ad ve Soyad en az 3 karakter olmalıdır";
+                status = "danger";
+            }
+
+            string result = hataMesaji + "|" + status;
+            result = JsonConvert.SerializeObject(result);
+            return new JsonResult(result);
+        }
+        #endregion
+
+
+        #region EditPassword
+        public ActionResult EditPassword(string password, string newpassword, string newpassword2)
+        {
+            string hataMesaji,status= "danger";
+
+            if(password != null && newpassword != null && newpassword2 != null) { 
+            if(newpassword.Length > 3)
+            {
+                if(newpassword == newpassword2)
+                {
+
+                    int userId = Int32.Parse(HttpContext.Session.GetString("userId"));
+                    User BilgiDegistir = _siparisTakipDB.Users.SingleOrDefault(k => k.userId == userId);
+                    if(BilgiDegistir.userPassword == password)
+                    {
+                        BilgiDegistir.userPassword = newpassword;
+                        _siparisTakipDB.SaveChanges();
+                        hataMesaji = "Şifre başarıyla değiştirildi.";
+                        status = "success";
+                    } else
+                    {
+                        hataMesaji = "Geçerli şifre hatalıdır.";
+                    }
+
+
+
+                } else
+                {
+                    hataMesaji = "Parolalar eşleşmiyor..";
+                }
+
+                
+
+
+            } else
+            {
+                hataMesaji = "Şifre en az 3 karakter olmalıdır.";
+            }
+            } else
+            {
+                hataMesaji = "Şifre en az 3 karakter olmalıdır.";
+            }
+            string result = hataMesaji + "|" + status;
+            result = JsonConvert.SerializeObject(result);
+            return new JsonResult(result);
+        }
+        #endregion
+
+
+
 
         public IActionResult DeleteSession()
         {

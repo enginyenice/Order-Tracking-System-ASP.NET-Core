@@ -32,6 +32,7 @@
                     <div class="col col-md-8">
                         <p><strong>Talep Tarihi: </strong> <span id="requestDeliveryDate">requestDeliveryDate</span></p>
                         <p><strong>Talep Eden Departman: </strong><span id="requestDepartment">requestDepartment</span></p>
+                        <p><strong>Talep Eden Personel: </strong><span id="requestSteff">requestSteff</span></p>
                         <p><strong>Açıklama: </strong><span id="requestDescription">requestDescription</span></p>
                         <p><strong>Tahmini Fiyat: </strong><span id="requestEstimatedPrice">requestEstimatedPrice</span></p>
                         <p><strong>Gider Yeri: </strong><span id="requestExpensePlace">requestExpensePlace</span></p>
@@ -39,7 +40,7 @@
                         <p><strong>Proje: </strong><span id="requestProject">requestProject</span></p>
                         <p><strong>Miktar: </strong><span id="requestQuantity">requestQuantity</span></p>
                         <p><strong>Durum: </strong><span id="requestStatus">requestStatus</span></p>
-                        <p><strong>Cinsi: </strong><span id="requestSteff">requestSteff</span></p>
+                        <p><strong>Cinsi: </strong><span id="requestSpecies">requestSpecies</span></p>
                         <p><strong>Tedarik Firma 1: </strong><span id="requestSupplyCompany1">requestSupplyCompany1</span></p>                        </p>
                         <p><strong>Tedarik Firma 2: </strong><span id="requestSupplyCompany2">requestSupplyCompany2</span></p>
                         <p><strong>Tedarik Firma 3: </strong><span id="requestSupplyCompany3">requestSupplyCompany3</span></p>
@@ -185,7 +186,6 @@
         url: '@Url.Action("RequestInfo", "Request")',
                 success: function (result) {
                     result = JSON.parse(result)
-                    console.log(result);
                     var date = new Date(result.requestDeliveryDate);
                     let yr = date.getFullYear();
                     let month = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth();
@@ -201,6 +201,7 @@
                     let image = "images/" + result.requestImage;
                     $("#RequestImage").attr('src', image);
                     $("#requestDeliveryDate").text(newDate);
+                    $("#requestSpecies").text(result.requestSpecies);
                     $("#requestDepartment").text(result.requestDepartment);
                     $("#requestDescription").text(result.requestDescription);
                     $("#requestEstimatedPrice").text(result.requestEstimatedPrice);
