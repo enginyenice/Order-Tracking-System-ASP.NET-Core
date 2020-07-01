@@ -33,8 +33,8 @@ namespace SiparisTakip.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreateRequest(
             [Bind("requestDepartment", "requestSteff",
-            "requestProject","requestProject",
-            "requestExpensePlace","requestProductFeatures",
+            "requestProject","requestExpensePlace",
+            "requestProductFeatures",
             "requestDescription","requestQuantity",
             "requestSpecies","requestEstimatedPrice",
             "date","requestSupplyCompany1",
@@ -56,6 +56,7 @@ namespace SiparisTakip.Controllers
 
                 request.requestDeliveryDate = Convert.ToDateTime(request.date);
                 request.requestImage = request.ImageFile.FileName;
+                request.requestStatus = 0;
                 request.userId = Int32.Parse(HttpContext.Session.GetString("userId"));
                 _siparisTakipDB.Add(request);
                 _siparisTakipDB.SaveChanges();
@@ -66,21 +67,6 @@ namespace SiparisTakip.Controllers
             }
             return RedirectToAction("Index", "Account");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            return View();
         }
 
 
