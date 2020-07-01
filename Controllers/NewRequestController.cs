@@ -51,21 +51,22 @@ namespace SiparisTakip.Controllers
                 string resimler = Path.Combine(_evrimoment.WebRootPath, "images");
                 if (request.ImageFile.Length > 0)
                 {
-                    using var fileStream = new FileStream(Path.Combine(resimler, request.ImageFile.FileName), FileMode.Create);
-                    request.ImageFile.CopyToAsync(fileStream);
+                    using (var fileStream = new FileStream(Path.Combine(resimler, request.ImageFile.FileName), FileMode.Create))
+                    {
+                        request.ImageFile.CopyTo(fileStream);
+                    }
                 }
 
 
                 request.requestDeliveryDate = Convert.ToDateTime(request.date);
                 request.requestImage = request.ImageFile.FileName;
-                request.requestStatus = 0;
                 request.userId = Int32.Parse(HttpContext.Session.GetString("userId"));
                 _siparisTakipDB.Add(request);
                 _siparisTakipDB.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                
+
             }
             return RedirectToAction("Index", "Account");
 

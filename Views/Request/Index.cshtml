@@ -53,8 +53,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
             </div>
 
         </div>
@@ -199,7 +198,7 @@
                     else
                         text = `<span class="text-success"><strong>Onaylandı</strong></span">`;
 
-                    let image = "~/images/" + result.requestImage;
+                    let image = "images/" + result.requestImage;
                     $("#RequestImage").attr('src', image);
                     $("#requestDeliveryDate").text(newDate);
                     $("#requestDepartment").text(result.requestDepartment);
@@ -209,7 +208,7 @@
                     $("#requestProductFeatures").text(result.requestProductFeatures);
                     $("#requestProject").text(result.requestProject);
                     $("#requestStatus").html(text);
-                    
+                    $("#myModalLabel").text(result.user.userName + " " + result.user.userSurname + " - " + result.requestProject);
                     $("#requestQuantity").text(result.requestQuantity);
                     $("#requestSteff").text(result.requestSteff);
                     $("#requestSupplyCompany1").text(result.requestSupplyCompany1);
