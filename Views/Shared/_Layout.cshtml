@@ -41,11 +41,17 @@
     <link href="~/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="~/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="~/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="~/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="~/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="~/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="~/vendors/jquery/dist/jquery.min.js"></script>
     <!-- jQuery UI -->
     <script src="~/vendors/jquery/dist/jquery-ui.min.js"></script>
+
+
 </head>
 
 
@@ -90,6 +96,10 @@
                                 </li>
                                 <li>
                                     <a a href="ConfirmedRequests"><i class="fa fa-desktop"></i>Onaylanan Talepler</a>
+                                    <a href="Request"><i class="fa fa-edit"></i> Talep Yönetimi</a>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-desktop"></i>Onaylanan Talepler</a>
                                 </li>
                                 <li><a href="PendingRequests"><i class="fa fa-laptop"></i>Bekleyen Talepler</a></li>
                             </ul>
@@ -231,6 +241,10 @@
     <script src="~/vendors/jszip/dist/jszip.min.js"></script>
     <script src="~/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="~/vendors/pdfmake/build/vfs_fonts.js"></script>
+    <!-- PNotify -->
+    <script src="~/vendors/pnotify/dist/pnotify.js"></script>
+    <script src="~/vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="~/vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

@@ -1,4 +1,11 @@
 ﻿@model IEnumerable<SiparisTakip.Models.Tables.Request>
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -11,7 +18,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Satın Alma Talebi Oluştur</h3>
+                <h3>Talep Güncelle</h3>
             </div>
 
             <div class="title_right">
@@ -31,28 +38,28 @@
                     </div>
                     <div class="x_content">
                         <div class="col-md-5 mt-2 mb-2">
-                            <ul class="list-group onayBekleyen" id="sortable1">
+                            <ul class="list-group onayBekleyen" style="min-height:300px" id="sortable1">
                                 <li ondblclick="myFunction()" class="list-group-item fixed bg-info text-white font-weight-bold text-center">Bekleyen Talepler</li>
                                 @foreach (var item in Model)
                                 {
-                                    if(item.requestStatus == 0)
-                                    { 
-                                        <li id="res-@item.requestId " class="list-group-item">@item.requestDepartment - @item.requestSteff - @item.requestProject</li>
+                                    if (item.requestStatus == 0)
+                                    {
+                                        <li id="res-@item.requestId" class="list-group-item">@item.requestDepartment - @item.requestSteff - @item.requestProject</li>
                                     }
 
                                 }
 
-                                
+
                             </ul>
                         </div>
                         <div class="col-md-5 offset-md-2 mt-2 mb-2">
-                            <ul class="list-group onaylanan" id="sortable2">
-                                <li  ondblclick="myFunction()"  id="res-5" class="list-group-item fixed bg-success text-white font-weight-bold text-center">Onaylanan Talepler</li>
+                            <ul class="list-group onaylanan" style="min-height:300px" id="sortable2">
+                                <li ondblclick="myFunction()" id="res-5" class="list-group-item fixed bg-success text-white font-weight-bold text-center">Onaylanan Talepler</li>
                                 @foreach (var item in Model)
                                 {
                                     if (item.requestStatus == 1)
                                     {
-                                        <li id="res-@item.requestId " class="list-group-item">@item.requestDepartment - @item.requestSteff - @item.requestProject</li>
+                                        <li id="res-@item.requestId" class="list-group-item">@item.requestDepartment - @item.requestSteff - @item.requestProject</li>
                                     }
 
                                 }
@@ -81,29 +88,45 @@
 
         $("#sortable1, #sortable2, #sortable3").disableSelection();
         $("#sortable1").on("sortupdate", function (event, ui) {
-            var data =  $(this).sortable("serialize");
+            var data = $(this).sortable("serialize");
             AjaxPost(data, 0);
         });
 
         $("#sortable2").on("sortupdate", function (event, ui) {
             var data = $(this).sortable("serialize");
-            AjaxPost(data, 1);
+            AjaxPost(data, 1,"OK");
         });
     });
 
-    function AjaxPost(data, status) {
-        let postData = JSON.stringify(data,status);
-        //console.log(postData);
-        $.ajax({
-            type: "POST",
-            url: 'Talep/RequestStatusEdit',
-            contentType: "application/json; charset=utf-8",
-            data: postData
-        })
-            .done(function (result) {
-                console.log(result);
+    function AjaxPost(data, status,alert) {
+        let postData = {
+            'data': data,
+            'status': status
+        }
+
+    $.ajax({
+        type: "post",
+        data:postData,
+    headers: {
+        "RequestVerificationToken": '@GetAntiXsrfRequestToken()'
+    },
+    url: '@Url.Action("RequestStatusEdit", "Request")',
+    success: function (result) {
+        if (alert !=null) {
+           new PNotify({
+                title: 'Sipariş Güncelleme',
+                text: 'Sipariş başarıyla güncellendi',
+                type: 'success',
+                styling: 'bootstrap3'
             });
-                }
+        }
+    }
+});
+
+        
+
+    }
+
 
 
 </script>
