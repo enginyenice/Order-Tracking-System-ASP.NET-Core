@@ -27,203 +27,208 @@
                     </div>
                     <div class="x_content">
 
+                        @using (Html.BeginForm("CreateRequest", "YeniTalep", FormMethod.Post,
+                      new { enctype = "multipart/form-data" }))
+                        {
 
-                        <!-- Smart Wizard -->
-           
-                        <div id="wizard" class="form_wizard wizard_horizontal">
-                            <ul class="wizard_steps">
-                                <li>
-                                    <a href="#step-1">
-                                        <span class="step_no">1</span>
-                                        <span class="step_descr">
-                                            Adım 1<br />
-                                            <small>Personel Bilgileri</small>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#step-2">
-                                        <span class="step_no">2</span>
-                                        <span class="step_descr">
-                                            Adım 2<br />
-                                            <small>Proje Bilgileri</small>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#step-3">
-                                        <span class="step_no">3</span>
-                                        <span class="step_descr">
-                                            Adım 3<br />
-                                            <small>Ürün Bilgileri</small>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#step-4">
-                                        <span class="step_no">4</span>
-                                        <span class="step_descr">
-                                            Adım 4<br />
-                                            <small>Tedarik Firma Bilgileri</small>
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div id="step-1">
-                                <form class="form-horizontal form-label-left">
-
-                                    <div class="form-group row">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
-                                            Talep Eden Departman <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" id="first-name" required="required" class="form-control  ">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
-                                            Talep Eden Personel<span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
-                                            Proje<span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
-                                        </div>
-                                    </div>
+                            <!-- Smart Wizard -->
+                                <div id="wizard" class="form_wizard wizard_horizontal">
+                                    <ul class="wizard_steps">
+                                        <li>
+                                            <a href="#step-1">
+                                                <span class="step_no">1</span>
+                                                <span class="step_descr">
+                                                    Adım 1<br />
+                                                    <small>Personel Bilgileri</small>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#step-2">
+                                                <span class="step_no">2</span>
+                                                <span class="step_descr">
+                                                    Adım 2<br />
+                                                    <small>Proje Bilgileri</small>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#step-3">
+                                                <span class="step_no">3</span>
+                                                <span class="step_descr">
+                                                    Adım 3<br />
+                                                    <small>Ürün Bilgileri</small>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#step-4">
+                                                <span class="step_no">4</span>
+                                                <span class="step_descr">
+                                                    Adım 4<br />
+                                                    <small>Tedarik Firma Bilgileri</small>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div id="step-1">
 
 
-
-
-                                </form>
-
-                            </div>
-            
-                            <div id="step-2">
-
-
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
-                                        Gider Yeri<span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
-                                    </div>
-                                </div>
-
-
-
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
-                                        Ürün Özellikleri <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
-                                        Açıklama <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
-                                        Miktar <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Cinsi</label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <div id="gender" class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-secondary">
-                                                <input type="radio" name="gender" value="male" class="join-btn"> &nbsp; Masraf &nbsp;
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="requestDepartment">
+                                                Talep Eden Departman <span class="required">*</span>
                                             </label>
-                                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-secondary">
-                                                <input type="radio" name="gender" value="female" class="join-btn"> Stok
+                                            <div class="col-md-6 col-sm-6 ">
+                                                <input type="text" id="requestDepartment" name="requestDepartment" required="required" class="form-control  ">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="requestSteff">
+                                                Talep Eden Personel<span class="required">*</span>
                                             </label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                <input type="text" id="requestSteffe" name="requestSteff" required="required" class="form-control ">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="requestProject">
+                                                Proje<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                <input type="text" id="requestProject" name="requestProject" required="required" class="form-control ">
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div id="step-2">
+
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="requestExpensePlace">
+                                                Gider Yeri<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                <input type="text" id="requestExpensePlace" name="requestExpensePlace" required="required" class="form-control ">
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="requestProductFeatures">
+                                                Ürün Özellikleri <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                <input type="text" id="requestProductFeatures" name="requestProductFeatures" required="required" class="form-control ">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="requestDescription">
+                                                Açıklama <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                <input type="text" id="requestDescription" name="requestDescription" required="required" class="form-control ">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="requestQuantity">
+                                                Miktar <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                <input type="text" id="requestQuantity" name="requestQuantity" required="required" class="form-control ">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align">Cinsi</label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                <div id="gender" class="btn-group" data-toggle="buttons">
+                                                    <label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-secondary">
+                                                        <input type="radio" name="requestSpecies" value="Masraf" class="join-btn"> &nbsp; Masraf &nbsp;
+                                                    </label>
+                                                    <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-secondary">
+                                                        <input type="radio" name="requestSpecies" value="Stok" class="join-btn"> Stok
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div id="step-3">
+                                    <div id="step-3">
 
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
-                                        Ürün Resmi <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
+                                                Ürün Resmi <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                <input type="file" name="ImageFile" multiple />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="requestEstimatedPrice">
+                                                Tahmini Fiyat <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                <input type="text" id="requestEstimatedPrice" name="requestEstimatedPrice" required="required" class="form-control ">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="date">
+                                                Teslim Tarihi <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                <input id="birthday" name="date" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" required="required" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+                                                <script>
+                                                    function timeFunctionLong(input) {
+                                                        setTimeout(function () {
+                                                            input.type = 'text';
+                                                        }, 60000);
+                                                    }
+                                                </script>
+                                            </div>
+                                        </div>
+
+
                                     </div>
-                                </div>
+                                    <div id="step-4">
 
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
-                                        Tahmini Fiyat <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="requestSupplyCompany1">
+                                                Tedarik Firma 1 <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                <input type="text" id="requestSupplyCompany1" name="requestSupplyCompany1" required="required" class="form-control ">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="requestSupplyCompany2">
+                                                Tedarik Firma 2 <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                <input type="text" id="requestSupplyCompany2" name="requestSupplyCompany2" required="required" class="form-control ">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="requestSupplyCompany3">
+                                                Tedarik Firma 3 <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                <input type="text" id="requestSupplyCompany3" name="requestSupplyCompany3" required="required" class="form-control ">
+                                            </div>
+                                        </div>
+
                                     </div>
+
                                 </div>
-
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
-                                        Teslim Tarihi <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div id="step-4">
-
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
-                                        Tedarik Firma 1 <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
-                                        Tedarik Firma 2 <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
-                                        Tedarik Firma 3 <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
-                                    </div>
-                                </div>
-
-                            </div>
-
+                        }
                         </div>
-
-                    </div>
                 </div>
             </div>
         </div>

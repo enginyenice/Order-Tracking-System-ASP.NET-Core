@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SiparisTakip.Models;
 
 namespace SiparisTakip.Migrations
 {
     [DbContext(typeof(SiparisTakipDB))]
-    partial class ApplicationDbContexModelSnapshot : ModelSnapshot
+    [Migration("20200701004216_AddRequestToDatabase")]
+    partial class AddRequestToDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,7 +29,7 @@ namespace SiparisTakip.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("requestDeliveryDate")
-                        .HasColumnType("Date");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("requestDepartment")
                         .HasColumnType("nvarchar(max)");
@@ -53,8 +55,8 @@ namespace SiparisTakip.Migrations
                     b.Property<int>("requestQuantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("requestSpecies")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("requestSpecies")
+                        .HasColumnType("int");
 
                     b.Property<string>("requestSteff")
                         .HasColumnType("nvarchar(max)");
@@ -68,7 +70,7 @@ namespace SiparisTakip.Migrations
                     b.Property<string>("requestSupplyCompany3")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("userId")
+                    b.Property<int?>("userId")
                         .HasColumnType("int");
 
                     b.HasKey("requestId");
@@ -110,9 +112,7 @@ namespace SiparisTakip.Migrations
                 {
                     b.HasOne("SiparisTakip.Models.User", null)
                         .WithMany("Requests")
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("userId");
                 });
 #pragma warning restore 612, 618
         }

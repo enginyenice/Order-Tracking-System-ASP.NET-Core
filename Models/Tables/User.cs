@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SiparisTakip.Models.Tables;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,5 +17,7 @@ namespace SiparisTakip.Models
         public string userMail { get; set; }
         public string userPassword { get; set; }
         public string userPermission { get; set; }
+
+        public virtual List<Request> Requests { get; set; }
     }
 }

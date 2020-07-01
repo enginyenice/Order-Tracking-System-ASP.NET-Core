@@ -41,7 +41,7 @@ namespace SiparisTakip.Controllers
                 string SessionUserSurname = userProfile.userSurname;
                 string SessionUserPermission = userProfile.userPermission;
 
-                HttpContext.Session.SetInt32("userId", SessionUserId);
+                HttpContext.Session.SetString("userId", SessionUserId.ToString());
                 HttpContext.Session.SetString("userMail", SessionUserMail);
                 HttpContext.Session.SetString("userName", SessionUserName);
                 HttpContext.Session.SetString("userSurname", SessionUserSurname);
