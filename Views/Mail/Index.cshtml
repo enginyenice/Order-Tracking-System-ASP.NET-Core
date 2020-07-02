@@ -1,5 +1,31 @@
-﻿@{
+﻿@model IEnumerable<SiparisTakip.Models.Tables.Setting>
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+@{
     ViewData["Title"] = "Mail Yönetimi";
+}
+@{
+    string settingEPosta = "", settingPassword = "", settingSmtpHost = "";
+    int settingSmtpPort = -1;
+    bool settingSmtpSSL = false;
+    string checkedType = "checked";
+    foreach (var item in Model)
+    {
+        settingEPosta = item.settingEPosta;
+        settingPassword = item.settingPassword;
+        settingSmtpHost = item.settingSmtpHost;
+        settingSmtpPort = item.settingSmtpPort;
+        settingSmtpSSL = item.settingSmtpSSL;
+
+
+    }
 }
 
 
@@ -20,66 +46,133 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Mail Ayarları</h2>
-    
+
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
                         <br />
-                        <form class="form-horizontal form-label-left">
+                            <div class="form-horizontal form-label-left">
 
-                            <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-3">E-Posta</label>
-                                <div class="col-md-9 col-sm-9 col-xs-9">
-                                    <input type="text" class="form-control">
-                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">E-Posta</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <input name="settingEPosta" value="@settingEPosta" id="settingEPosta" type="email" required class="form-control">
+                                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Şifre</label>
-                                <div class="col-md-9 col-sm-9 col-xs-9">
-                                    <input type="text" class="form-control">
-                                    <span class="fa fa-lock form-control-feedback right" aria-hidden="true"></span>
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Şifre</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <input name="settingPassword" value="@settingPassword" id="settingPassword" type="text" required class="form-control">
+                                        <span class="fa fa-lock form-control-feedback right" aria-hidden="true"></span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-3">SMTP Host</label>
-                                <div class="col-md-9 col-sm-9 col-xs-9">
-                                    <input type="text" class="form-control">
-                                    <span class="fa fa-building form-control-feedback right" aria-hidden="true"></span>
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">SMTP Host</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <input name="settingSmtpHost" value="@settingSmtpHost" id="settingSmtpHost" type="text" required class="form-control">
+                                        <span class="fa fa-building form-control-feedback right" aria-hidden="true"></span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-3">SMTP Port</label>
-                                <div class="col-md-9 col-sm-9 col-xs-9">
-                                    <input type="text" class="form-control">
-                                    <span class="fa fa-wifi form-control-feedback right" aria-hidden="true"></span>
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">SMTP Port</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <input name="settingSmtpPort" value="@settingSmtpPort" id="settingSmtpPort" type="number" required class="form-control">
+                                        <span class="fa fa-wifi form-control-feedback right" aria-hidden="true"></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-3">SMTP SLL</label>
-                                <div class="">
-                                    <label>
-                                        <input type="checkbox" class="js-switch" checked />
-                                    </label>
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">SMTP SSL</label>
+                                    <div class="">
+                                        <label>
+                                            <input name="settingSmtpSSL" id="settingSmtpSSL" type="checkbox" class="js-switch"
+                                                   @if (settingSmtpSSL == true)
+                                                   { @checkedType } />
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="ln_solid"></div>
+                                <div class="ln_solid"></div>
 
-                            <div class="form-group row">
-                                <div class="col-md-12 text-right">
-                                    <button type="submit" class="btn btn-success">Kaydet</button>
+                                <div class="form-group row">
+                                    <div class="col-md-12 text-right">
+                                        <button onclick="mailYenile()" class="btn btn-success">Güncelle</button>
+                                    </div>
                                 </div>
-                            </div>
 
-                        </form>
-                    </div>
+                            </div>
+                        </div>
                 </div>
             </div>
 
         </div>
     </div>
 </div>
+<script>
+
+
+    let settingEPosta = "";
+    let settingPassword = "";
+    let settingSmtpHost = "";
+    let settingSmtpPort = "";
+    let settingSmtpSSL = "";
+
+    $("#settingEPosta").change(function () {
+        settingEPosta = $("#settingEPosta").val();
+    });
+    $("#settingPassword").change(function () {
+        settingPassword = $("#settingPassword").val();
+    });
+    $("#settingSmtpHost").change(function () {
+        settingSmtpHost = $("#settingSmtpHost").val();
+    });
+    $("#settingSmtpPort").change(function () {
+        settingSmtpPort = $("#settingSmtpPort").val();
+    });
+    $("#settingSmtpSSL").click(function () {
+        settingSmtpSSL = $('#settingSmtpSSL').is(":checked");
+    });
+
+
+
+    function mailYenile() {
+        settingEPosta = $("#settingEPosta").val();
+        settingPassword = $("#settingPassword").val();
+        settingSmtpHost = $("#settingSmtpHost").val();
+        settingSmtpPort = $("#settingSmtpPort").val();
+        settingSmtpSSL = $('#settingSmtpSSL').is(":checked");
+        let postData = {
+            'settingEPosta': settingEPosta,
+            'settingPassword': settingPassword,
+            'settingSmtpHost': settingSmtpHost,
+            'settingSmtpPort': settingSmtpPort,
+            'settingSmtpSSL': settingSmtpSSL
+        }
+
+    $.ajax({
+        type: "post",
+        data:postData,
+    headers: {
+        "RequestVerificationToken": '@GetAntiXsrfRequestToken()'
+    },
+    url: '@Url.Action("MailUpdate", "Mail")',
+        success: function (result) {
+            result = JSON.parse(result);
+        var res = result.split("|");
+        new PNotify({
+            title: 'Eposta İşlemleri',
+            text: res[0],
+            type: res[1],
+            styling: 'bootstrap3'
+        });
+    }
+});
+    }
+
+
+
+
+</script>

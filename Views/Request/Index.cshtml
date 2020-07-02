@@ -41,7 +41,7 @@
                         <p><strong>Miktar: </strong><span id="requestQuantity">requestQuantity</span></p>
                         <p><strong>Durum: </strong><span id="requestStatus">requestStatus</span></p>
                         <p><strong>Cinsi: </strong><span id="requestSpecies">requestSpecies</span></p>
-                        <p><strong>Tedarik Firma 1: </strong><span id="requestSupplyCompany1">requestSupplyCompany1</span></p>                        </p>
+                        <p><strong>Tedarik Firma 1: </strong><span id="requestSupplyCompany1">requestSupplyCompany1</span></p> 
                         <p><strong>Tedarik Firma 2: </strong><span id="requestSupplyCompany2">requestSupplyCompany2</span></p>
                         <p><strong>Tedarik Firma 3: </strong><span id="requestSupplyCompany3">requestSupplyCompany3</span></p>
                         <p><strong>Müşteri Adı: </strong><span id="userName">userName</span></p>
@@ -68,7 +68,7 @@
             </div>
 
             <div class="title_right">
-
+                
             </div>
         </div>
         <div class="clearfix"></div>
@@ -83,6 +83,11 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
+                        <div class="row">
+                            <div class="x_content">
+                                <p></p><strong>Talep durumunu üzerine basılı tutup sürükleyerek değiştirebilirsiniz.</strong></p>
+                                <p></p><strong>Talep detaylarına ulaşmak için talebe çift tıklayınız. </strong></p>
+                            </div>
                         <div class="col-md-5 mt-2 mb-2">
                             <ul class="list-group onayBekleyen" style="min-height:300px" id="sortable1">
                                 <li ondblclick="myFunction()" class="list-group-item fixed bg-info text-white font-weight-bold text-center">Bekleyen Talepler</li>
@@ -157,7 +162,8 @@
         "RequestVerificationToken": '@GetAntiXsrfRequestToken()'
     },
     url: '@Url.Action("RequestStatusEdit", "Request")',
-    success: function (result) {
+        success: function (result) {
+            console.log(result);
         if (alert !=null) {
            new PNotify({
                 title: 'Sipariş Güncelleme',
