@@ -92,13 +92,28 @@
                                 <li>
                                     <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> Ana Sayfa </a>
                                 </li>
-                                <li> <a href="@Url.Action("Index", "Request")"><i class="fa fa-cogs"></i> Talep Yönetimi</a></li>
-                                <li> <a href="@Url.Action("Index", "Mail")"><i class="fa fa-envelope"></i> Mail Yönetimi</a></li>
+                                @{
+                                    var userPermission = Context.Session.GetString("userPermission");
+                                    if (userPermission != null)
+                                    {
+
+                                        if (userPermission == "Administrator")
+                                        {
+                                            <li> <a href="@Url.Action("Index", "Request")"><i class="fa fa-cogs"></i> Talep Yönetimi</a></li>
+                                            <li> <a href="@Url.Action("Index", "Mail")"><i class="fa fa-envelope"></i> Mail Yönetimi</a></li>
+                                            <li> <a href="@Url.Action("Index", "AllRequests")"><i class="fa fa-globe"></i> Tüm Talepler</a></li>
+
+                                        }
+                                    }
+
+                                }
 
                                 <li><a href="@Url.Action("Index", "NewRequest")"><i class="fa fa-edit"></i> Satın Alma Talebi Oluştur</a></li>
+
+
                                 <li><a href="@Url.Action("Index", "PendingRequests")"><i class="fa fa-clock-o"></i>Bekleyen Talepler</a></li>
                                 <li><a a href="@Url.Action("Index", "ConfirmedRequests")"><i class="fa fa-check"></i>Onaylanan Talepler</a></li>
-                                <li> <a href="@Url.Action("Index", "AllRequests")"><i class="fa fa-globe"></i> Tüm Talepler</a></li>
+
 
 
                             </ul>

@@ -23,7 +23,8 @@ namespace SiparisTakip.Controllers
 
             if (HttpContext != null)
             {
-                if ((HttpContext.Session.GetString("userId")) != null)
+                if ((HttpContext.Session.GetString("userId")) != null &&
+                    HttpContext.Session.GetString("userPermission") == "Administrator")
                 {
                     return true;
                 }
@@ -35,9 +36,34 @@ namespace SiparisTakip.Controllers
             bool session = SessionCont();
             if (session == false)
             {
-                return RedirectToAction("Index", "PendingRequestsController");
+                return RedirectToAction("Index", "Home");
             }
             return View(_siparisTakipDB.Requests.Include(r=>r.user).ToList());
         }
+
+
+
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var request = await _siparisTakipDB.Requests
+                .FirstOrDefaultAsync(m => m.requestId == id);
+            if (request == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
+            _siparisTakipDB.Requests.Remove(request);
+            await _siparisTakipDB.SaveChangesAsync();
+            return RedirectToAction("Index", "AllRequests");
+        }
+
+
     }
 }

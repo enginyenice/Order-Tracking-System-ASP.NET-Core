@@ -30,12 +30,13 @@ namespace SiparisTakip.Controllers
 
             if (HttpContext != null)
             {
-                if ((HttpContext.Session.GetString("userId")) != null)
+                if ((HttpContext.Session.GetString("userId")) != null &&
+                    HttpContext.Session.GetString("userPermission") == "Administrator")
                 {
                     return true;
                 }
             }
-            return false; ;
+            return false;
         }
         public IActionResult Index()
         {
@@ -102,6 +103,43 @@ namespace SiparisTakip.Controllers
             string getData = JsonConvert.SerializeObject(getRequest);
             return new JsonResult(getData);
         }
+
+
+
+
+
+
+
+
+        public async Task<IActionResult> StatusEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var request = await _siparisTakipDB.Requests
+                .Include(m => m.user)
+                .FirstOrDefaultAsync(m => m.requestId == id);
+            if (request == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (request.requestStatus == 0)
+            { request.requestStatus = 1;
+
+                sendMail(request);
+
+            }
+            else
+                request.requestStatus = 0;
+            await _siparisTakipDB.SaveChangesAsync();
+            return RedirectToAction("Index", "AllRequests");
+        }
+
+
+
 
 
         public void sendMail(Request request)
