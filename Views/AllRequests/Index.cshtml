@@ -10,8 +10,6 @@
             <div class="title_left">
                 <h3>Bekleyen Talepler</h3>
             </div>
-
-
         </div>
 
         <div class="clearfix"></div>
@@ -50,54 +48,52 @@
                                             </tr>
                                         </thead>
 
-
                                         <tbody>
                                             @{
                                                 foreach (var item in Model)
                                                 {
-                                                                                        <tr class="align-middle">
-                                                                                            <td><img src=" /images/@item.requestImage" style="width:50px; height:50px;"></td>
-                                                                                            <td class="align-middle">@item.user.userName &nbsp; @item.user.userSurname</td>
-                                                                                            <td class="align-middle">@item.requestId</td>
-                                                                                            <td class="align-middle">@item.requestDepartment</td>
-                                                                                            <td class="align-middle">@item.requestSteff</td>
-                                                                                            <td class="align-middle">@item.requestProject</td>
-                                                                                            <td class="align-middle">@item.requestExpensePlace</td>
-                                                                                            <td class="align-middle">@item.requestSpecies</td>
-                                                                                            <td class="align-middle">@item.requestProductFeatures</td>
-                                                                                            <td class="align-middle">@item.requestDescription</td>
-                                                                                            <td class="align-middle">@item.requestQuantity</td>
-                                                                                            <td class="align-middle">@item.requestEstimatedPrice</td>
-                                                                                            <td class="align-middle">@item.requestDeliveryDate</td>
-                                                                                            <td class="align-middle">@item.requestSupplyCompany1 <br> @item.requestSupplyCompany2 <br>@item.requestSupplyCompany3 </td>
-                                                                                            <td class="align-middle">
-                                                                                                @{ if (item.requestStatus == 1)
-                                                                                                    {
-                                                                                                        <p>Onaylandı</p>
-                                                                                                    }
-                                                                                                    else
-                                                                                                    {
-                                                                                                        <p>Beklemede</p>
-                                                                                                    }
+                                                    <tr class="align-middle">
+                                                        <td><img src=" /images/@item.requestImage" style="width:50px; height:50px;"></td>
+                                                        <td class="align-middle">@item.user.userName &nbsp; @item.user.userSurname</td>
+                                                        <td class="align-middle">@item.requestId</td>
+                                                        <td class="align-middle">@item.requestDepartment</td>
+                                                        <td class="align-middle">@item.requestSteff</td>
+                                                        <td class="align-middle">@item.requestProject</td>
+                                                        <td class="align-middle">@item.requestExpensePlace</td>
+                                                        <td class="align-middle">@item.requestSpecies</td>
+                                                        <td class="align-middle">@item.requestProductFeatures</td>
+                                                        <td class="align-middle">@item.requestDescription</td>
+                                                        <td class="align-middle">@item.requestQuantity</td>
+                                                        <td class="align-middle">@item.requestEstimatedPrice</td>
+                                                        <td class="align-middle">@item.requestDeliveryDate</td>
+                                                        <td class="align-middle">@item.requestSupplyCompany1 <br> @item.requestSupplyCompany2 <br>@item.requestSupplyCompany3 </td>
+                                                        <td class="align-middle">
+                                                            @{ if (item.requestStatus == 1)
+                                                                {
+                                                                    <p>Onaylandı</p>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <p>Beklemede</p>
+                                                                }
 
-                                                                                                }
-<td class="align-middle">
-                                                                                                @{ if (item.requestStatus == 1)
-                                                                                                    {
-                                                                                                        @Html.ActionLink("Beklemeye Al", "Edit", "Brands", new { id = item.userId }, new { @class = "btn btn-warning" })
-                                                                                                    }
-                                                                                                    else
-                                                                                                    {
-                                                                                                        @Html.ActionLink("Onayla", "Delete", "Brands", new { id = item.userId }, new { @class = "btn btn-success" })
-                                                                                                    }
+                                                            }
+                                                        <td class="align-middle">
+                                                            @{ if (item.requestStatus == 1)
+                                                                {
+                                                                    @Html.ActionLink("Beklemeye Al", "Edit", "Brands", new { id = item.userId }, new { @class = "btn btn-warning" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.ActionLink("Onayla", "Delete", "Brands", new { id = item.userId }, new { @class = "btn btn-success" })
+                                                                }
 
-                                                                                                }
-                                                                                            </td>
-                                                                                        </tr>
+                                                            }
+                                                        </td>
+                                                    </tr>
                                                 }
 
                                             }
-
                                         </tbody>
                                     </table>
                                 </div>
