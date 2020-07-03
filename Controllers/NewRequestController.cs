@@ -40,9 +40,10 @@ namespace SiparisTakip.Controllers
 
         public IActionResult Index()
         {
+
             if (SessionCont() == false)
                 return RedirectToAction("Index", "Account");
-            return View();
+            return View(_siparisTakipDB.Departments.ToList());
         }
 
 
