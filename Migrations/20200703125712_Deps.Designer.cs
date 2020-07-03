@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SiparisTakip.Models;
 
 namespace SiparisTakip.Migrations
 {
     [DbContext(typeof(SiparisTakipDB))]
-    partial class ApplicationDbContexModelSnapshot : ModelSnapshot
+    [Migration("20200703125712_Deps")]
+    partial class Deps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,7 +33,7 @@ namespace SiparisTakip.Migrations
 
                     b.HasKey("depId");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Deps");
                 });
 
             modelBuilder.Entity("SiparisTakip.Models.Tables.Request", b =>

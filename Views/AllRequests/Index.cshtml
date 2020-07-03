@@ -25,9 +25,9 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    
+
                                     <table id="datatable" class="table table-striped table-bordered" style="width:100%; text-align:center">
-                                        
+
                                         <thead>
                                             <tr class="align-middle">
                                                 <th class="align-middle">Ürün Resmi</th>
@@ -50,7 +50,6 @@
                                             </tr>
                                         </thead>
 
-                                        
                                         <tbody>
                                             @{
                                                 foreach (var item in Model)
@@ -80,28 +79,24 @@
                                                                     <p>Beklemede</p>
                                                                 }
 
-                                                                                                }
-                                                                                            <td class="align-middle">
-                                                                                                @{ if (item.requestStatus == 1)
-                                                                                                    {
-                                                                                                        @Html.ActionLink("Beklemeye Al", "StatusEdit", "Request", new { id = item.requestId }, new { @class = "btn btn-warning" })
-                                                                                                    }
-                                                                                                    else
-                                                                                                    {
-                                                                                                        @Html.ActionLink("Onayla", "StatusEdit", "Request", new { id = item.requestId }, new { @class = "btn btn-success" })
-                                                                                                    }
+                                                            }
+                                                        <td class="align-middle">
+                                                            @{ if (item.requestStatus == 1)
+                                                                {
+                                                                    @Html.ActionLink("Beklemeye Al", "StatusEdit", "Request", new { id = item.requestId }, new { @class = "btn btn-warning" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.ActionLink("Onayla", "StatusEdit", "Request", new { id = item.requestId }, new { @class = "btn btn-success" })
+                                                                }
 
-                                                                                                }
-                                                                                            </td>
+                                                            }
+                                                        </td>
 
-                                                                                            <td class="align-middle">
-                                                                                                @Html.ActionLink("Sil", "Delete", "Request", new { id = item.requestId }, new { @class = "btn btn-dark" })
-                                                                                            </td>
-
-
-
-
-                                                                                        </tr>
+                                                        <td class="align-middle">
+                                                            @Html.ActionLink("Sil", "Delete", "Request", new { id = item.requestId }, new { @class = "btn btn-dark" })
+                                                        </td>
+                                                    </tr>
                                                 }
 
                                             }
