@@ -19,12 +19,12 @@
     // Avoid using mixin so we can pass custom focus shadow properly
     @if $enable-shadows {
       box-shadow: $input-box-shadow, $input-focus-box-shadow;
-    } @else {
+    }
+    @else {
       box-shadow: $input-focus-box-shadow;
     }
   }
 }
-
 
 @mixin form-validation-state($state, $color, $icon) {
   .#{$state}-feedback {
@@ -74,7 +74,6 @@
       }
     }
   }
-
   // stylelint-disable-next-line selector-no-qualifying-type
   textarea.form-control {
     .was-validated &:#{$state},
@@ -107,7 +106,6 @@
       }
     }
   }
-
 
   .form-control-file {
     .was-validated &:#{$state},
@@ -167,7 +165,6 @@
       }
     }
   }
-
   // custom file
   .custom-file-input {
     .was-validated &:#{$state},

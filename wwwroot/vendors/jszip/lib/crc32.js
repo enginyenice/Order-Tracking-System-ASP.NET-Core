@@ -82,7 +82,7 @@ module.exports = function crc32(input, crc) {
 
     var isArray = utils.getTypeOf(input) !== "string";
 
-    if (typeof(crc) == "undefined") {
+    if (typeof (crc) == "undefined") {
         crc = 0;
     }
     var x = 0;

@@ -7,7 +7,7 @@ var utils = require('./utils');
  * @constructor
  * @param {number} length The length of the array.
  */
-var Uint8ArrayWriter = function(length) {
+var Uint8ArrayWriter = function (length) {
     this.data = new Uint8Array(length);
     this.index = 0;
 };
@@ -16,7 +16,7 @@ Uint8ArrayWriter.prototype = {
      * Append any content to the current array.
      * @param {Object} input the content to add.
      */
-    append: function(input) {
+    append: function (input) {
         if (input.length !== 0) {
             // with an empty Uint8Array, Opera fails with a "Offset larger than array size"
             input = utils.transformTo("uint8array", input);
@@ -28,7 +28,7 @@ Uint8ArrayWriter.prototype = {
      * Finalize the construction an return the result.
      * @return {Uint8Array} the generated array.
      */
-    finalize: function() {
+    finalize: function () {
         return this.data;
     }
 };

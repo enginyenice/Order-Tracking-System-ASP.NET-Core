@@ -11,13 +11,13 @@ Package.describe({
     git: 'https://github.com/abpetkov/switchery'
 });
 
-Package.onUse(function(api) {
+Package.onUse(function (api) {
     api.versionsFrom(['METEOR@0.9.0', 'METEOR@1.0']);
     api.export('Switchery');
     api.addFiles(['dist/switchery.js', 'dist/switchery.css', 'meteor/export.js'], where);
 });
 
-Package.onTest(function(api) {
+Package.onTest(function (api) {
     api.use(packageName, where);
     api.use('tinytest', where);
     api.addFiles('meteor/tests.js', where); // testing specific files

@@ -13,9 +13,9 @@ Uint8ArrayReader.prototype = new ArrayReader();
 /**
  * @see DataReader.readData
  */
-Uint8ArrayReader.prototype.readData = function(size) {
+Uint8ArrayReader.prototype.readData = function (size) {
     this.checkOffset(size);
-    if(size === 0) {
+    if (size === 0) {
         // in IE10, when using subarray(idx, idx), we get the array [0x00] instead of [].
         return new Uint8Array(0);
     }

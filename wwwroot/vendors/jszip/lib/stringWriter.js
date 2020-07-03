@@ -6,7 +6,7 @@ var utils = require('./utils');
  * An object to write any content to a string.
  * @constructor
  */
-var StringWriter = function() {
+var StringWriter = function () {
     this.data = [];
 };
 StringWriter.prototype = {
@@ -14,7 +14,7 @@ StringWriter.prototype = {
      * Append any content to the current string.
      * @param {Object} input the content to add.
      */
-    append: function(input) {
+    append: function (input) {
         input = utils.transformTo("string", input);
         this.data.push(input);
     },
@@ -22,7 +22,7 @@ StringWriter.prototype = {
      * Finalize the construction an return the result.
      * @return {string} the generated string.
      */
-    finalize: function() {
+    finalize: function () {
         return this.data.join("");
     }
 };

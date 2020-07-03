@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SiparisTakip.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SiparisTakip.Controllers
 {
@@ -20,7 +18,6 @@ namespace SiparisTakip.Controllers
 
         public bool SessionCont()
         {
-
             if (HttpContext != null)
             {
                 if ((HttpContext.Session.GetString("userId")) != null &&
@@ -31,6 +28,7 @@ namespace SiparisTakip.Controllers
             }
             return false;
         }
+
         public IActionResult Index()
         {
             bool session = SessionCont();
@@ -38,11 +36,8 @@ namespace SiparisTakip.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View(_siparisTakipDB.Requests.Include(r=>r.user).ToList());
+            return View(_siparisTakipDB.Requests.Include(r => r.user).ToList());
         }
-
-
-
 
         public async Task<IActionResult> Delete(int? id)
         {
@@ -58,12 +53,9 @@ namespace SiparisTakip.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-
             _siparisTakipDB.Requests.Remove(request);
             await _siparisTakipDB.SaveChangesAsync();
             return RedirectToAction("Index", "AllRequests");
         }
-
-
     }
 }

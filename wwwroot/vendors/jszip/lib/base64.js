@@ -2,15 +2,13 @@
 // private property
 var _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
-
 // public method for encoding
-exports.encode = function(input, utf8) {
+exports.encode = function (input, utf8) {
     var output = "";
     var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
     var i = 0;
 
     while (i < input.length) {
-
         chr1 = input.charCodeAt(i++);
         chr2 = input.charCodeAt(i++);
         chr3 = input.charCodeAt(i++);
@@ -28,14 +26,13 @@ exports.encode = function(input, utf8) {
         }
 
         output = output + _keyStr.charAt(enc1) + _keyStr.charAt(enc2) + _keyStr.charAt(enc3) + _keyStr.charAt(enc4);
-
     }
 
     return output;
 };
 
 // public method for decoding
-exports.decode = function(input, utf8) {
+exports.decode = function (input, utf8) {
     var output = "";
     var chr1, chr2, chr3;
     var enc1, enc2, enc3, enc4;
@@ -44,7 +41,6 @@ exports.decode = function(input, utf8) {
     input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
 
     while (i < input.length) {
-
         enc1 = _keyStr.indexOf(input.charAt(i++));
         enc2 = _keyStr.indexOf(input.charAt(i++));
         enc3 = _keyStr.indexOf(input.charAt(i++));
@@ -62,9 +58,7 @@ exports.decode = function(input, utf8) {
         if (enc4 != 64) {
             output = output + String.fromCharCode(chr3);
         }
-
     }
 
     return output;
-
 };

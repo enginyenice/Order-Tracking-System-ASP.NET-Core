@@ -24,10 +24,8 @@
         settingSmtpPort = item.settingSmtpPort;
         settingSmtpSSL = item.settingSmtpSSL;
 
-
     }
 }
-
 
 <div class="right_col" role="main">
     <div class="">
@@ -35,7 +33,6 @@
             <div class="title_left">
                 <h3>Mail Yönetimi</h3>
             </div>
-
         </div>
 
         <div class="clearfix"></div>
@@ -102,17 +99,14 @@
                                         <button onclick="mailYenile()" class="btn btn-success">Güncelle</button>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 <script>
-
 
     let settingEPosta = "";
     let settingPassword = "";
@@ -135,8 +129,6 @@
     $("#settingSmtpSSL").click(function () {
         settingSmtpSSL = $('#settingSmtpSSL').is(":checked");
     });
-
-
 
     function mailYenile() {
         settingEPosta = $("#settingEPosta").val();
@@ -171,8 +163,4 @@
     }
 });
     }
-
-
-
-
 </script>

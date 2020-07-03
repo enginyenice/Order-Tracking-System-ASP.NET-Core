@@ -17,16 +17,20 @@
 .icheckbox_polaris {
     background-position: 0 0;
 }
+
     .icheckbox_polaris.hover {
         background-position: -31px 0;
     }
+
     .icheckbox_polaris.checked {
         background-position: -62px 0;
     }
+
     .icheckbox_polaris.disabled {
         background-position: -93px 0;
         cursor: default;
     }
+
     .icheckbox_polaris.checked.disabled {
         background-position: -124px 0;
     }
@@ -34,16 +38,20 @@
 .iradio_polaris {
     background-position: -155px 0;
 }
+
     .iradio_polaris.hover {
         background-position: -186px 0;
     }
+
     .iradio_polaris.checked {
         background-position: -217px 0;
     }
+
     .iradio_polaris.disabled {
         background-position: -248px 0;
         cursor: default;
     }
+
     .iradio_polaris.checked.disabled {
         background-position: -279px 0;
     }

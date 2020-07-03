@@ -6,7 +6,6 @@
 
 .bd-content {
   order: 1;
-
   // Hack the sticky header
   > h2[id],
   > h3[id],
@@ -34,7 +33,6 @@
         border: 0;
       }
     }
-
     // Cells
     > thead,
     > tbody,
@@ -52,7 +50,6 @@
         }
       }
     }
-
     // Prevent breaking of code (e.g., Grunt tasks list)
     td:first-child > code {
       white-space: nowrap;
@@ -120,5 +117,10 @@
   }
 }
 
-.bd-text-purple { color: $bd-purple; }
-.bd-text-purple-bright { color: $bd-purple-bright; }
+.bd-text-purple {
+  color: $bd-purple;
+}
+
+.bd-text-purple-bright {
+  color: $bd-purple-bright;
+}

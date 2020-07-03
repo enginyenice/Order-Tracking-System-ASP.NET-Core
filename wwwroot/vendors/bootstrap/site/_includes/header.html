@@ -8,11 +8,11 @@
 <meta name="docsearch:version" content="{{ site.docs_version }}">
 
 <title>
-  {%- if page.title -%}
+    {%- if page.title -%}
     {{ page.title | smartify }} · {{ site.title | smartify }}
-  {%- else -%}
+    {%- else -%}
     {{ site.title | smartify }} · {{ site.description | smartify }}
-  {%- endif -%}
+    {%- endif -%}
 </title>
 
 <link rel="canonical" href="{{ site.url | append: page.url }}">

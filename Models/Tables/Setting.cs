@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SiparisTakip.Models.Tables
+﻿namespace SiparisTakip.Models.Tables
 {
     public class Setting
     {

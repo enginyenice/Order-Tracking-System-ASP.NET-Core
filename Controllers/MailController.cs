@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SiparisTakip.Models;
 using SiparisTakip.Models.Tables;
+using System.Linq;
 
 namespace SiparisTakip.Controllers
 {
     public class MailController : Controller
     {
         private readonly SiparisTakipDB _siparisTakipDB;
+
         public MailController(SiparisTakipDB context)
         {
             _siparisTakipDB = context;
         }
 
-
         public bool SessionCont()
         {
-
             if (HttpContext != null)
             {
                 if ((HttpContext.Session.GetString("userId")) != null &&
@@ -33,7 +29,6 @@ namespace SiparisTakip.Controllers
             return false;
         }
 
-
         public IActionResult Index()
         {
             bool session = SessionCont();
@@ -43,7 +38,8 @@ namespace SiparisTakip.Controllers
             }
             return View(_siparisTakipDB.Settings.ToList());
         }
-        public ActionResult MailUpdate(string settingEPosta,string settingPassword,string settingSmtpHost, int settingSmtpPort,bool settingSmtpSSL)
+
+        public ActionResult MailUpdate(string settingEPosta, string settingPassword, string settingSmtpHost, int settingSmtpPort, bool settingSmtpSSL)
         {
             bool session = SessionCont();
             if (session == false)
@@ -54,7 +50,7 @@ namespace SiparisTakip.Controllers
             string hataMesaji = "", status = "danger";
             int settingCount = _siparisTakipDB.Settings.ToList().Count();
 
-            if(settingEPosta != null)
+            if (settingEPosta != null)
             {
                 if (settingCount == 0) // Mail Yok
                 {
@@ -68,8 +64,6 @@ namespace SiparisTakip.Controllers
                     setting.settingSmtpSSL = settingSmtpSSL;
                     _siparisTakipDB.Add(setting);
                     _siparisTakipDB.SaveChanges();
-
-
                 }
                 else // Mail Yok
                 {
@@ -83,12 +77,11 @@ namespace SiparisTakip.Controllers
                     setting.settingSmtpSSL = settingSmtpSSL;
                     _siparisTakipDB.SaveChanges();
                 }
-            } else
+            }
+            else
             {
                 hataMesaji = "Veriler gonderilirken bir hata oluştu";
             }
-
-
 
             string result = hataMesaji + "|" + status;
             result = JsonConvert.SerializeObject(result);

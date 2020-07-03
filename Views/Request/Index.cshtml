@@ -30,6 +30,9 @@
                     <img id="RequestImage" src="~/images/img.jpg" class="img-thumbnail">
                     </div>
                     <div class="col col-md-8">
+                        <p><strong>Müşteri Adı: </strong><span id="userName" style="text-transform:capitalize">userName</span></p>
+                        <p><strong>Müşteri Soyadı: </strong><span id="userSurname" style="text-transform:capitalize">userSurname</span></p>
+                        <p><strong>Müşteri E-Postası: </strong><span id="userMail">userMail</span></p>
                         <p><strong>Talep Tarihi: </strong> <span id="requestDeliveryDate">requestDeliveryDate</span></p>
                         <p><strong>Talep Numarası: </strong> <span id="requestNo">requestNo</span></p>
                         <p><strong>Talep Eden Departman: </strong><span id="requestDepartment">requestDepartment</span></p>
@@ -45,11 +48,6 @@
                         <p><strong>Tedarik Firma 1: </strong><span id="requestSupplyCompany1">requestSupplyCompany1</span></p>
                         <p><strong>Tedarik Firma 2: </strong><span id="requestSupplyCompany2">requestSupplyCompany2</span></p>
                         <p><strong>Tedarik Firma 3: </strong><span id="requestSupplyCompany3">requestSupplyCompany3</span></p>
-                        <p><strong>Müşteri Adı: </strong><span id="userName">userName</span></p>
-                        <p><strong>Müşteri Soyadı: </strong><span id="userSurname">userSurname</span></p>
-
-
-
 
                     </div>
                 </div>
@@ -57,7 +55,6 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
             </div>
-
         </div>
     </div>
 </div>
@@ -69,7 +66,6 @@
             </div>
 
             <div class="title_right">
-                
             </div>
         </div>
         <div class="clearfix"></div>
@@ -86,36 +82,35 @@
                     <div class="x_content">
                         <div class="row">
                             <div class="x_content">
-                                <p></p><strong>Talep durumunu üzerine basılı tutup sürükleyerek değiştirebilirsiniz.</strong></p>
-                                <p></p><strong>Talep detaylarına ulaşmak için talebe çift tıklayınız. </strong></p>
+                                <p><strong>Talep durumunu üzerine basılı tutup sürükleyerek değiştirebilirsiniz.</strong></p>
+                                <p><strong>Talep detaylarına ulaşmak için talebe çift tıklayınız. </strong></p>
                             </div>
-                        <div class="col-md-5 mt-2 mb-2">
-                            <ul class="list-group onayBekleyen" style="min-height:300px" id="sortable1">
-                                <li ondblclick="myFunction()" class="list-group-item fixed bg-info text-white font-weight-bold text-center">Bekleyen Talepler</li>
-                                @foreach (var item in Model)
-                                {
-                                    if (item.requestStatus == 0)
+                            <div class="col-md-5 mt-2 mb-2">
+                                <ul class="list-group onayBekleyen" style="min-height:300px" id="sortable1">
+                                    <li ondblclick="myFunction()" class="list-group-item fixed bg-info text-white font-weight-bold text-center">Bekleyen Talepler</li>
+                                    @foreach (var item in Model)
                                     {
-                                        <li id="res-@item.requestId" ondblclick="RequestDetails(@item.requestId)" class="list-group-item">@item.requestDepartment - @item.requestSteff - @item.requestProject</li>
+                                        if (item.requestStatus == 0)
+                                        {
+                                            <li id="res-@item.requestId" ondblclick="RequestDetails(@item.requestId)" class="list-group-item">@item.requestDepartment - @item.requestSteff - @item.requestProject</li>
+                                        }
+
                                     }
-
-                                }
-
-
-                            </ul>
-                        </div>
-                        <div class="col-md-5 offset-md-2 mt-2 mb-2">
-                            <ul class="list-group onaylanan" style="min-height:300px" id="sortable2">
-                                <li ondblclick="myFunction()" id="res-5" class="list-group-item fixed bg-success text-white font-weight-bold text-center">Onaylanan Talepler</li>
-                                @foreach (var item in Model)
-                                {
-                                    if (item.requestStatus == 1)
+                                </ul>
+                            </div>
+                            <div class="col-md-5 offset-md-2 mt-2 mb-2">
+                                <ul class="list-group onaylanan" style="min-height:300px" id="sortable2">
+                                    <li ondblclick="myFunction()" id="res-5" class="list-group-item fixed bg-success text-white font-weight-bold text-center">Onaylanan Talepler</li>
+                                    @foreach (var item in Model)
                                     {
-                                        <li id="res-@item.requestId" ondblclick="RequestDetails(@item.requestId)" class="list-group-item">@item.requestDepartment - @item.requestSteff - @item.requestProject</li>
-                                    }
+                                        if (item.requestStatus == 1)
+                                        {
+                                            <li id="res-@item.requestId" ondblclick="RequestDetails(@item.requestId)" class="list-group-item">@item.requestDepartment - @item.requestSteff - @item.requestProject</li>
+                                        }
 
-                                }
-                            </ul>
+                                    }
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -176,8 +171,6 @@
     }
 });
 
-
-
     }
 
     function RequestDetails(id) {
@@ -206,6 +199,9 @@
                         text = `<span class="text-success"><strong>Onaylandı</strong></span">`;
 
                     let image = "images/" + result.requestImage;
+                    $("#userName").text(result.user.userName);
+                    $("#userSurname").text(result.user.userSurname);
+                    $("#userMail").text(result.user.userMail);
                     $("#RequestImage").attr('src', image);
                     $("#requestDeliveryDate").text(newDate);
                     $("#requestNo").text(result.requestNo);
@@ -223,17 +219,10 @@
                     $("#requestSupplyCompany1").text(result.requestSupplyCompany1);
                     $("#requestSupplyCompany2").text(result.requestSupplyCompany2);
                     $("#requestSupplyCompany3").text(result.requestSupplyCompany3);
-                    $("#userName").text(result.user.userName);
-                    $("#userSurname").text(result.user.userSurname);
-                    
-
-                    
+      
 
                     $('.modal').modal('show');
     }
     });
 }
-
-
-
 </script>

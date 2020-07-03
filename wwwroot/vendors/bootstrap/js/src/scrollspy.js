@@ -14,52 +14,52 @@ import Util from './util'
  * ------------------------------------------------------------------------
  */
 
-const NAME               = 'scrollspy'
-const VERSION            = '4.3.1'
-const DATA_KEY           = 'bs.scrollspy'
-const EVENT_KEY          = `.${DATA_KEY}`
-const DATA_API_KEY       = '.data-api'
+const NAME = 'scrollspy'
+const VERSION = '4.3.1'
+const DATA_KEY = 'bs.scrollspy'
+const EVENT_KEY = `.${DATA_KEY}`
+const DATA_API_KEY = '.data-api'
 const JQUERY_NO_CONFLICT = $.fn[NAME]
 
 const Default = {
-  offset : 10,
-  method : 'auto',
-  target : ''
+  offset: 10,
+  method: 'auto',
+  target: ''
 }
 
 const DefaultType = {
-  offset : 'number',
-  method : 'string',
-  target : '(string|element)'
+  offset: 'number',
+  method: 'string',
+  target: '(string|element)'
 }
 
 const Event = {
-  ACTIVATE      : `activate${EVENT_KEY}`,
-  SCROLL        : `scroll${EVENT_KEY}`,
-  LOAD_DATA_API : `load${EVENT_KEY}${DATA_API_KEY}`
+  ACTIVATE: `activate${EVENT_KEY}`,
+  SCROLL: `scroll${EVENT_KEY}`,
+  LOAD_DATA_API: `load${EVENT_KEY}${DATA_API_KEY}`
 }
 
 const ClassName = {
-  DROPDOWN_ITEM : 'dropdown-item',
-  DROPDOWN_MENU : 'dropdown-menu',
-  ACTIVE        : 'active'
+  DROPDOWN_ITEM: 'dropdown-item',
+  DROPDOWN_MENU: 'dropdown-menu',
+  ACTIVE: 'active'
 }
 
 const Selector = {
-  DATA_SPY        : '[data-spy="scroll"]',
-  ACTIVE          : '.active',
-  NAV_LIST_GROUP  : '.nav, .list-group',
-  NAV_LINKS       : '.nav-link',
-  NAV_ITEMS       : '.nav-item',
-  LIST_ITEMS      : '.list-group-item',
-  DROPDOWN        : '.dropdown',
-  DROPDOWN_ITEMS  : '.dropdown-item',
-  DROPDOWN_TOGGLE : '.dropdown-toggle'
+  DATA_SPY: '[data-spy="scroll"]',
+  ACTIVE: '.active',
+  NAV_LIST_GROUP: '.nav, .list-group',
+  NAV_LINKS: '.nav-link',
+  NAV_ITEMS: '.nav-item',
+  LIST_ITEMS: '.list-group-item',
+  DROPDOWN: '.dropdown',
+  DROPDOWN_ITEMS: '.dropdown-item',
+  DROPDOWN_TOGGLE: '.dropdown-toggle'
 }
 
 const OffsetMethod = {
-  OFFSET   : 'offset',
-  POSITION : 'position'
+  OFFSET: 'offset',
+  POSITION: 'position'
 }
 
 /**
@@ -70,16 +70,16 @@ const OffsetMethod = {
 
 class ScrollSpy {
   constructor(element, config) {
-    this._element       = element
+    this._element = element
     this._scrollElement = element.tagName === 'BODY' ? window : element
-    this._config        = this._getConfig(config)
-    this._selector      = `${this._config.target} ${Selector.NAV_LINKS},` +
-                          `${this._config.target} ${Selector.LIST_ITEMS},` +
-                          `${this._config.target} ${Selector.DROPDOWN_ITEMS}`
-    this._offsets       = []
-    this._targets       = []
-    this._activeTarget  = null
-    this._scrollHeight  = 0
+    this._config = this._getConfig(config)
+    this._selector = `${this._config.target} ${Selector.NAV_LINKS},` +
+      `${this._config.target} ${Selector.LIST_ITEMS},` +
+      `${this._config.target} ${Selector.DROPDOWN_ITEMS}`
+    this._offsets = []
+    this._targets = []
+    this._activeTarget = null
+    this._scrollHeight = 0
 
     $(this._scrollElement).on(Event.SCROLL, (event) => this._process(event))
 
@@ -149,14 +149,14 @@ class ScrollSpy {
     $.removeData(this._element, DATA_KEY)
     $(this._scrollElement).off(EVENT_KEY)
 
-    this._element       = null
+    this._element = null
     this._scrollElement = null
-    this._config        = null
-    this._selector      = null
-    this._offsets       = null
-    this._targets       = null
-    this._activeTarget  = null
-    this._scrollHeight  = null
+    this._config = null
+    this._selector = null
+    this._offsets = null
+    this._targets = null
+    this._activeTarget = null
+    this._scrollHeight = null
   }
 
   // Private
@@ -199,9 +199,9 @@ class ScrollSpy {
   }
 
   _process() {
-    const scrollTop    = this._getScrollTop() + this._config.offset
+    const scrollTop = this._getScrollTop() + this._config.offset
     const scrollHeight = this._getScrollHeight()
-    const maxScroll    = this._config.offset +
+    const maxScroll = this._config.offset +
       scrollHeight -
       this._getOffsetHeight()
 
@@ -227,9 +227,9 @@ class ScrollSpy {
     const offsetLength = this._offsets.length
     for (let i = offsetLength; i--;) {
       const isActiveTarget = this._activeTarget !== this._targets[i] &&
-          scrollTop >= this._offsets[i] &&
-          (typeof this._offsets[i + 1] === 'undefined' ||
-              scrollTop < this._offsets[i + 1])
+        scrollTop >= this._offsets[i] &&
+        (typeof this._offsets[i + 1] === 'undefined' ||
+          scrollTop < this._offsets[i + 1])
 
       if (isActiveTarget) {
         this._activate(this._targets[i])

@@ -379,16 +379,16 @@ $(function () {
     assert.expect(1)
     var done = assert.async()
     var templateHTML = '<div id="modal-test" class="modal">' +
-                          '<div class="modal-dialog" role="document">' +
-                            '<div class="modal-content">' +
-                              '<div class="modal-body">' +
-                                '<button id="popover-test" type="button" class="btn btn-secondary" data-toggle="popover" data-placement="top" data-content="Popover">' +
-                                  'Popover on top' +
-                                '</button>' +
-                              '</div>' +
-                            '</div>' +
-                          '</div>' +
-                        '</div>'
+      '<div class="modal-dialog" role="document">' +
+      '<div class="modal-content">' +
+      '<div class="modal-body">' +
+      '<button id="popover-test" type="button" class="btn btn-secondary" data-toggle="popover" data-placement="top" data-content="Popover">' +
+      'Popover on top' +
+      '</button>' +
+      '</div>' +
+      '</div>' +
+      '</div>' +
+      '</div>'
 
     $(templateHTML).appendTo('#qunit-fixture')
     $('#popover-test')

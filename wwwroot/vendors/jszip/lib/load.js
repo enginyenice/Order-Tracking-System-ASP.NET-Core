@@ -3,12 +3,12 @@ var base64 = require('./base64');
 var utf8 = require('./utf8');
 var utils = require('./utils');
 var ZipEntries = require('./zipEntries');
-module.exports = function(data, options) {
+module.exports = function (data, options) {
     var files, zipEntries, i, input;
     options = utils.extend(options || {}, {
         base64: false,
         checkCRC32: false,
-        optimizedBinaryString : false,
+        optimizedBinaryString: false,
         createFolders: false,
         decodeFileName: utf8.utf8decode
     });
@@ -25,9 +25,9 @@ module.exports = function(data, options) {
             optimizedBinaryString: true,
             date: input.date,
             dir: input.dir,
-            comment : input.fileCommentStr.length ? input.fileCommentStr : null,
-            unixPermissions : input.unixPermissions,
-            dosPermissions : input.dosPermissions,
+            comment: input.fileCommentStr.length ? input.fileCommentStr : null,
+            unixPermissions: input.unixPermissions,
+            dosPermissions: input.dosPermissions,
             createFolders: options.createFolders
         });
     }

@@ -4,10 +4,10 @@ jQuery(function ($) {
     /**
      * Reset the message.
      */
-    function resetMessage () {
+    function resetMessage() {
         $("#result")
-        .removeClass()
-        .text("");
+            .removeClass()
+            .text("");
     }
     /**
      * show a successful message.
@@ -16,8 +16,8 @@ jQuery(function ($) {
     function showMessage(text) {
         resetMessage();
         $("#result")
-        .addClass("alert alert-success")
-        .text(text);
+            .addClass("alert alert-success")
+            .text(text);
     }
     /**
      * show an error message.
@@ -26,8 +26,8 @@ jQuery(function ($) {
     function showError(text) {
         resetMessage();
         $("#result")
-        .addClass("alert alert-danger")
-        .text(text);
+            .addClass("alert alert-danger")
+            .text(text);
     }
 
     /**
@@ -41,23 +41,22 @@ jQuery(function ($) {
     function deferredAddZip(url, filename, zip) {
         var deferred = $.Deferred();
         JSZipUtils.getBinaryContent(url, function (err, data) {
-            if(err) {
+            if (err) {
                 deferred.reject(err);
             } else {
-                zip.file(filename, data, {binary:true});
+                zip.file(filename, data, { binary: true });
                 deferred.resolve(data);
             }
         });
         return deferred;
     }
 
-    if(!JSZip.support.blob) {
+    if (!JSZip.support.blob) {
         showError("This demo works only with a recent browser !");
         return;
     }
 
     var $form = $("#download_form").on("submit", function () {
-
         resetMessage();
 
         var zip = new JSZip();
@@ -73,7 +72,7 @@ jQuery(function ($) {
 
         // when everything has been downloaded, we can trigger the dl
         $.when.apply($, deferreds).done(function () {
-            var blob = zip.generate({type:"blob"});
+            var blob = zip.generate({ type: "blob" });
 
             // see FileSaver.js
             saveAs(blob, "example.zip");

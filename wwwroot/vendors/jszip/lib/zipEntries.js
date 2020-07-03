@@ -28,7 +28,7 @@ ZipEntries.prototype = {
      * @param {string} expectedSignature the expected signature.
      * @throws {Error} if it is an other signature.
      */
-    checkSignature: function(expectedSignature) {
+    checkSignature: function (expectedSignature) {
         var signature = this.reader.readString(4);
         if (signature !== expectedSignature) {
             throw new Error("Corrupted zip or bug : unexpected signature " + "(" + utils.pretty(signature) + ", expected " + utils.pretty(expectedSignature) + ")");
@@ -40,7 +40,7 @@ ZipEntries.prototype = {
      * @param {string} expectedSignature the signature to expect.
      * @return {boolean} true if the signature is here, false otherwise.
      */
-    isSignature: function(askedIndex, expectedSignature) {
+    isSignature: function (askedIndex, expectedSignature) {
         var currentIndex = this.reader.index;
         this.reader.setIndex(askedIndex);
         var signature = this.reader.readString(4);
@@ -51,7 +51,7 @@ ZipEntries.prototype = {
     /**
      * Read the end of the central directory.
      */
-    readBlockEndOfCentral: function() {
+    readBlockEndOfCentral: function () {
         this.diskNumber = this.reader.readInt(2);
         this.diskWithCentralDirStart = this.reader.readInt(2);
         this.centralDirRecordsOnThisDisk = this.reader.readInt(2);
@@ -76,7 +76,7 @@ ZipEntries.prototype = {
      * The end of central can coexist with its Zip64 brother,
      * I don't want to read the wrong number of bytes !
      */
-    readBlockZip64EndOfCentral: function() {
+    readBlockZip64EndOfCentral: function () {
         this.zip64EndOfCentralSize = this.reader.readInt(8);
         this.versionMadeBy = this.reader.readString(2);
         this.versionNeeded = this.reader.readInt(2);
@@ -107,7 +107,7 @@ ZipEntries.prototype = {
     /**
      * Read the end of the Zip 64 central directory locator.
      */
-    readBlockZip64EndOfCentralLocator: function() {
+    readBlockZip64EndOfCentralLocator: function () {
         this.diskWithZip64CentralDirStart = this.reader.readInt(4);
         this.relativeOffsetEndOfZip64CentralDir = this.reader.readInt(8);
         this.disksCount = this.reader.readInt(4);
@@ -118,7 +118,7 @@ ZipEntries.prototype = {
     /**
      * Read the local files, based on the offset read in the central part.
      */
-    readLocalFiles: function() {
+    readLocalFiles: function () {
         var i, file;
         for (i = 0; i < this.files.length; i++) {
             file = this.files[i];
@@ -132,7 +132,7 @@ ZipEntries.prototype = {
     /**
      * Read the central directory.
      */
-    readCentralDir: function() {
+    readCentralDir: function () {
         var file;
 
         this.reader.setIndex(this.centralDirOffset);
@@ -159,7 +159,7 @@ ZipEntries.prototype = {
     /**
      * Read the end of central directory.
      */
-    readEndOfCentral: function() {
+    readEndOfCentral: function () {
         var offset = this.reader.lastIndexOfSignature(sig.CENTRAL_DIRECTORY_END);
         if (offset < 0) {
             // Check if the content is a truncated zip or complete garbage.
@@ -171,7 +171,7 @@ ZipEntries.prototype = {
 
             if (isGarbage) {
                 throw new Error("Can't find end of central directory : is this a zip file ? " +
-                                "If it is, see http://stuk.github.io/jszip/documentation/howto/read_zip.html");
+                    "If it is, see http://stuk.github.io/jszip/documentation/howto/read_zip.html");
             } else {
                 throw new Error("Corrupted zip : can't find end of central directory");
             }
@@ -180,7 +180,6 @@ ZipEntries.prototype = {
         var endOfCentralDirOffset = offset;
         this.checkSignature(sig.CENTRAL_DIRECTORY_END);
         this.readBlockEndOfCentral();
-
 
         /* extract from the zip spec :
             4)  If one of the fields in the end of central directory
@@ -248,7 +247,7 @@ ZipEntries.prototype = {
             throw new Error("Corrupted zip: missing " + Math.abs(extraBytes) + " bytes.");
         }
     },
-    prepareReader: function(data) {
+    prepareReader: function (data) {
         var type = utils.getTypeOf(data);
         utils.checkSupport(type);
         if (type === "string" && !support.uint8array) {
@@ -269,7 +268,7 @@ ZipEntries.prototype = {
      * Read a zip file and create ZipEntries.
      * @param {String|ArrayBuffer|Uint8Array|Buffer} data the binary string representing a zip file.
      */
-    load: function(data) {
+    load: function (data) {
         this.prepareReader(data);
         this.readEndOfCentral();
         this.readCentralDir();

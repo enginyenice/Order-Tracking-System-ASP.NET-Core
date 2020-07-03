@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SiparisTakip.Models;
+using System.Diagnostics;
 
 namespace SiparisTakip.Controllers
 {
@@ -17,32 +13,27 @@ namespace SiparisTakip.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-
         }
 
         public bool SessionCont()
         {
-
             if (HttpContext != null)
             {
                 if ((HttpContext.Session.GetString("userId")) != null)
                 {
-                        return true;
+                    return true;
                 }
             }
             return false; ;
         }
 
-        
         public IActionResult Index()
         {
-            
             if (SessionCont() == false)
                 return RedirectToAction("Index", "Account");
 
             return View();
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

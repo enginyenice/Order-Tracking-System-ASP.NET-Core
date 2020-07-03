@@ -2,14 +2,13 @@
 @using Microsoft.AspNetCore.Http.Extensions
 @{
     string AktifKullaniciAdSoyad = "";
-    if (Context.Session.GetString("userName")!=null)
+    if (Context.Session.GetString("userName") != null)
     {
         System.Globalization.CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
         System.Globalization.TextInfo textInfo = cultureInfo.TextInfo;
-        AktifKullaniciAdSoyad = textInfo.ToTitleCase(Context.Session.GetString("userName")) + " " + Context.Session.GetString("userSurname").ToUpper();
+        AktifKullaniciAdSoyad = textInfo.ToTitleCase(Context.Session.GetString("userName")) + " " + textInfo.ToTitleCase(Context.Session.GetString("userSurname"));
     }
 }
-
 
 <!DOCTYPE html>
 <html lang="tr">
@@ -51,10 +50,7 @@
     <script src="~/vendors/jquery/dist/jquery.min.js"></script>
     <!-- jQuery UI -->
     <script src="~/vendors/jquery/dist/jquery-ui.min.js"></script>
-
-
 </head>
-
 
 <body class="nav-md">
     <div class="container body">
@@ -87,44 +83,38 @@
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu ">
                         <div class="menu_section">
-
+                            <h3 class="pt-3 pb-1">Genel İşlemler</h3>
                             <ul class="nav side-menu">
                                 <li>
                                     <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> Ana Sayfa </a>
                                 </li>
-                                @{
-                                    var userPermission = Context.Session.GetString("userPermission");
-                                    if (userPermission != null)
+                                <li><a href="@Url.Action("Index", "NewRequest")"><i class="fa fa-edit"></i> Satın Alma Talebi Oluştur</a></li>
+                                <li><a href="@Url.Action("Index", "PendingRequests")"><i class="fa fa-clock-o"></i>Bekleyen Taleplerim</a></li>
+                                <li><a a href="@Url.Action("Index", "ConfirmedRequests")"><i class="fa fa-check"></i>Onaylanan Taleplerim</a></li>
+                            </ul>
+                            @{
+                                var userPermission = Context.Session.GetString("userPermission");
+                                if (userPermission != null)
+                                {
+
+                                    if (userPermission == "Administrator")
                                     {
-
-                                        if (userPermission == "Administrator")
-                                        {
-                                            <li> <a href="@Url.Action("Index", "Request")"><i class="fa fa-cogs"></i> Talep Yönetimi</a></li>
+                                        <h3 class="pt-4 pb-1">Yetkili İşlemleri</h3>
+                                        <ul class="nav side-menu">
+                                            <li> <a href="@Url.Action("Index", "AllRequests")"><i class="fa fa-globe"></i> Tüm Personel Talepleri</a></li>
+                                            <li> <a href="@Url.Action("Index", "Request")"><i class="fa fa-cogs"></i>Hızlı Talep Yönetimi</a></li>
                                             <li> <a href="@Url.Action("Index", "Mail")"><i class="fa fa-envelope"></i> Mail Yönetimi</a></li>
-                                            <li> <a href="@Url.Action("Index", "AllRequests")"><i class="fa fa-globe"></i> Tüm Talepler</a></li>
                                             <li> <a href="@Url.Action("Index", "Department")"><i class="fa fa-globe"></i> Departman Yönetimi</a></li>
-
-                                        }
+                                        </ul>
                                     }
-
                                 }
 
-                                <li><a href="@Url.Action("Index", "NewRequest")"><i class="fa fa-edit"></i> Satın Alma Talebi Oluştur</a></li>
-
-
-                                <li><a href="@Url.Action("Index", "PendingRequests")"><i class="fa fa-clock-o"></i>Bekleyen Talepler</a></li>
-                                <li><a a href="@Url.Action("Index", "ConfirmedRequests")"><i class="fa fa-check"></i>Onaylanan Talepler</a></li>
-
-
-
-                            </ul>
+                            }
                         </div>
-
                     </div>
                     <!-- /sidebar menu -->
                     <!-- /menu footer buttons -->
                     <div class="sidebar-footer hidden-small" style="background: #172D44; height:40px;">
-
                     </div>
                     <!-- /menu footer buttons -->
                 </div>
@@ -148,8 +138,6 @@
                                     <a class="dropdown-item" href="@Url.Action("DeleteSession", "Account")"><i class="fa fa-sign-out pull-right"></i> Çıkış Yap</a>
                                 </div>
                             </li>
-
-
                         </ul>
                     </nav>
                 </div>
@@ -168,7 +156,6 @@
             <!-- /footer content -->
         </div>
     </div>
-
 
     <!-- Bootstrap -->
     <script src="~/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -207,9 +194,3 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
-
-
-
-
-
-

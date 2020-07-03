@@ -24,7 +24,7 @@ ZipEntry.prototype = {
      * say if the file is encrypted.
      * @return {boolean} true if the file is encrypted, false otherwise.
      */
-    isEncrypted: function() {
+    isEncrypted: function () {
         // bit 1 is set
         return (this.bitFlag & 0x0001) === 0x0001;
     },
@@ -32,7 +32,7 @@ ZipEntry.prototype = {
      * say if the file has utf-8 filename/comment.
      * @return {boolean} true if the filename/comment is in utf-8, false otherwise.
      */
-    useUTF8: function() {
+    useUTF8: function () {
         // bit 11 is set
         return (this.bitFlag & 0x0800) === 0x0800;
     },
@@ -43,8 +43,8 @@ ZipEntry.prototype = {
      * @param {number} length the length of the data to read.
      * @return {Function} the callback to get the compressed content (the type depends of the DataReader class).
      */
-    prepareCompressedContent: function(reader, from, length) {
-        return function() {
+    prepareCompressedContent: function (reader, from, length) {
+        return function () {
             var previousIndex = reader.index;
             reader.setIndex(from);
             var compressedFileData = reader.readData(length);
@@ -62,9 +62,8 @@ ZipEntry.prototype = {
      * @param {number} uncompressedSize the uncompressed size to expect.
      * @return {Function} the callback to get the uncompressed content (the type depends of the DataReader class).
      */
-    prepareContent: function(reader, from, length, compression, uncompressedSize) {
-        return function() {
-
+    prepareContent: function (reader, from, length, compression, uncompressedSize) {
+        return function () {
             var compressedFileData = utils.transformTo(compression.uncompressInputType, this.getCompressedContent());
             var uncompressedFileData = compression.uncompress(compressedFileData);
 
@@ -79,7 +78,7 @@ ZipEntry.prototype = {
      * Read the local part of a zip file and add the info in this object.
      * @param {DataReader} reader the reader to use.
      */
-    readLocalPart: function(reader) {
+    readLocalPart: function (reader) {
         var compression, localExtraFieldsLength;
 
         // we already know everything from the central dir !
@@ -110,7 +109,7 @@ ZipEntry.prototype = {
 
         compression = utils.findCompression(this.compressionMethod);
         if (compression === null) { // no compression found
-            throw new Error("Corrupted zip : compression " + utils.pretty(this.compressionMethod) + " unknown (inner file : " +  utils.transformTo("string", this.fileName) + ")");
+            throw new Error("Corrupted zip : compression " + utils.pretty(this.compressionMethod) + " unknown (inner file : " + utils.transformTo("string", this.fileName) + ")");
         }
         this.decompressed = new CompressedObject();
         this.decompressed.compressedSize = this.compressedSize;
@@ -133,7 +132,7 @@ ZipEntry.prototype = {
      * Read the central part of a zip file and add the info in this object.
      * @param {DataReader} reader the reader to use.
      */
-    readCentralPart: function(reader) {
+    readCentralPart: function (reader) {
         this.versionMadeBy = reader.readInt(2);
         this.versionNeeded = reader.readInt(2);
         this.bitFlag = reader.readInt(2);
@@ -173,12 +172,12 @@ ZipEntry.prototype = {
         // but some unknown platform could set it as a compatibility flag.
         this.dir = this.externalFileAttributes & 0x0010 ? true : false;
 
-        if(madeBy === MADE_BY_DOS) {
+        if (madeBy === MADE_BY_DOS) {
             // first 6 bits (0 to 5)
             this.dosPermissions = this.externalFileAttributes & 0x3F;
         }
 
-        if(madeBy === MADE_BY_UNIX) {
+        if (madeBy === MADE_BY_UNIX) {
             this.unixPermissions = (this.externalFileAttributes >> 16) & 0xFFFF;
             // the octal permissions are in (this.unixPermissions & 0x01FF).toString(8);
         }
@@ -193,8 +192,7 @@ ZipEntry.prototype = {
      * Parse the ZIP64 extra field and merge the info in the current ZipEntry.
      * @param {DataReader} reader the reader to use.
      */
-    parseZIP64ExtraField: function(reader) {
-
+    parseZIP64ExtraField: function (reader) {
         if (!this.extraFields[0x0001]) {
             return;
         }
@@ -221,7 +219,7 @@ ZipEntry.prototype = {
      * Read the central part of a zip file and add the info in this object.
      * @param {DataReader} reader the reader to use.
      */
-    readExtraFields: function(reader) {
+    readExtraFields: function (reader) {
         var start = reader.index,
             extraFieldId,
             extraFieldLength,
@@ -244,7 +242,7 @@ ZipEntry.prototype = {
     /**
      * Apply an UTF8 transformation if needed.
      */
-    handleUTF8: function() {
+    handleUTF8: function () {
         var decodeParamType = support.uint8array ? "uint8array" : "array";
         if (this.useUTF8()) {
             this.fileNameStr = jszipProto.utf8decode(this.fileName);
@@ -254,7 +252,7 @@ ZipEntry.prototype = {
             if (upath !== null) {
                 this.fileNameStr = upath;
             } else {
-                var fileNameByteArray =  utils.transformTo(decodeParamType, this.fileName);
+                var fileNameByteArray = utils.transformTo(decodeParamType, this.fileName);
                 this.fileNameStr = this.loadOptions.decodeFileName(fileNameByteArray);
             }
 
@@ -262,7 +260,7 @@ ZipEntry.prototype = {
             if (ucomment !== null) {
                 this.fileCommentStr = ucomment;
             } else {
-                var commentByteArray =  utils.transformTo(decodeParamType, this.fileComment);
+                var commentByteArray = utils.transformTo(decodeParamType, this.fileComment);
                 this.fileCommentStr = this.loadOptions.decodeFileName(commentByteArray);
             }
         }
@@ -272,7 +270,7 @@ ZipEntry.prototype = {
      * Find the unicode path declared in the extra field, if any.
      * @return {String} the unicode path, null otherwise.
      */
-    findExtraFieldUnicodePath: function() {
+    findExtraFieldUnicodePath: function () {
         var upathField = this.extraFields[0x7075];
         if (upathField) {
             var extraReader = new StringReader(upathField.value);
@@ -296,7 +294,7 @@ ZipEntry.prototype = {
      * Find the unicode comment declared in the extra field, if any.
      * @return {String} the unicode comment, null otherwise.
      */
-    findExtraFieldUnicodeComment: function() {
+    findExtraFieldUnicodeComment: function () {
         var ucommentField = this.extraFields[0x6375];
         if (ucommentField) {
             var extraReader = new StringReader(ucommentField.value);

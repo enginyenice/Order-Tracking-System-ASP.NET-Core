@@ -14,46 +14,46 @@ import Util from './util'
  * ------------------------------------------------------------------------
  */
 
-const NAME                = 'collapse'
-const VERSION             = '4.3.1'
-const DATA_KEY            = 'bs.collapse'
-const EVENT_KEY           = `.${DATA_KEY}`
-const DATA_API_KEY        = '.data-api'
-const JQUERY_NO_CONFLICT  = $.fn[NAME]
+const NAME = 'collapse'
+const VERSION = '4.3.1'
+const DATA_KEY = 'bs.collapse'
+const EVENT_KEY = `.${DATA_KEY}`
+const DATA_API_KEY = '.data-api'
+const JQUERY_NO_CONFLICT = $.fn[NAME]
 
 const Default = {
-  toggle : true,
-  parent : ''
+  toggle: true,
+  parent: ''
 }
 
 const DefaultType = {
-  toggle : 'boolean',
-  parent : '(string|element)'
+  toggle: 'boolean',
+  parent: '(string|element)'
 }
 
 const Event = {
-  SHOW           : `show${EVENT_KEY}`,
-  SHOWN          : `shown${EVENT_KEY}`,
-  HIDE           : `hide${EVENT_KEY}`,
-  HIDDEN         : `hidden${EVENT_KEY}`,
-  CLICK_DATA_API : `click${EVENT_KEY}${DATA_API_KEY}`
+  SHOW: `show${EVENT_KEY}`,
+  SHOWN: `shown${EVENT_KEY}`,
+  HIDE: `hide${EVENT_KEY}`,
+  HIDDEN: `hidden${EVENT_KEY}`,
+  CLICK_DATA_API: `click${EVENT_KEY}${DATA_API_KEY}`
 }
 
 const ClassName = {
-  SHOW       : 'show',
-  COLLAPSE   : 'collapse',
-  COLLAPSING : 'collapsing',
-  COLLAPSED  : 'collapsed'
+  SHOW: 'show',
+  COLLAPSE: 'collapse',
+  COLLAPSING: 'collapsing',
+  COLLAPSED: 'collapsed'
 }
 
 const Dimension = {
-  WIDTH  : 'width',
-  HEIGHT : 'height'
+  WIDTH: 'width',
+  HEIGHT: 'height'
 }
 
 const Selector = {
-  ACTIVES     : '.show, .collapsing',
-  DATA_TOGGLE : '[data-toggle="collapse"]'
+  ACTIVES: '.show, .collapsing',
+  DATA_TOGGLE: '[data-toggle="collapse"]'
 }
 
 /**
@@ -65,9 +65,9 @@ const Selector = {
 class Collapse {
   constructor(element, config) {
     this._isTransitioning = false
-    this._element         = element
-    this._config          = this._getConfig(config)
-    this._triggerArray    = [].slice.call(document.querySelectorAll(
+    this._element = element
+    this._config = this._getConfig(config)
+    this._triggerArray = [].slice.call(document.querySelectorAll(
       `[data-toggle="collapse"][href="#${element.id}"],` +
       `[data-toggle="collapse"][data-target="#${element.id}"]`
     ))
@@ -264,10 +264,10 @@ class Collapse {
   dispose() {
     $.removeData(this._element, DATA_KEY)
 
-    this._config          = null
-    this._parent          = null
-    this._element         = null
-    this._triggerArray    = null
+    this._config = null
+    this._parent = null
+    this._element = null
+    this._triggerArray = null
     this._isTransitioning = null
   }
 
@@ -335,8 +335,8 @@ class Collapse {
 
   static _jQueryInterface(config) {
     return this.each(function () {
-      const $this   = $(this)
-      let data      = $this.data(DATA_KEY)
+      const $this = $(this)
+      let data = $this.data(DATA_KEY)
       const _config = {
         ...Default,
         ...$this.data(),
@@ -380,8 +380,8 @@ $(document).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
 
   $(selectors).each(function () {
     const $target = $(this)
-    const data    = $target.data(DATA_KEY)
-    const config  = data ? 'toggle' : $trigger.data()
+    const data = $target.data(DATA_KEY)
+    const config = data ? 'toggle' : $trigger.data()
     Collapse._jQueryInterface.call($target, config)
   })
 })

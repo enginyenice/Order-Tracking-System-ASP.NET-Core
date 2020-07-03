@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SiparisTakip.Models.Tables
 {
@@ -11,6 +8,7 @@ namespace SiparisTakip.Models.Tables
     {
         [Key]
         public int requestId { get; set; }
+
         public string requestNo { get; set; }
         public string requestDepartment { get; set; }
         public string requestSteff { get; set; }
@@ -25,6 +23,7 @@ namespace SiparisTakip.Models.Tables
 
         [Column(TypeName = "Date")]
         public DateTime requestDeliveryDate { get; set; }
+
         public string requestSupplyCompany1 { get; set; }
         public string requestSupplyCompany2 { get; set; }
         public string requestSupplyCompany3 { get; set; }
@@ -34,11 +33,10 @@ namespace SiparisTakip.Models.Tables
         public int userId { get; set; }
         public virtual User user { get; set; }
 
-
         [NotMapped]
         public Microsoft.AspNetCore.Http.IFormFile ImageFile { get; set; }
+
         [NotMapped]
         public string date { get; set; }
-
     }
 }

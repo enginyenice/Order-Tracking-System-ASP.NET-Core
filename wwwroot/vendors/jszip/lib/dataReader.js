@@ -13,7 +13,7 @@ DataReader.prototype = {
      * @param {string} offset the additional offset to check.
      * @throws {Error} an Error if the offset is out of bounds.
      */
-    checkOffset: function(offset) {
+    checkOffset: function (offset) {
         this.checkIndex(this.index + offset);
     },
     /**
@@ -21,7 +21,7 @@ DataReader.prototype = {
      * @param {string} newIndex the index to check.
      * @throws {Error} an Error if the index is out of bounds.
      */
-    checkIndex: function(newIndex) {
+    checkIndex: function (newIndex) {
         if (this.length < this.zero + newIndex || newIndex < 0) {
             throw new Error("End of data reached (data length = " + this.length + ", asked index = " + (newIndex) + "). Corrupted zip ?");
         }
@@ -31,7 +31,7 @@ DataReader.prototype = {
      * @param {number} newIndex The new index.
      * @throws {Error} if the new index is out of the data.
      */
-    setIndex: function(newIndex) {
+    setIndex: function (newIndex) {
         this.checkIndex(newIndex);
         this.index = newIndex;
     },
@@ -40,7 +40,7 @@ DataReader.prototype = {
      * @param {number} n the number of bytes to skip.
      * @throws {Error} if the new index is out of the data.
      */
-    skip: function(n) {
+    skip: function (n) {
         this.setIndex(this.index + n);
     },
     /**
@@ -48,7 +48,7 @@ DataReader.prototype = {
      * @param {number} i the index to use.
      * @return {number} a byte.
      */
-    byteAt: function(i) {
+    byteAt: function (i) {
         // see implementations
     },
     /**
@@ -56,7 +56,7 @@ DataReader.prototype = {
      * @param {number} size the number of bytes to read.
      * @return {number} the corresponding number.
      */
-    readInt: function(size) {
+    readInt: function (size) {
         var result = 0,
             i;
         this.checkOffset(size);
@@ -71,7 +71,7 @@ DataReader.prototype = {
      * @param {number} size the number of bytes to read.
      * @return {string} the corresponding string.
      */
-    readString: function(size) {
+    readString: function (size) {
         return utils.transformTo("string", this.readData(size));
     },
     /**
@@ -79,7 +79,7 @@ DataReader.prototype = {
      * @param {number} size the number of bytes to read.
      * @return {Object} the raw data, implementation specific.
      */
-    readData: function(size) {
+    readData: function (size) {
         // see implementations
     },
     /**
@@ -87,22 +87,22 @@ DataReader.prototype = {
      * @param {string} sig the signature to find.
      * @return {number} the index of the last occurence, -1 if not found.
      */
-    lastIndexOfSignature: function(sig) {
+    lastIndexOfSignature: function (sig) {
         // see implementations
     },
     /**
      * Get the next date.
      * @return {Date} the date.
      */
-    readDate: function() {
+    readDate: function () {
         var dostime = this.readInt(4);
         return new Date(
-        ((dostime >> 25) & 0x7f) + 1980, // year
-        ((dostime >> 21) & 0x0f) - 1, // month
-        (dostime >> 16) & 0x1f, // day
-        (dostime >> 11) & 0x1f, // hour
-        (dostime >> 5) & 0x3f, // minute
-        (dostime & 0x1f) << 1); // second
+            ((dostime >> 25) & 0x7f) + 1980, // year
+            ((dostime >> 21) & 0x0f) - 1, // month
+            (dostime >> 16) & 0x1f, // day
+            (dostime >> 11) & 0x1f, // hour
+            (dostime >> 5) & 0x3f, // minute
+            (dostime & 0x1f) << 1); // second
     }
 };
 module.exports = DataReader;

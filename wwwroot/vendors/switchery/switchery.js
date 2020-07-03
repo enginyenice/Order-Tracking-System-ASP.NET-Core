@@ -16,9 +16,9 @@
  */
 
 var transitionize = require('transitionize')
-  , fastclick = require('fastclick')
-  , classes = require('classes')
-  , events = require('events');
+    , fastclick = require('fastclick')
+    , classes = require('classes')
+    , events = require('events');
 
 /**
  * Expose `Switchery`.
@@ -33,15 +33,15 @@ module.exports = Switchery;
  */
 
 var defaults = {
-    color             : '#64bd63'
-  , secondaryColor    : '#dfdfdf'
-  , jackColor         : '#fff'
-  , jackSecondaryColor: null
-  , className         : 'switchery'
-  , disabled          : false
-  , disabledOpacity   : 0.5
-  , speed             : '0.4s'
-  , size              : 'default'
+    color: '#64bd63'
+    , secondaryColor: '#dfdfdf'
+    , jackColor: '#fff'
+    , jackSecondaryColor: null
+    , className: 'switchery'
+    , disabled: false
+    , disabledOpacity: 0.5
+    , speed: '0.4s'
+    , size: 'default'
 };
 
 /**
@@ -53,19 +53,19 @@ var defaults = {
  */
 
 function Switchery(element, options) {
-  if (!(this instanceof Switchery)) return new Switchery(element, options);
+    if (!(this instanceof Switchery)) return new Switchery(element, options);
 
-  this.element = element;
-  this.options = options || {};
+    this.element = element;
+    this.options = options || {};
 
-  for (var i in defaults) {
-    if (this.options[i] == null) {
-      this.options[i] = defaults[i];
+    for (var i in defaults) {
+        if (this.options[i] == null) {
+            this.options[i] = defaults[i];
+        }
     }
-  }
 
-  if (this.element != null && this.element.type == 'checkbox') this.init();
-  if (this.isDisabled() === true) this.disable();
+    if (this.element != null && this.element.type == 'checkbox') this.init();
+    if (this.isDisabled() === true) this.disable();
 }
 
 /**
@@ -74,8 +74,8 @@ function Switchery(element, options) {
  * @api private
  */
 
-Switchery.prototype.hide = function() {
-  this.element.style.display = 'none';
+Switchery.prototype.hide = function () {
+    this.element.style.display = 'none';
 };
 
 /**
@@ -84,9 +84,9 @@ Switchery.prototype.hide = function() {
  * @api private
  */
 
-Switchery.prototype.show = function() {
-  var switcher = this.create();
-  this.insertAfter(this.element, switcher);
+Switchery.prototype.show = function () {
+    var switcher = this.create();
+    this.insertAfter(this.element, switcher);
 };
 
 /**
@@ -96,14 +96,14 @@ Switchery.prototype.show = function() {
  * @api private
  */
 
-Switchery.prototype.create = function() {
-  this.switcher = document.createElement('span');
-  this.jack = document.createElement('small');
-  this.switcher.appendChild(this.jack);
-  this.switcher.className = this.options.className;
-  this.events = events(this.switcher, this);
+Switchery.prototype.create = function () {
+    this.switcher = document.createElement('span');
+    this.jack = document.createElement('small');
+    this.switcher.appendChild(this.jack);
+    this.switcher.className = this.options.className;
+    this.events = events(this.switcher, this);
 
-  return this.switcher;
+    return this.switcher;
 };
 
 /**
@@ -114,8 +114,8 @@ Switchery.prototype.create = function() {
  * @api private
  */
 
-Switchery.prototype.insertAfter = function(reference, target) {
-  reference.parentNode.insertBefore(target, reference.nextSibling);
+Switchery.prototype.insertAfter = function (reference, target) {
+    reference.parentNode.insertBefore(target, reference.nextSibling);
 };
 
 /**
@@ -126,30 +126,30 @@ Switchery.prototype.insertAfter = function(reference, target) {
  */
 
 Switchery.prototype.setPosition = function (clicked) {
-  var checked = this.isChecked()
-    , switcher = this.switcher
-    , jack = this.jack;
+    var checked = this.isChecked()
+        , switcher = this.switcher
+        , jack = this.jack;
 
-  if (clicked && checked) checked = false;
-  else if (clicked && !checked) checked = true;
+    if (clicked && checked) checked = false;
+    else if (clicked && !checked) checked = true;
 
-  if (checked === true) {
-    this.element.checked = true;
+    if (checked === true) {
+        this.element.checked = true;
 
-    if (window.getComputedStyle) jack.style.left = parseInt(window.getComputedStyle(switcher).width) - parseInt(window.getComputedStyle(jack).width) + 'px';
-    else jack.style.left = parseInt(switcher.currentStyle['width']) - parseInt(jack.currentStyle['width']) + 'px';
+        if (window.getComputedStyle) jack.style.left = parseInt(window.getComputedStyle(switcher).width) - parseInt(window.getComputedStyle(jack).width) + 'px';
+        else jack.style.left = parseInt(switcher.currentStyle['width']) - parseInt(jack.currentStyle['width']) + 'px';
 
-    if (this.options.color) this.colorize();
-    this.setSpeed();
-  } else {
-    jack.style.left = 0;
-    this.element.checked = false;
-    this.switcher.style.boxShadow = 'inset 0 0 0 0 ' + this.options.secondaryColor;
-    this.switcher.style.borderColor = this.options.secondaryColor;
-    this.switcher.style.backgroundColor = (this.options.secondaryColor !== defaults.secondaryColor) ? this.options.secondaryColor : '#fff';
-    this.jack.style.backgroundColor = (this.options.jackSecondaryColor !== this.options.jackColor) ? this.options.jackSecondaryColor : this.options.jackColor;
-    this.setSpeed();
-  }
+        if (this.options.color) this.colorize();
+        this.setSpeed();
+    } else {
+        jack.style.left = 0;
+        this.element.checked = false;
+        this.switcher.style.boxShadow = 'inset 0 0 0 0 ' + this.options.secondaryColor;
+        this.switcher.style.borderColor = this.options.secondaryColor;
+        this.switcher.style.backgroundColor = (this.options.secondaryColor !== defaults.secondaryColor) ? this.options.secondaryColor : '#fff';
+        this.jack.style.backgroundColor = (this.options.jackSecondaryColor !== this.options.jackColor) ? this.options.jackSecondaryColor : this.options.jackColor;
+        this.setSpeed();
+    }
 };
 
 /**
@@ -158,28 +158,28 @@ Switchery.prototype.setPosition = function (clicked) {
  * @api private
  */
 
-Switchery.prototype.setSpeed = function() {
-  var switcherProp = {}
-    , jackProp = {
-        'background-color': this.options.speed
-      , 'left': this.options.speed.replace(/[a-z]/, '') / 2 + 's'
-    };
+Switchery.prototype.setSpeed = function () {
+    var switcherProp = {}
+        , jackProp = {
+            'background-color': this.options.speed
+            , 'left': this.options.speed.replace(/[a-z]/, '') / 2 + 's'
+        };
 
-  if (this.isChecked()) {
-    switcherProp = {
-        'border': this.options.speed
-      , 'box-shadow': this.options.speed
-      , 'background-color': this.options.speed.replace(/[a-z]/, '') * 3 + 's'
-    };
-  } else {
-    switcherProp = {
-        'border': this.options.speed
-      , 'box-shadow': this.options.speed
-    };
-  }
+    if (this.isChecked()) {
+        switcherProp = {
+            'border': this.options.speed
+            , 'box-shadow': this.options.speed
+            , 'background-color': this.options.speed.replace(/[a-z]/, '') * 3 + 's'
+        };
+    } else {
+        switcherProp = {
+            'border': this.options.speed
+            , 'box-shadow': this.options.speed
+        };
+    }
 
-  transitionize(this.switcher, switcherProp);
-  transitionize(this.jack, jackProp);
+    transitionize(this.switcher, switcherProp);
+    transitionize(this.jack, jackProp);
 };
 
 /**
@@ -188,22 +188,22 @@ Switchery.prototype.setSpeed = function() {
  * @api private
  */
 
-Switchery.prototype.setSize = function() {
-  var small = 'switchery-small'
-    , normal = 'switchery-default'
-    , large = 'switchery-large';
+Switchery.prototype.setSize = function () {
+    var small = 'switchery-small'
+        , normal = 'switchery-default'
+        , large = 'switchery-large';
 
-  switch (this.options.size) {
-    case 'small':
-      classes(this.switcher).add(small)
-      break;
-    case 'large':
-      classes(this.switcher).add(large)
-      break;
-    default:
-      classes(this.switcher).add(normal)
-      break;
-  }
+    switch (this.options.size) {
+        case 'small':
+            classes(this.switcher).add(small)
+            break;
+        case 'large':
+            classes(this.switcher).add(large)
+            break;
+        default:
+            classes(this.switcher).add(normal)
+            break;
+    }
 };
 
 /**
@@ -212,13 +212,13 @@ Switchery.prototype.setSize = function() {
  * @api private
  */
 
-Switchery.prototype.colorize = function() {
-  var switcherHeight = this.switcher.offsetHeight / 2;
+Switchery.prototype.colorize = function () {
+    var switcherHeight = this.switcher.offsetHeight / 2;
 
-  this.switcher.style.backgroundColor = this.options.color;
-  this.switcher.style.borderColor = this.options.color;
-  this.switcher.style.boxShadow = 'inset 0 0 0 ' + switcherHeight + 'px ' + this.options.color;
-  this.jack.style.backgroundColor = this.options.jackColor;
+    this.switcher.style.backgroundColor = this.options.color;
+    this.switcher.style.borderColor = this.options.color;
+    this.switcher.style.boxShadow = 'inset 0 0 0 ' + switcherHeight + 'px ' + this.options.color;
+    this.jack.style.backgroundColor = this.options.jackColor;
 };
 
 /**
@@ -228,14 +228,14 @@ Switchery.prototype.colorize = function() {
  * @api private
  */
 
-Switchery.prototype.handleOnchange = function(state) {
-  if (document.dispatchEvent) {
-    var event = document.createEvent('HTMLEvents');
-    event.initEvent('change', true, true);
-    this.element.dispatchEvent(event);
-  } else {
-    this.element.fireEvent('onchange');
-  }
+Switchery.prototype.handleOnchange = function (state) {
+    if (document.dispatchEvent) {
+        var event = document.createEvent('HTMLEvents');
+        event.initEvent('change', true, true);
+        this.element.dispatchEvent(event);
+    } else {
+        this.element.fireEvent('onchange');
+    }
 };
 
 /**
@@ -245,19 +245,19 @@ Switchery.prototype.handleOnchange = function(state) {
  * @api private
  */
 
-Switchery.prototype.handleChange = function() {
-  var self = this
-    , el = this.element;
+Switchery.prototype.handleChange = function () {
+    var self = this
+        , el = this.element;
 
-  if (el.addEventListener) {
-    el.addEventListener('change', function() {
-      self.setPosition();
-    });
-  } else {
-    el.attachEvent('onchange', function() {
-      self.setPosition();
-    });
-  }
+    if (el.addEventListener) {
+        el.addEventListener('change', function () {
+            self.setPosition();
+        });
+    } else {
+        el.attachEvent('onchange', function () {
+            self.setPosition();
+        });
+    }
 };
 
 /**
@@ -266,11 +266,11 @@ Switchery.prototype.handleChange = function() {
  * @api private
  */
 
-Switchery.prototype.handleClick = function() {
-  var switcher = this.switcher;
+Switchery.prototype.handleClick = function () {
+    var switcher = this.switcher;
 
-  fastclick(switcher);
-  this.events.bind('click', 'bindClick');
+    fastclick(switcher);
+    this.events.bind('click', 'bindClick');
 };
 
 /**
@@ -279,12 +279,12 @@ Switchery.prototype.handleClick = function() {
  * @api private
  */
 
-Switchery.prototype.bindClick = function() {
-  var parent = this.element.parentNode.tagName.toLowerCase()
-    , labelParent = (parent === 'label') ? false : true;
+Switchery.prototype.bindClick = function () {
+    var parent = this.element.parentNode.tagName.toLowerCase()
+        , labelParent = (parent === 'label') ? false : true;
 
-  this.setPosition(labelParent);
-  this.handleOnchange(this.element.checked);
+    this.setPosition(labelParent);
+    this.handleOnchange(this.element.checked);
 };
 
 /**
@@ -293,8 +293,8 @@ Switchery.prototype.bindClick = function() {
  * @api private
  */
 
-Switchery.prototype.markAsSwitched = function() {
-  this.element.setAttribute('data-switchery', true);
+Switchery.prototype.markAsSwitched = function () {
+    this.element.setAttribute('data-switchery', true);
 };
 
 /**
@@ -303,8 +303,8 @@ Switchery.prototype.markAsSwitched = function() {
  * @api private
  */
 
-Switchery.prototype.markedAsSwitched = function() {
-  return this.element.getAttribute('data-switchery');
+Switchery.prototype.markedAsSwitched = function () {
+    return this.element.getAttribute('data-switchery');
 };
 
 /**
@@ -313,14 +313,14 @@ Switchery.prototype.markedAsSwitched = function() {
  * @api private
  */
 
-Switchery.prototype.init = function() {
-  this.hide();
-  this.show();
-  this.setSize();
-  this.setPosition();
-  this.markAsSwitched();
-  this.handleChange();
-  this.handleClick();
+Switchery.prototype.init = function () {
+    this.hide();
+    this.show();
+    this.setSize();
+    this.setPosition();
+    this.markAsSwitched();
+    this.handleChange();
+    this.handleClick();
 };
 
 /**
@@ -330,8 +330,8 @@ Switchery.prototype.init = function() {
  * @api public
  */
 
-Switchery.prototype.isChecked = function() {
-  return this.element.checked;
+Switchery.prototype.isChecked = function () {
+    return this.element.checked;
 };
 
 /**
@@ -341,8 +341,8 @@ Switchery.prototype.isChecked = function() {
  * @api public
  */
 
-Switchery.prototype.isDisabled = function() {
-  return this.options.disabled || this.element.disabled || this.element.readOnly;
+Switchery.prototype.isDisabled = function () {
+    return this.options.disabled || this.element.disabled || this.element.readOnly;
 };
 
 /**
@@ -351,8 +351,8 @@ Switchery.prototype.isDisabled = function() {
  * @api public
  */
 
-Switchery.prototype.destroy = function() {
-  this.events.unbind();
+Switchery.prototype.destroy = function () {
+    this.events.unbind();
 };
 
 /**
@@ -361,12 +361,12 @@ Switchery.prototype.destroy = function() {
  * @api public
  */
 
-Switchery.prototype.enable = function() {
-  if (this.options.disabled) this.options.disabled = false;
-  if (this.element.disabled) this.element.disabled = false;
-  if (this.element.readOnly) this.element.readOnly = false;
-  this.switcher.style.opacity = 1;
-  this.events.bind('click', 'bindClick');
+Switchery.prototype.enable = function () {
+    if (this.options.disabled) this.options.disabled = false;
+    if (this.element.disabled) this.element.disabled = false;
+    if (this.element.readOnly) this.element.readOnly = false;
+    this.switcher.style.opacity = 1;
+    this.events.bind('click', 'bindClick');
 };
 
 /**
@@ -375,10 +375,10 @@ Switchery.prototype.enable = function() {
  * @api public
  */
 
-Switchery.prototype.disable = function() {
-  if (!this.options.disabled) this.options.disabled = true;
-  if (!this.element.disabled) this.element.disabled = true;
-  if (!this.element.readOnly) this.element.readOnly = true;
-  this.switcher.style.opacity = this.options.disabledOpacity;
-  this.destroy();
+Switchery.prototype.disable = function () {
+    if (!this.options.disabled) this.options.disabled = true;
+    if (!this.element.disabled) this.element.disabled = true;
+    if (!this.element.readOnly) this.element.readOnly = true;
+    this.switcher.style.opacity = this.options.disabledOpacity;
+    this.destroy();
 };

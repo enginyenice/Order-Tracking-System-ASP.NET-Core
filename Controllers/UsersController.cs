@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SiparisTakip.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SiparisTakip.Controllers
 {
@@ -16,7 +13,6 @@ namespace SiparisTakip.Controllers
 
         public bool SessionCont()
         {
-
             if (HttpContext != null)
             {
                 if ((HttpContext.Session.GetString("userId")) != null)
@@ -26,12 +22,11 @@ namespace SiparisTakip.Controllers
             }
             return false; ;
         }
+
         public UsersController(SiparisTakipDB context)
         {
-
             _context = context;
         }
-
 
         // GET: Users
         public async Task<IActionResult> Index()
@@ -70,7 +65,7 @@ namespace SiparisTakip.Controllers
         }
 
         // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -104,7 +99,7 @@ namespace SiparisTakip.Controllers
         }
 
         // POST: Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -3,7 +3,7 @@
   "repo": "rstacruz/nprogress",
   "description": "slim progress bar",
   "version": "0.2.0",
-  "keywords": ["progress","bar","spinner"],
+  "keywords": [ "progress", "bar", "spinner" ],
   "development": {
     "chaijs/chai": "*",
     "visionmedia/mocha": "*"

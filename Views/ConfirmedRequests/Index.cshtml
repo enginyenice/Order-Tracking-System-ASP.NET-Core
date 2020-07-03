@@ -10,8 +10,6 @@
             <div class="title_left">
                 <h3>Onaylanan Talepler</h3>
             </div>
-
-
         </div>
 
         <div class="clearfix"></div>
@@ -19,8 +17,8 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
-                    <div class="x_title">
-
+                    <div class="x_title text-right">
+                        @Html.ActionLink("Yeni Talep Oluştur", "Index", "NewRequest", null, new { @class = "btn  btn-dark mr-2" })
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -47,7 +45,6 @@
                                             </tr>
                                         </thead>
 
-
                                         <tbody>
                                             @{
                                                 foreach (var item in Model)
@@ -70,7 +67,6 @@
                                                 }
 
                                             }
-
                                         </tbody>
                                     </table>
                                 </div>

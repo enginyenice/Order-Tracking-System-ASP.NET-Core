@@ -17,8 +17,8 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
-                    <div class="x_title">
-
+                    <div class="x_title text-right">
+                        @Html.ActionLink("Yeni Talep Oluştur", "Index", "NewRequest", null, new { @class = "btn  btn-dark mr-2" })
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -94,7 +94,7 @@
                                                         </td>
 
                                                         <td class="align-middle">
-                                                            @Html.ActionLink("Sil", "Delete", "Request", new { id = item.requestId }, new { @class = "btn btn-dark" })
+                                                            @Html.ActionLink("Sil", "Delete", "AllRequests  ", new { id = item.requestId }, new { @class = "btn btn-dark" })
                                                         </td>
                                                     </tr>
                                                 }

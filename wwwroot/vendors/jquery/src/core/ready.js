@@ -4,12 +4,10 @@ define( [
 	"../core/init",
 	"../deferred"
 ], function( jQuery, document ) {
-
 // The deferred used on DOM ready
 var readyList;
 
 jQuery.fn.ready = function( fn ) {
-
 	// Add the callback
 	jQuery.ready.promise().done( fn );
 
@@ -17,7 +15,6 @@ jQuery.fn.ready = function( fn ) {
 };
 
 jQuery.extend( {
-
 	// Is the DOM ready to be used? Set to true once it occurs.
 	isReady: false,
 
@@ -36,7 +33,6 @@ jQuery.extend( {
 
 	// Handle when the DOM is ready
 	ready: function( wait ) {
-
 		// Abort if there are pending holds or we're already ready
 		if ( wait === true ? --jQuery.readyWait : jQuery.isReady ) {
 			return;
@@ -72,7 +68,6 @@ function completed() {
 
 jQuery.ready.promise = function( obj ) {
 	if ( !readyList ) {
-
 		readyList = jQuery.Deferred();
 
 		// Catch cases where $(document).ready() is called
@@ -81,12 +76,9 @@ jQuery.ready.promise = function( obj ) {
 		// Older IE sometimes signals "interactive" too soon
 		if ( document.readyState === "complete" ||
 			( document.readyState !== "loading" && !document.documentElement.doScroll ) ) {
-
 			// Handle it asynchronously to allow scripts the opportunity to delay ready
 			window.setTimeout( jQuery.ready );
-
 		} else {
-
 			// Use the handy event callback
 			document.addEventListener( "DOMContentLoaded", completed );
 
@@ -99,5 +91,4 @@ jQuery.ready.promise = function( obj ) {
 
 // Kick off the DOM ready check even if the user does not
 jQuery.ready.promise();
-
 } );

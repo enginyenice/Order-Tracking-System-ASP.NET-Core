@@ -1,5 +1,3 @@
-using System;
-
 namespace SiparisTakip.Models
 {
     public class ErrorViewModel

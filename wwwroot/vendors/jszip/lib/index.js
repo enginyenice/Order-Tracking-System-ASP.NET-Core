@@ -22,7 +22,7 @@ Usage:
  */
 function JSZip(data, options) {
     // if this constructor is used without `new`, it adds `new` before itself:
-    if(!(this instanceof JSZip)) return new JSZip(data, options);
+    if (!(this instanceof JSZip)) return new JSZip(data, options);
 
     // object containing the files :
     // {
@@ -38,7 +38,7 @@ function JSZip(data, options) {
     if (data) {
         this.load(data, options);
     }
-    this.clone = function() {
+    this.clone = function () {
         var newObj = new JSZip();
         for (var i in this) {
             if (typeof this[i] !== "function") {
@@ -64,14 +64,14 @@ JSZip.base64 = {
      * @deprecated
      * This method will be removed in a future version without replacement.
      */
-    encode : function(input) {
+    encode: function (input) {
         return base64.encode(input);
     },
     /**
      * @deprecated
      * This method will be removed in a future version without replacement.
      */
-    decode : function(input) {
+    decode: function (input) {
         return base64.decode(input);
     }
 };

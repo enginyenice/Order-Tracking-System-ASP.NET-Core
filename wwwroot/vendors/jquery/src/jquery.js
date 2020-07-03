@@ -31,7 +31,5 @@ define( [
 	"./deprecated",
 	"./exports/amd"
 ], function( jQuery ) {
-
 return ( window.jQuery = window.$ = jQuery );
-
 } );

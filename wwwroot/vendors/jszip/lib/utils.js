@@ -7,16 +7,16 @@ var nodeBuffer = require('./nodeBuffer');
  * @param {string} str the string to transform.
  * @return {String} the binary string.
  */
-exports.string2binary = function(str) {
+exports.string2binary = function (str) {
     var result = "";
     for (var i = 0; i < str.length; i++) {
         result += String.fromCharCode(str.charCodeAt(i) & 0xff);
     }
     return result;
 };
-exports.arrayBuffer2Blob = function(buffer, mimeType) {
+exports.arrayBuffer2Blob = function (buffer, mimeType) {
     exports.checkSupport("blob");
-	mimeType = mimeType || 'application/zip';
+    mimeType = mimeType || 'application/zip';
 
     try {
         // Blob constructor
@@ -25,7 +25,6 @@ exports.arrayBuffer2Blob = function(buffer, mimeType) {
         });
     }
     catch (e) {
-
         try {
             // deprecated, browser only, old way
             var Builder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
@@ -34,13 +33,10 @@ exports.arrayBuffer2Blob = function(buffer, mimeType) {
             return builder.getBlob(mimeType);
         }
         catch (e) {
-
             // well, fuck ?!
             throw new Error("Bug : can't construct the Blob.");
         }
     }
-
-
 };
 /**
  * The identity function.
@@ -85,27 +81,27 @@ function arrayLikeToString(array) {
         type = exports.getTypeOf(array),
         k = 0,
         canUseApply = true;
-      try {
-         switch(type) {
+    try {
+        switch (type) {
             case "uint8array":
-               String.fromCharCode.apply(null, new Uint8Array(0));
-               break;
+                String.fromCharCode.apply(null, new Uint8Array(0));
+                break;
             case "nodebuffer":
-               String.fromCharCode.apply(null, nodeBuffer(0));
-               break;
-         }
-      } catch(e) {
-         canUseApply = false;
-      }
+                String.fromCharCode.apply(null, nodeBuffer(0));
+                break;
+        }
+    } catch (e) {
+        canUseApply = false;
+    }
 
-      // no apply : slow and painful algorithm
-      // default browser on android 4.*
-      if (!canUseApply) {
-         var resultStr = "";
-         for(var i = 0; i < array.length;i++) {
+    // no apply : slow and painful algorithm
+    // default browser on android 4.*
+    if (!canUseApply) {
+        var resultStr = "";
+        for (var i = 0; i < array.length; i++) {
             resultStr += String.fromCharCode(array[i]);
-         }
-    return resultStr;
+        }
+        return resultStr;
     }
     while (k < len && chunk > 1) {
         try {
@@ -126,7 +122,6 @@ function arrayLikeToString(array) {
 
 exports.applyFromCharCode = arrayLikeToString;
 
-
 /**
  * Copy the data from an array-like to an other array-like.
  * @param {Array|ArrayBuffer|Uint8Array|Buffer} arrayFrom the origin array.
@@ -146,16 +141,16 @@ var transform = {};
 // string to ?
 transform["string"] = {
     "string": identity,
-    "array": function(input) {
+    "array": function (input) {
         return stringToArrayLike(input, new Array(input.length));
     },
-    "arraybuffer": function(input) {
+    "arraybuffer": function (input) {
         return transform["string"]["uint8array"](input).buffer;
     },
-    "uint8array": function(input) {
+    "uint8array": function (input) {
         return stringToArrayLike(input, new Uint8Array(input.length));
     },
-    "nodebuffer": function(input) {
+    "nodebuffer": function (input) {
         return stringToArrayLike(input, nodeBuffer(input.length));
     }
 };
@@ -164,30 +159,30 @@ transform["string"] = {
 transform["array"] = {
     "string": arrayLikeToString,
     "array": identity,
-    "arraybuffer": function(input) {
+    "arraybuffer": function (input) {
         return (new Uint8Array(input)).buffer;
     },
-    "uint8array": function(input) {
+    "uint8array": function (input) {
         return new Uint8Array(input);
     },
-    "nodebuffer": function(input) {
+    "nodebuffer": function (input) {
         return nodeBuffer(input);
     }
 };
 
 // arraybuffer to ?
 transform["arraybuffer"] = {
-    "string": function(input) {
+    "string": function (input) {
         return arrayLikeToString(new Uint8Array(input));
     },
-    "array": function(input) {
+    "array": function (input) {
         return arrayLikeToArrayLike(new Uint8Array(input), new Array(input.byteLength));
     },
     "arraybuffer": identity,
-    "uint8array": function(input) {
+    "uint8array": function (input) {
         return new Uint8Array(input);
     },
-    "nodebuffer": function(input) {
+    "nodebuffer": function (input) {
         return nodeBuffer(new Uint8Array(input));
     }
 };
@@ -195,14 +190,14 @@ transform["arraybuffer"] = {
 // uint8array to ?
 transform["uint8array"] = {
     "string": arrayLikeToString,
-    "array": function(input) {
+    "array": function (input) {
         return arrayLikeToArrayLike(input, new Array(input.length));
     },
-    "arraybuffer": function(input) {
+    "arraybuffer": function (input) {
         return input.buffer;
     },
     "uint8array": identity,
-    "nodebuffer": function(input) {
+    "nodebuffer": function (input) {
         return nodeBuffer(input);
     }
 };
@@ -210,13 +205,13 @@ transform["uint8array"] = {
 // nodebuffer to ?
 transform["nodebuffer"] = {
     "string": arrayLikeToString,
-    "array": function(input) {
+    "array": function (input) {
         return arrayLikeToArrayLike(input, new Array(input.length));
     },
-    "arraybuffer": function(input) {
+    "arraybuffer": function (input) {
         return transform["nodebuffer"]["uint8array"](input).buffer;
     },
-    "uint8array": function(input) {
+    "uint8array": function (input) {
         return arrayLikeToArrayLike(input, new Uint8Array(input.length));
     },
     "nodebuffer": identity
@@ -230,7 +225,7 @@ transform["nodebuffer"] = {
  * @param {String|Array|ArrayBuffer|Uint8Array|Buffer} input the input to convert.
  * @throws {Error} an Error if the browser doesn't support the requested output type.
  */
-exports.transformTo = function(outputType, input) {
+exports.transformTo = function (outputType, input) {
     if (!input) {
         // undefined, null, etc
         // an empty string won't harm.
@@ -251,7 +246,7 @@ exports.transformTo = function(outputType, input) {
  * @param {Object} input the input to identify.
  * @return {String} the (lowercase) type of the input.
  */
-exports.getTypeOf = function(input) {
+exports.getTypeOf = function (input) {
     if (typeof input === "string") {
         return "string";
     }
@@ -274,7 +269,7 @@ exports.getTypeOf = function(input) {
  * @param {String} type the type to check.
  * @throws {Error} an Error if the browser doesn't support the requested type.
  */
-exports.checkSupport = function(type) {
+exports.checkSupport = function (type) {
     var supported = support[type.toLowerCase()];
     if (!supported) {
         throw new Error(type + " is not supported by this browser");
@@ -288,7 +283,7 @@ exports.MAX_VALUE_32BITS = -1; // well, "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" is pa
  * @param {string} str the string to prettify.
  * @return {string} a pretty string.
  */
-exports.pretty = function(str) {
+exports.pretty = function (str) {
     var res = '',
         code, i;
     for (i = 0; i < (str || "").length; i++) {
@@ -303,7 +298,7 @@ exports.pretty = function(str) {
  * @param {string} compressionMethod the method magic to find.
  * @return {Object|null} the JSZip compression object, null if none found.
  */
-exports.findCompression = function(compressionMethod) {
+exports.findCompression = function (compressionMethod) {
     for (var method in compressions) {
         if (!compressions.hasOwnProperty(method)) {
             continue;
@@ -330,7 +325,7 @@ exports.isRegExp = function (object) {
  * @param {...Object} var_args All objects to merge.
  * @return {Object} a new object with the data of the others.
  */
-exports.extend = function() {
+exports.extend = function () {
     var result = {}, i, attr;
     for (i = 0; i < arguments.length; i++) { // arguments is not enumerable in some browsers
         for (attr in arguments[i]) {
@@ -341,4 +336,3 @@ exports.extend = function() {
     }
     return result;
 };
-

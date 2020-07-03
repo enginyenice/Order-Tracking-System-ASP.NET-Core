@@ -1,16 +1,15 @@
-
-(function($,sr){
+(function ($, sr) {
     // debouncing function from John Hann
     // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
     var debounce = function (func, threshold, execAsap) {
-      var timeout;
+        var timeout;
 
-        return function debounced () {
+        return function debounced() {
             var obj = this, args = arguments;
-            function delayed () {
+            function delayed() {
                 if (!execAsap)
-                    func.apply(obj, args); 
-                timeout = null; 
+                    func.apply(obj, args);
+                timeout = null;
             }
 
             if (timeout)
@@ -18,14 +17,13 @@
             else if (execAsap)
                 func.apply(obj, args);
 
-            timeout = setTimeout(delayed, threshold || 100); 
+            timeout = setTimeout(delayed, threshold || 100);
         };
     };
 
-    // smartresize 
-    jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
-
-})(jQuery,'smartresize');
+    // smartresize
+    jQuery.fn[sr] = function (fn) { return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
+})(jQuery, 'smartresize');
 /**
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -285,7 +283,6 @@ if (typeof NProgress != 'undefined') {
     });
 }
 
-
 //hover and retain popover when on popover content
 var originalLeave = $.fn.popover.Constructor.prototype.leave;
 $.fn.popover.Constructor.prototype.leave = function (obj) {
@@ -318,14 +315,11 @@ $('body').popover({
     }
 });
 
-
 function gd(year, month, day) {
     return new Date(year, month - 1, day).getTime();
 }
 
-
 function init_flot_chart() {
-
     if (typeof ($.plot) === 'undefined') { return; }
 
     console.log('init_flot_chart');
@@ -395,11 +389,9 @@ function init_flot_chart() {
         [16, 9]
     ];
 
-
     for (var i = 0; i < 30; i++) {
         chart_plot_02_data.push([new Date(Date.today().add(i).days()).getTime(), randNum() + i + i + 10]);
     }
-
 
     var chart_plot_01_settings = {
         series: {
@@ -533,13 +525,11 @@ function init_flot_chart() {
         }
     };
 
-
     if ($("#chart_plot_01").length) {
         console.log('Plot1');
 
         $.plot($("#chart_plot_01"), [arr_data1, arr_data2], chart_plot_01_settings);
     }
-
 
     if ($("#chart_plot_02").length) {
         console.log('Plot2');
@@ -555,12 +545,10 @@ function init_flot_chart() {
                     fillColor: "#fff"
                 }
             }], chart_plot_02_settings);
-
     }
 
     if ($("#chart_plot_03").length) {
         console.log('Plot3');
-
 
         $.plot($("#chart_plot_03"), [{
             label: "Registrations",
@@ -572,16 +560,12 @@ function init_flot_chart() {
                 fillColor: "#fff"
             }
         }], chart_plot_03_settings);
-
     };
-
 }
-
 
 /* STARRR */
 
 function init_starrr() {
-
     if (typeof (starrr) === 'undefined') { return; }
     console.log('init_starrr');
 
@@ -598,20 +582,16 @@ function init_starrr() {
     $('.stars-existing').on('starrr:change', function (e, value) {
         $('.stars-count-existing').html(value);
     });
-
 };
 
-
 function init_JQVmap() {
-
-    //console.log('check init_JQVmap [' + typeof (VectorCanvas) + '][' + typeof (jQuery.fn.vectorMap) + ']' );	
+    //console.log('check init_JQVmap [' + typeof (VectorCanvas) + '][' + typeof (jQuery.fn.vectorMap) + ']' );
 
     if (typeof (jQuery.fn.vectorMap) === 'undefined') { return; }
 
     console.log('init_JQVmap');
 
     if ($('#world-map-gdp').length) {
-
         $('#world-map-gdp').vectorMap({
             map: 'world_en',
             backgroundColor: null,
@@ -624,11 +604,9 @@ function init_JQVmap() {
             scaleColors: ['#E6F2F0', '#149B7E'],
             normalizeFunction: 'polynomial'
         });
-
     }
 
     if ($('#usa_map').length) {
-
         $('#usa_map').vectorMap({
             map: 'usa_en',
             backgroundColor: null,
@@ -641,14 +619,10 @@ function init_JQVmap() {
             scaleColors: ['#E6F2F0', '#149B7E'],
             normalizeFunction: 'polynomial'
         });
-
     }
-
 };
 
-
 function init_skycons() {
-
     if (typeof (Skycons) === 'undefined') { return; }
     console.log('init_skycons');
 
@@ -666,18 +640,14 @@ function init_skycons() {
         icons.set(list[i], list[i]);
 
     icons.play();
-
 }
 
-
 function init_chart_doughnut() {
-
     if (typeof (Chart) === 'undefined') { return; }
 
     console.log('init_chart_doughnut');
 
     if ($('.canvasDoughnut').length) {
-
         var chart_doughnut_settings = {
             type: 'doughnut',
             tooltipFillColor: "rgba(51, 51, 51, 0.55)",
@@ -714,24 +684,18 @@ function init_chart_doughnut() {
         }
 
         $('.canvasDoughnut').each(function () {
-
             var chart_element = $(this);
             var chart_doughnut = new Chart(chart_element, chart_doughnut_settings);
-
         });
-
     }
-
 }
 
 function init_gauge() {
-
     if (typeof (Gauge) === 'undefined') { return; }
 
     console.log('init_gauge [' + $('.gauge-chart').length + ']');
 
     console.log('init_gauge');
-
 
     var chart_gauge_settings = {
         lines: 12,
@@ -749,51 +713,36 @@ function init_gauge() {
         generateGradient: true
     };
 
-
     if ($('#chart_gauge_01').length) {
-
         var chart_gauge_01_elem = document.getElementById('chart_gauge_01');
         var chart_gauge_01 = new Gauge(chart_gauge_01_elem).setOptions(chart_gauge_settings);
-
     }
 
-
     if ($('#gauge-text').length) {
-
         chart_gauge_01.maxValue = 6000;
         chart_gauge_01.animationSpeed = 32;
         chart_gauge_01.set(3200);
         chart_gauge_01.setTextField(document.getElementById("gauge-text"));
-
     }
 
     if ($('#chart_gauge_02').length) {
-
         var chart_gauge_02_elem = document.getElementById('chart_gauge_02');
         var chart_gauge_02 = new Gauge(chart_gauge_02_elem).setOptions(chart_gauge_settings);
-
     }
 
-
     if ($('#gauge-text2').length) {
-
         chart_gauge_02.maxValue = 9000;
         chart_gauge_02.animationSpeed = 32;
         chart_gauge_02.set(2400);
         chart_gauge_02.setTextField(document.getElementById("gauge-text2"));
-
     }
-
-
 }
 
 /* SPARKLINES */
 
 function init_sparklines() {
-
     if (typeof (jQuery.fn.sparkline) === 'undefined') { return; }
     console.log('init_sparklines');
-
 
     $(".sparkline_one").sparkline([2, 4, 3, 4, 5, 4, 5, 4, 3, 4, 5, 6, 4, 5, 6, 3, 5, 4, 5, 4, 5, 4, 3, 4, 5, 6, 7, 5, 4, 3, 5, 6], {
         type: 'bar',
@@ -806,7 +755,6 @@ function init_sparklines() {
         barColor: '#26B99A'
     });
 
-
     $(".sparkline_two").sparkline([2, 4, 3, 4, 5, 4, 5, 4, 3, 4, 5, 6, 7, 5, 4, 3, 5, 6], {
         type: 'bar',
         height: '40',
@@ -817,7 +765,6 @@ function init_sparklines() {
         barSpacing: 2,
         barColor: '#26B99A'
     });
-
 
     $(".sparkline_three").sparkline([2, 4, 3, 4, 5, 4, 5, 4, 3, 4, 5, 6, 7, 5, 4, 3, 5, 6], {
         type: 'line',
@@ -830,7 +777,6 @@ function init_sparklines() {
         minSpotColor: '#26B99A'
     });
 
-
     $(".sparkline11").sparkline([2, 4, 3, 4, 5, 4, 5, 4, 3, 4, 6, 2, 4, 3, 4, 5, 4, 5, 4, 3], {
         type: 'bar',
         height: '40',
@@ -841,7 +787,6 @@ function init_sparklines() {
         barSpacing: 2,
         barColor: '#26B99A'
     });
-
 
     $(".sparkline22").sparkline([2, 4, 3, 4, 7, 5, 4, 3, 5, 6, 2, 4, 3, 4, 5, 4, 5, 4, 3, 4, 6], {
         type: 'line',
@@ -854,7 +799,6 @@ function init_sparklines() {
         minSpotColor: '#34495E'
     });
 
-
     $(".sparkline_bar").sparkline([2, 4, 3, 4, 5, 4, 5, 4, 3, 4, 5, 6, 4, 5, 6, 3, 5], {
         type: 'bar',
         colorMap: {
@@ -862,7 +806,6 @@ function init_sparklines() {
         },
         barColor: '#26B99A'
     });
-
 
     $(".sparkline_area").sparkline([5, 6, 7, 9, 9, 5, 3, 2, 2, 4, 6, 7], {
         type: 'line',
@@ -877,7 +820,6 @@ function init_sparklines() {
         width: 85
     });
 
-
     $(".sparkline_line").sparkline([2, 4, 3, 4, 5, 4, 5, 4, 3, 4, 5, 6, 4, 5, 6, 3, 5], {
         type: 'line',
         lineColor: '#26B99A',
@@ -887,12 +829,10 @@ function init_sparklines() {
         minSpotColor: '#34495E'
     });
 
-
     $(".sparkline_pie").sparkline([1, 1, 2, 1], {
         type: 'pie',
         sliceColors: ['#26B99A', '#ccc', '#75BCDD', '#D66DE2']
     });
-
 
     $(".sparkline_discreet").sparkline([4, 6, 7, 7, 4, 3, 2, 1, 4, 4, 2, 4, 3, 7, 8, 9, 7, 6, 4, 3], {
         type: 'discrete',
@@ -900,15 +840,11 @@ function init_sparklines() {
         lineColor: '#26B99A',
         width: '85',
     });
-
-
 };
-
 
 /* AUTOCOMPLETE */
 
 function init_autocomplete() {
-
     if (typeof ($.fn.autocomplete) === 'undefined') { return; }
     console.log('init_autocomplete');
 
@@ -925,25 +861,19 @@ function init_autocomplete() {
     $('#autocomplete-custom-append').autocomplete({
         lookup: countriesArray
     });
-
 };
 
 /* AUTOSIZE */
 
 function init_autosize() {
-
     if (typeof $.fn.autosize !== 'undefined') {
-
         autosize($('.resizable_textarea'));
-
     }
-
 };
 
 /* PARSLEY */
 
 function init_parsley() {
-
     if (typeof (parsley) === 'undefined') { return; }
     console.log('init_parsley');
 
@@ -984,9 +914,7 @@ function init_parsley() {
     try {
         hljs.initHighlightingOnLoad();
     } catch (err) { }
-
 };
-
 
 /* INPUTS */
 
@@ -1004,21 +932,16 @@ function onChangeTag(input, tag) {
 
 //tags input
 function init_TagsInput() {
-
     if (typeof $.fn.tagsInput !== 'undefined') {
-
         $('#tags_1').tagsInput({
             width: 'auto'
         });
-
     }
-
 };
 
 /* SELECT2 */
 
 function init_select2() {
-
     if (typeof (select2) === 'undefined') { return; }
     console.log('init_toolbox');
 
@@ -1032,13 +955,11 @@ function init_select2() {
         placeholder: "With Max Selection limit 4",
         allowClear: true
     });
-
 };
 
 /* WYSIWYG EDITOR */
 
 function init_wysiwyg() {
-
     if (typeof ($.fn.wysiwyg) === 'undefined') { return; }
     console.log('init_wysiwyg');
 
@@ -1103,17 +1024,13 @@ function init_wysiwyg() {
         });
     });
 
-
     window.prettyPrint;
     prettyPrint();
-
 };
 
 /* CROPPER */
 
 function init_cropper() {
-
-
     if (typeof ($.fn.cropper) === 'undefined') { return; }
     console.log('init_cropper');
 
@@ -1140,10 +1057,8 @@ function init_cropper() {
         }
     };
 
-
     // Tooltip
     $('[data-toggle="tooltip"]').tooltip();
-
 
     // Cropper
     $image.on({
@@ -1170,7 +1085,6 @@ function init_cropper() {
         }
     }).cropper(options);
 
-
     // Buttons
     if (!$.isFunction(document.createElement('canvas').getContext)) {
         $('button[data-method="getCroppedCanvas"]').prop('disabled', true);
@@ -1181,12 +1095,10 @@ function init_cropper() {
         $('button[data-method="scale"]').prop('disabled', true);
     }
 
-
     // Download
     if (typeof $download[0].download === 'undefined') {
         $download.addClass('disabled');
     }
-
 
     // Options
     $('.docs-toggles').on('change', 'input', function () {
@@ -1215,7 +1127,6 @@ function init_cropper() {
 
         $image.cropper('destroy').cropper(options);
     });
-
 
     // Methods
     $('.docs-buttons').on('click', '[data-method]', function () {
@@ -1253,7 +1164,6 @@ function init_cropper() {
 
                 case 'getCroppedCanvas':
                     if (result) {
-
                         // Bootstrap's Modal
                         $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
 
@@ -1272,7 +1182,6 @@ function init_cropper() {
                     console.log(e.message);
                 }
             }
-
         }
     });
 
@@ -1325,7 +1234,6 @@ function init_cropper() {
                 if (/^image\/\w+$/.test(file.type)) {
                     blobURL = URL.createObjectURL(file);
                     $image.one('built.cropper', function () {
-
                         // Revoke when load complete
                         URL.revokeObjectURL(blobURL);
                     }).cropper('reset').cropper('replace', blobURL);
@@ -1338,8 +1246,6 @@ function init_cropper() {
     } else {
         $inputImage.prop('disabled', true).parent().addClass('disabled');
     }
-
-
 };
 
 /* CROPPER --- end */
@@ -1347,7 +1253,6 @@ function init_cropper() {
 /* KNOB */
 
 function init_knob() {
-
     if (typeof ($.fn.knob) === 'undefined') { return; }
     console.log('init_knob');
 
@@ -1366,10 +1271,8 @@ function init_knob() {
          return value + '%';
          },*/
         draw: function () {
-
             // "tron" case
             if (this.$.data('skin') == 'tron') {
-
                 this.cursorExt = 0.3;
 
                 var a = this.arc(this.cv) // Arc
@@ -1401,7 +1304,6 @@ function init_knob() {
                 return false;
             }
         }
-
     });
 
     // Example of infinite knob, iPod click wheel
@@ -1447,24 +1349,20 @@ function init_knob() {
             v = this.cv;
         }
     });
-
 };
 
 /* INPUT MASK */
 
 function init_InputMask() {
-
     if (typeof ($.fn.inputmask) === 'undefined') { return; }
     console.log('init_InputMask');
 
     $(":input").inputmask();
-
 };
 
 /* COLOR PICKER */
 
 function init_ColorPicker() {
-
     if (typeof ($.fn.colorpicker) === 'undefined') { return; }
     console.log('init_ColorPicker');
 
@@ -1481,14 +1379,11 @@ function init_ColorPicker() {
     });
 
     $('.demo-auto').colorpicker();
-
 };
-
 
 /* ION RANGE SLIDER */
 
 function init_IonRangeSlider() {
-
     if (typeof ($.fn.ionRangeSlider) === 'undefined') { return; }
     console.log('init_IonRangeSlider');
 
@@ -1552,14 +1447,11 @@ function init_IonRangeSlider() {
             return m.format("Do MMMM, HH:mm");
         }
     });
-
 };
-
 
 /* DATERANGEPICKER */
 
 function init_daterangepicker() {
-
     if (typeof ($.fn.daterangepicker) === 'undefined') { return; }
     console.log('init_daterangepicker');
 
@@ -1630,11 +1522,9 @@ function init_daterangepicker() {
     $('#destroy').click(function () {
         $('#reportrange').data('daterangepicker').remove();
     });
-
 }
 
 function init_daterangepicker_right() {
-
     if (typeof ($.fn.daterangepicker) === 'undefined') { return; }
     console.log('init_daterangepicker_right');
 
@@ -1710,11 +1600,9 @@ function init_daterangepicker_right() {
     $('#destroy').click(function () {
         $('#reportrange_right').data('daterangepicker').remove();
     });
-
 }
 
 function init_daterangepicker_single_call() {
-
     if (typeof ($.fn.daterangepicker) === 'undefined') { return; }
     console.log('init_daterangepicker_single_call');
 
@@ -1742,13 +1630,9 @@ function init_daterangepicker_single_call() {
     }, function (start, end, label) {
         console.log(start.toISOString(), end.toISOString(), label);
     });
-
-
 }
 
-
 function init_daterangepicker_reservation() {
-
     if (typeof ($.fn.daterangepicker) === 'undefined') { return; }
     console.log('init_daterangepicker_reservation');
 
@@ -1763,13 +1647,11 @@ function init_daterangepicker_reservation() {
             format: 'MM/DD/YYYY h:mm A'
         }
     });
-
 }
 
 /* SMART WIZARD */
 
 function init_SmartWizard() {
-
     if (typeof ($.fn.smartWizard) === 'undefined') { return; }
     console.log('init_SmartWizard');
 
@@ -1778,18 +1660,15 @@ function init_SmartWizard() {
     $('#wizard_verticle').smartWizard({
         transitionEffect: 'slide'
     });
-   
+
     $('.buttonNext').addClass('btn btn-success');
     $('.buttonPrevious').addClass('btn btn-primary');
     $('.buttonFinish').addClass('btn btn-warning');
-
 };
-
 
 /* VALIDATOR */
 
 function init_validator() {
-
     if (typeof (validator) === 'undefined') { return; }
     console.log('init_validator');
 
@@ -1820,22 +1699,18 @@ function init_validator() {
 
         return false;
     });
-
 };
 
 /* PNotify */
 
 function init_PNotify() {
-
     if (typeof (PNotify) === 'undefined') { return; }
     console.log('init_PNotify');
 };
 
-
 /* CUSTOM NOTIFICATION */
 
 function init_CustomNotification() {
-
     console.log('run_customtabs');
 
     if (typeof (CustomTabs) === 'undefined') { return; }
@@ -1886,13 +1761,11 @@ function init_CustomNotification() {
         $('.notifications a').first().addClass('active');
         $('#notif-group div').first().css('display', 'block');
     });
-
 };
 
 /* EASYPIECHART */
 
 function init_EasyPieChart() {
-
     if (typeof ($.fn.easyPieChart) === 'undefined') { return; }
     console.log('init_EasyPieChart');
 
@@ -1945,27 +1818,20 @@ function init_EasyPieChart() {
             hide: 400
         }
     });
-
 };
 
-
 function init_charts() {
-
     console.log('run_charts  typeof [' + typeof (Chart) + ']');
 
     if (typeof (Chart) === 'undefined') { return; }
 
     console.log('init_charts');
 
-
     Chart.defaults.global.legend = {
         enabled: false
     };
 
-
-
     if ($('#canvas_line').length) {
-
         var canvas_line_00 = new Chart(document.getElementById("canvas_line"), {
             type: 'line',
             data: {
@@ -1993,12 +1859,9 @@ function init_charts() {
                 }]
             },
         });
-
     }
 
-
     if ($('#canvas_line1').length) {
-
         var canvas_line_01 = new Chart(document.getElementById("canvas_line1"), {
             type: 'line',
             data: {
@@ -2026,12 +1889,9 @@ function init_charts() {
                 }]
             },
         });
-
     }
 
-
     if ($('#canvas_line2').length) {
-
         var canvas_line_02 = new Chart(document.getElementById("canvas_line2"), {
             type: 'line',
             data: {
@@ -2059,12 +1919,9 @@ function init_charts() {
                 }]
             },
         });
-
     }
 
-
     if ($('#canvas_line3').length) {
-
         var canvas_line_03 = new Chart(document.getElementById("canvas_line3"), {
             type: 'line',
             data: {
@@ -2092,12 +1949,9 @@ function init_charts() {
                 }]
             },
         });
-
     }
 
-
     if ($('#canvas_line4').length) {
-
         var canvas_line_04 = new Chart(document.getElementById("canvas_line4"), {
             type: 'line',
             data: {
@@ -2125,14 +1979,11 @@ function init_charts() {
                 }]
             },
         });
-
     }
-
 
     // Line chart
 
     if ($('#lineChart').length) {
-
         var ctx = document.getElementById("lineChart");
         var lineChart = new Chart(ctx, {
             type: 'line',
@@ -2161,13 +2012,11 @@ function init_charts() {
                 }]
             },
         });
-
     }
 
     // Bar chart
 
     if ($('#mybarChart').length) {
-
         var ctx = document.getElementById("mybarChart");
         var mybarChart = new Chart(ctx, {
             type: 'bar',
@@ -2194,14 +2043,11 @@ function init_charts() {
                 }
             }
         });
-
     }
-
 
     // Doughnut chart
 
     if ($('#canvasDoughnut').length) {
-
         var ctx = document.getElementById("canvasDoughnut");
         var data = {
             labels: [
@@ -2227,7 +2073,6 @@ function init_charts() {
                     "#36CAAB",
                     "#49A9EA"
                 ]
-
             }]
         };
 
@@ -2236,13 +2081,11 @@ function init_charts() {
             tooltipFillColor: "rgba(51, 51, 51, 0.55)",
             data: data
         });
-
     }
 
     // Radar chart
 
     if ($('#canvasRadar').length) {
-
         var ctx = document.getElementById("canvasRadar");
         var data = {
             labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
@@ -2271,13 +2114,10 @@ function init_charts() {
             type: 'radar',
             data: data,
         });
-
     }
-
 
     // Pie chart
     if ($('#pieChart').length) {
-
         var ctx = document.getElementById("pieChart");
         var data = {
             datasets: [{
@@ -2307,14 +2147,11 @@ function init_charts() {
                 legend: false
             }
         });
-
     }
-
 
     // PolarArea chart
 
     if ($('#polarArea').length) {
-
         var ctx = document.getElementById("polarArea");
         var data = {
             datasets: [{
@@ -2348,27 +2185,23 @@ function init_charts() {
                 }
             }
         });
-
     }
 }
 
 /* COMPOSE */
 
 function init_compose() {
-
     if (typeof ($.fn.slideToggle) === 'undefined') { return; }
     console.log('init_compose');
 
     $('#compose, .compose-close').click(function () {
         $('.compose').slideToggle();
     });
-
 };
 
 /* CALENDAR */
 
 function init_calendar() {
-
     if (typeof ($.fn.fullCalendar) === 'undefined') { return; }
     console.log('init_calendar');
 
@@ -2465,14 +2298,11 @@ function init_calendar() {
             url: 'http://google.com/'
         }]
     });
-
 };
 
 /* DATA TABLES */
 
 function init_DataTables() {
-
- 
     //$('#datatable').dataTable();
     $('#datatable').DataTable({
         "oLanguage": {
@@ -2547,7 +2377,6 @@ function init_DataTables() {
         };
     }();
 
-
     $('#datatable-keytable').DataTable({
         keys: true
     });
@@ -2581,18 +2410,15 @@ function init_DataTables() {
     });
 
     TableManageButtons.init();
-
 };
 
 /* CHART - MORRIS  */
 
 function init_morris_charts() {
-
     if (typeof (Morris) === 'undefined') { return; }
     console.log('init_morris_charts');
 
     if ($('#graph_bar').length) {
-
         Morris.Bar({
             element: 'graph_bar',
             data: [
@@ -2616,11 +2442,9 @@ function init_morris_charts() {
             hideHover: 'auto',
             resize: true
         });
-
     }
 
     if ($('#graph_bar_group').length) {
-
         Morris.Bar({
             element: 'graph_bar_group',
             data: [
@@ -2643,11 +2467,9 @@ function init_morris_charts() {
             xLabelAngle: 60,
             resize: true
         });
-
     }
 
     if ($('#graphx').length) {
-
         Morris.Bar({
             element: 'graphx',
             data: [
@@ -2665,11 +2487,9 @@ function init_morris_charts() {
         }).on('click', function (i, row) {
             console.log(i, row);
         });
-
     }
 
     if ($('#graph_area').length) {
-
         Morris.Area({
             element: 'graph_area',
             data: [
@@ -2692,11 +2512,9 @@ function init_morris_charts() {
             hideHover: 'auto',
             resize: true
         });
-
     }
 
     if ($('#graph_donut').length) {
-
         Morris.Donut({
             element: 'graph_donut',
             data: [
@@ -2711,11 +2529,9 @@ function init_morris_charts() {
             },
             resize: true
         });
-
     }
 
     if ($('#graph_line').length) {
-
         Morris.Line({
             element: 'graph_line',
             xkey: 'year',
@@ -2736,21 +2552,14 @@ function init_morris_charts() {
         $MENU_TOGGLE.on('click', function () {
             $(window).resize();
         });
-
     }
-
 };
-
-
 
 /* ECHRTS */
 
-
 function init_echarts() {
-
     if (typeof (echarts) === 'undefined') { return; }
     console.log('init_echarts');
-
 
     var theme = {
         color: [
@@ -2964,11 +2773,9 @@ function init_echarts() {
         }
     };
 
-
     //echart Bar
 
     if ($('#mainb').length) {
-
         var echartBar = echarts.init(document.getElementById('mainb'), theme);
 
         echartBar.setOption({
@@ -3037,16 +2844,11 @@ function init_echarts() {
                 }
             }]
         });
-
     }
-
-
-
 
     //echart Radar
 
     if ($('#echart_sonar').length) {
-
         var echartRadar = echarts.init(document.getElementById('echart_sonar'), theme);
 
         echartRadar.setOption({
@@ -3110,13 +2912,11 @@ function init_echarts() {
                 }]
             }]
         });
-
     }
 
     //echart Funnel
 
     if ($('#echart_pyramid').length) {
-
         var echartFunnel = echarts.init(document.getElementById('echart_pyramid'), theme);
 
         echartFunnel.setOption({
@@ -3170,13 +2970,11 @@ function init_echarts() {
                 }]
             }]
         });
-
     }
 
     //echart Gauge
 
     if ($('#echart_gauge').length) {
-
         var echartGauge = echarts.init(document.getElementById('echart_gauge'), theme);
 
         echartGauge.setOption({
@@ -3290,13 +3088,11 @@ function init_echarts() {
                 }]
             }]
         });
-
     }
 
     //echart Line
 
     if ($('#echart_line').length) {
-
         var echartLine = echarts.init(document.getElementById('echart_line'), theme);
 
         echartLine.setOption({
@@ -3382,13 +3178,11 @@ function init_echarts() {
                 data: [1320, 1132, 601, 234, 120, 90, 20]
             }]
         });
-
     }
 
     //echart Scatter
 
     if ($('#echart_scatter').length) {
-
         var echartScatter = echarts.init(document.getElementById('echart_scatter'), theme);
 
         echartScatter.setOption({
@@ -4002,13 +3796,11 @@ function init_echarts() {
                 }
             }]
         });
-
     }
 
     //echart Bar Horizontal
 
     if ($('#echart_bar_horizontal').length) {
-
         var echartBar = echarts.init(document.getElementById('echart_bar_horizontal'), theme);
 
         echartBar.setOption({
@@ -4051,13 +3843,11 @@ function init_echarts() {
                 data: [19325, 23438, 31000, 121594, 134141, 681807]
             }]
         });
-
     }
 
     //echart Pie Collapse
 
     if ($('#echart_pie2').length) {
-
         var echartPieCollapse = echarts.init(document.getElementById('echart_pie2'), theme);
 
         echartPieCollapse.setOption({
@@ -4118,13 +3908,11 @@ function init_echarts() {
                 }]
             }]
         });
-
     }
 
     //echart Donut
 
     if ($('#echart_donut').length) {
-
         var echartDonut = echarts.init(document.getElementById('echart_donut'), theme);
 
         echartDonut.setOption({
@@ -4205,13 +3993,11 @@ function init_echarts() {
                 }]
             }]
         });
-
     }
 
     //echart Pie
 
     if ($('#echart_pie').length) {
-
         var echartPie = echarts.init(document.getElementById('echart_pie'), theme);
 
         echartPie.setOption({
@@ -4299,13 +4085,11 @@ function init_echarts() {
                 color: 'rgba(0,0,0,0)'
             }
         };
-
     }
 
     //echart Mini Pie
 
     if ($('#echart_mini_pie').length) {
-
         var echartMiniPie = echarts.init(document.getElementById('echart_mini_pie'), theme);
 
         echartMiniPie.setOption({
@@ -4404,15 +4188,12 @@ function init_echarts() {
                 }]
             }]
         });
-
     }
 
     //echart Map
 
     if ($('#echart_world_map').length) {
-
         var echartMap = echarts.init(document.getElementById('echart_world_map'), theme);
-
 
         echartMap.setOption({
             title: {
@@ -5015,14 +4796,10 @@ function init_echarts() {
                 }]
             }]
         });
-
     }
-
 }
 
-
 $(document).ready(function () {
-
     init_sparklines();
     init_flot_chart();
     init_sidebar();
@@ -5057,5 +4834,4 @@ $(document).ready(function () {
     init_CustomNotification();
     init_autosize();
     init_autocomplete();
-
 });	

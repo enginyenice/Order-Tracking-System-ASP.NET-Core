@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SiparisTakip.Models;
+using System;
+using System.Linq;
 
 namespace SiparisTakip.Controllers
 {
@@ -19,7 +17,6 @@ namespace SiparisTakip.Controllers
 
         public bool SessionCont()
         {
-
             if (HttpContext != null)
             {
                 if ((HttpContext.Session.GetString("userId")) != null)
@@ -29,14 +26,15 @@ namespace SiparisTakip.Controllers
             }
             return false;
         }
+
         public IActionResult Index()
         {
             bool session = SessionCont();
             if (session == false)
             {
-                return RedirectToAction("Index", "PendingRequestsController");
+                return RedirectToAction("Index", "Account");
             }
-            return View(_siparisTakipDB.Requests.Where(r=>r.userId== Convert.ToInt32(HttpContext.Session.GetString("userId")) && r.requestStatus==0 ).ToList());
+            return View(_siparisTakipDB.Requests.Where(r => r.userId == Convert.ToInt32(HttpContext.Session.GetString("userId")) && r.requestStatus == 0).ToList());
         }
     }
 }
