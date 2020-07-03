@@ -161,13 +161,9 @@ namespace SiparisTakip.Controllers
 
             //mailin içeriği.. Bu alan isteğe göre genişletilip daraltılabilir.
             string text = "";
-            if (request.requestStatus == 0)
-                text = "<span style='color: #17a2b8'><strong>Onay Bekliyor</strong></span>";
-                    else
-
-                 text = "<span style='color: #28a745'><strong>Onaylandı</strong></span>";
+            text = "<span style='color: #28a745'><strong>Onaylandı</strong></span>";
             mail.Body = "<div style='color:black'>"+
-            "<p><strong> Talep No: </strong> <span id = 'requestDeliveryDate' >" + request.requestId + "</span ></p>" +
+            "<p><strong> Talep No: </strong> <span id = 'requestDeliveryDate' >" + request.requestNo + "</span ></p>" +
             "<p><strong> Talep Tarihi: </strong> <span id = 'requestDeliveryDate' >" + request.requestDeliveryDate + "</span ></p>" +
             "<p><strong> Talep Eden Departman: </strong><span id = 'requestDepartment' >" + request.requestDepartment + "</span ></p>" +
             "<p><strong> Talep Eden Personel: </strong><span id = 'requestSteff' >" + request.requestSteff + "</span ></p>" +

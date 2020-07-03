@@ -11,6 +11,7 @@ namespace SiparisTakip.Models.Tables
     {
         [Key]
         public int requestId { get; set; }
+        public string requestNo { get; set; }
         public string requestDepartment { get; set; }
         public string requestSteff { get; set; }
         public string requestProject { get; set; }
@@ -28,6 +29,8 @@ namespace SiparisTakip.Models.Tables
         public string requestSupplyCompany2 { get; set; }
         public string requestSupplyCompany3 { get; set; }
         public int requestStatus { get; set; } // 0 - Onay Bekliyor 1 - Tamamlandı
+        public string requestCreateAt { get; set; }
+
         public int userId { get; set; }
         public virtual User user { get; set; }
 

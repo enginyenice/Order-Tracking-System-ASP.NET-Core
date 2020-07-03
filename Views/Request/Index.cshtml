@@ -31,6 +31,7 @@
                     </div>
                     <div class="col col-md-8">
                         <p><strong>Talep Tarihi: </strong> <span id="requestDeliveryDate">requestDeliveryDate</span></p>
+                        <p><strong>Talep Numarası: </strong> <span id="requestNo">requestNo</span></p>
                         <p><strong>Talep Eden Departman: </strong><span id="requestDepartment">requestDepartment</span></p>
                         <p><strong>Talep Eden Personel: </strong><span id="requestSteff">requestSteff</span></p>
                         <p><strong>Açıklama: </strong><span id="requestDescription">requestDescription</span></p>
@@ -41,7 +42,7 @@
                         <p><strong>Miktar: </strong><span id="requestQuantity">requestQuantity</span></p>
                         <p><strong>Durum: </strong><span id="requestStatus">requestStatus</span></p>
                         <p><strong>Cinsi: </strong><span id="requestSpecies">requestSpecies</span></p>
-                        <p><strong>Tedarik Firma 1: </strong><span id="requestSupplyCompany1">requestSupplyCompany1</span></p> 
+                        <p><strong>Tedarik Firma 1: </strong><span id="requestSupplyCompany1">requestSupplyCompany1</span></p>
                         <p><strong>Tedarik Firma 2: </strong><span id="requestSupplyCompany2">requestSupplyCompany2</span></p>
                         <p><strong>Tedarik Firma 3: </strong><span id="requestSupplyCompany3">requestSupplyCompany3</span></p>
                         <p><strong>Müşteri Adı: </strong><span id="userName">userName</span></p>
@@ -207,6 +208,7 @@
                     let image = "images/" + result.requestImage;
                     $("#RequestImage").attr('src', image);
                     $("#requestDeliveryDate").text(newDate);
+                    $("#requestNo").text(result.requestNo);
                     $("#requestSpecies").text(result.requestSpecies);
                     $("#requestDepartment").text(result.requestDepartment);
                     $("#requestDescription").text(result.requestDescription);
@@ -215,7 +217,7 @@
                     $("#requestProductFeatures").text(result.requestProductFeatures);
                     $("#requestProject").text(result.requestProject);
                     $("#requestStatus").html(text);
-                    $("#myModalLabel").text(result.user.userName + " " + result.user.userSurname + " - " + result.requestProject);
+                    $("#myModalLabel").text(result.user.userName + " " + result.user.userSurname + " - " + result.requestProject + " - " + result.requestNo);
                     $("#requestQuantity").text(result.requestQuantity);
                     $("#requestSteff").text(result.requestSteff);
                     $("#requestSupplyCompany1").text(result.requestSupplyCompany1);

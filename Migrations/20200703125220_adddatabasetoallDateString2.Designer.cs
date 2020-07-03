@@ -3,36 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SiparisTakip.Models;
 
 namespace SiparisTakip.Migrations
 {
     [DbContext(typeof(SiparisTakipDB))]
-    partial class ApplicationDbContexModelSnapshot : ModelSnapshot
+    [Migration("20200703125220_adddatabasetoallDateString2")]
+    partial class adddatabasetoallDateString2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("SiparisTakip.Models.Tables.Department", b =>
-                {
-                    b.Property<int>("depId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("depName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("depId");
-
-                    b.ToTable("Departments");
-                });
 
             modelBuilder.Entity("SiparisTakip.Models.Tables.Request", b =>
                 {
