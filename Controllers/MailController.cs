@@ -56,12 +56,14 @@ namespace SiparisTakip.Controllers
                 {
                     hataMesaji = "Mail eklendi.";
                     status = "success";
-                    Setting setting = new Setting();
-                    setting.settingEPosta = settingEPosta;
-                    setting.settingPassword = settingPassword;
-                    setting.settingSmtpHost = settingSmtpHost;
-                    setting.settingSmtpPort = settingSmtpPort;
-                    setting.settingSmtpSSL = settingSmtpSSL;
+                    Setting setting = new Setting
+                    {
+                        settingEPosta = settingEPosta,
+                        settingPassword = settingPassword,
+                        settingSmtpHost = settingSmtpHost,
+                        settingSmtpPort = settingSmtpPort,
+                        settingSmtpSSL = settingSmtpSSL
+                    };
                     _siparisTakipDB.Add(setting);
                     _siparisTakipDB.SaveChanges();
                 }
