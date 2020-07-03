@@ -33,7 +33,6 @@
                                                 <th class="align-middle">Adı</th>
                                                 <th class="align-middle">Soyadı</th>
                                                 <th class="align-middle">Mail</th>
-                                                <th class="align-middle">Şifre</th>
                                                 <th class="align-middle">Yetki</th>
                                                 <th class="align-middle">İşlem</th>
                                        
@@ -50,16 +49,15 @@
                                                         <td class="align-middle">@item.userName</td>
                                                         <td class="align-middle">@item.userSurname</td>
                                                         <td class="align-middle">@item.userMail</td>
-                                                        <td class="align-middle">@item.userPassword</td>
                                                         <td class="align-middle">@item.userPermission</td>
                                                         <td class="align-middle">
                                                             @{ if (item.userPermission == "Customer")
                                                                 {
-                                                                    @Html.ActionLink("Yekili Yap", "StatusEdit", "Request", new { id = item.userId }, new { @class = "btn btn-warning" })
+                                                                    @Html.ActionLink("Yekili Yap", "PermissionEdit", "UserManagment", new { id = item.userId }, new { @class = "btn btn-warning" })
                                                                 }
                                                                 else
                                                                 {
-                                                                    @Html.ActionLink("Yetkisini Al", "StatusEdit", "Request", new { id = item.userId }, new { @class = "btn btn-success" })
+                                                                    @Html.ActionLink("Yetkisini Al", "PermissionEdit", "UserManagment", new { id = item.userId }, new { @class = "btn btn-success" })
                                                                 }
 
                                                             }
