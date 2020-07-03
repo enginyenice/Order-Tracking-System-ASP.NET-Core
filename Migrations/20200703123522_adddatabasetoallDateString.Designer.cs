@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SiparisTakip.Models;
 
 namespace SiparisTakip.Migrations
 {
     [DbContext(typeof(SiparisTakipDB))]
-    partial class ApplicationDbContexModelSnapshot : ModelSnapshot
+    [Migration("20200703123522_adddatabasetoallDateString")]
+    partial class adddatabasetoallDateString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,8 +28,8 @@ namespace SiparisTakip.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("requestCreateAt")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("requestCreateAt")
+                        .HasColumnType("Date");
 
                     b.Property<DateTime>("requestDeliveryDate")
                         .HasColumnType("Date");
