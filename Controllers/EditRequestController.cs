@@ -127,7 +127,7 @@ namespace SiparisTakip.Controllers
             catch (DbUpdateConcurrencyException)
             {
             }
-            return RedirectToAction("Index", "PendingRequests");
+            return RedirectToAction("Index", "AllRequests");
         }
 
 
