@@ -169,8 +169,8 @@
                                 -->
                                 <div class="form-group">
                                     <label asp-for="requestEstimatedPrice" class="control-label">Tahmini Fiyat</label>
-                                    <input required="required" asp-for="requestEstimatedPrice" class="form-control" />
-                                    <span asp-validation-for="requestEstimatedPrice" class="text-danger"></span>
+                                    <input type="number" step="0.01" required="required" asp-for="requestEstimatedPrice" class="form-control" />
+                                    <span class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="requestDeliveryDate" class="control-label">Teslim Tarihi</label>
