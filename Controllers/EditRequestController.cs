@@ -18,6 +18,7 @@ namespace SiparisTakip.Controllers
 
         private readonly SiparisTakipDB _siparisTakipDB;
 
+        [Obsolete]
         public EditRequestController(SiparisTakipDB context,IHostingEnvironment evrimoment)
         {
             _siparisTakipDB = context;

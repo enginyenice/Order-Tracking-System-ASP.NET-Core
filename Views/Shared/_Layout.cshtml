@@ -94,6 +94,7 @@
                                 <li><a href="@Url.Action("Index", "NewRequest")"><i class="fa fa-edit"></i> Satın Alma Talebi Oluştur</a></li>
                                 <li><a href="@Url.Action("Index", "PendingRequests")"><i class="fa fa-clock-o"></i>Bekleyen Taleplerim</a></li>
                                 <li><a a href="@Url.Action("Index", "ConfirmedRequests")"><i class="fa fa-check"></i>Onaylanan Taleplerim</a></li>
+                                <li><a a href="@Url.Action("Index", "DeletedRequests")"><i class="fa fa-remove"></i>Silinen Taleplerim</a></li>
                             </ul>
                             @{
                                 var userPermission = Context.Session.GetString("userPermission");
