@@ -58,13 +58,11 @@
                                         </thead>
 
                                         <tbody>
-                                            @{ foreach (var item in Model) {
-
-                                                        <tr class="align-middle @{
-                                                            string deleteColor = "bg-danger text-white";
-                                                            if (item.requestStatus == 2)
-                                                                @deleteColor
-                                                            } ">
+                                            @{ foreach (var item in Model)
+                                                {
+                                                    if (item.requestStatus != 2)
+                                                    {
+                                                        <tr class="align-middle">
                                                             <td><img src=" /images/@item.requestImage" style="width:50px; height:50px;"></td>
                                                             <td class="align-middle">@item.user.userName &nbsp; @item.user.userSurname</td>
                                                             <td class="align-middle">@item.requestNo</td>
@@ -104,21 +102,27 @@
                                                             </td>
                                                             <td class="align-middle">
                                                                 @Html.ActionLink("Düzenle", "Index", "EditRequest", new { id = item.requestId }, new { @class = "btn btn-warning" })
-
-                                                                @if (item.requestStatus != 2)
-                                                                {
                                                                     <button onclick="deleteItem(@item.requestId)" class="btn btn-danger" type="button">Sil</button>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <button onclick="bringBack(@item.requestId)" class="btn btn-info text-white" type="button">Geri Getir</button>
-                                                                }
+                                                                
                                                             </td>
                                                         </tr>
                                                     }
+                                                    else
+                                                    {
+                                        <tr class="align-middle text-white bg-danger">
+                                            <td><img src=" /images/@item.requestImage" style="width:50px; height:50px;"></td>
+                                            <td class="align-middle">@item.user.userName &nbsp; @item.user.userSurname</td>
+                                            <td class="align-middle">@item.requestNo</td>
+                                            <td class="align-middle">@item.requestDepartment</td>
+                                            <td colspan="12" class="align-middle">Silinme Nedeni: @item.requestDeleteDescription</td>
+                                            <td><button onclick="bringBack(@item.requestId)" class="btn btn-info text-white" type="button">Geri Getir</button></td>
+                                        </tr>
+
                                             }
-                                        </tbody>
-                                    </table>
+                                            }
+                                            }
+</tbody>
+                                        </table>
                                 </div>
                             </div>
                         </div>

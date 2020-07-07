@@ -38,7 +38,7 @@ namespace SiparisTakip.Controllers
         {
             if (SessionCont() == false)
                 return RedirectToAction("Index", "Account");
-            return View(_siparisTakipDB.Requests.OrderByDescending(m => m.requestId).Take(20));
+            return View(_siparisTakipDB.Requests.Where(m => m.requestStatus != 2).OrderByDescending(m => m.requestId).Take(20));
         }
 
         [HttpPost]
