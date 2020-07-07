@@ -20,6 +20,7 @@ namespace SiparisTakip.Models.Tables
         public string requestSpecies { get; set; }
         public string requestImage { get; set; }
         public float requestEstimatedPrice { get; set; }
+        public string requestDeleteDescription { get; set; }
 
         [Column(TypeName = "Date")]
         public DateTime requestDeliveryDate { get; set; }

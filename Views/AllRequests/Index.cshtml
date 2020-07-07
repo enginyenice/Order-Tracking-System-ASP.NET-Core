@@ -1,4 +1,11 @@
-﻿@model IEnumerable<SiparisTakip.Models.Tables.Request>
+﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+@model IEnumerable<SiparisTakip.Models.Tables.Request>
 @{
     ViewData["Title"] = "Tüm İstekler";
 }
@@ -51,55 +58,64 @@
                                         </thead>
 
                                         <tbody>
-                                            @{
-                                                foreach (var item in Model)
-                                                {
-                                                    <tr class="align-middle">
-                                                        <td><img src=" /images/@item.requestImage" style="width:50px; height:50px;"></td>
-                                                        <td class="align-middle">@item.user.userName &nbsp; @item.user.userSurname</td>
-                                                        <td class="align-middle">@item.requestNo</td>
-                                                        <td class="align-middle">@item.requestDepartment</td>
-                                                        <td class="align-middle">@item.requestSteff</td>
-                                                        <td class="align-middle">@item.requestProject</td>
-                                                        <td class="align-middle">@item.requestExpensePlace</td>
-                                                        <td class="align-middle">@item.requestSpecies</td>
-                                                        <td class="align-middle">@item.requestProductFeatures</td>
-                                                        <td class="align-middle">@item.requestDescription</td>
-                                                        <td class="align-middle">@item.requestQuantity</td>
-                                                        <td class="align-middle">@item.requestEstimatedPrice</td>
-                                                        <td class="align-middle">@item.requestDeliveryDate</td>
-                                                        <td class="align-middle">@item.requestSupplyCompany1 <br> @item.requestSupplyCompany2 <br>@item.requestSupplyCompany3 </td>
-                                                        <td class="align-middle">
-                                                            @{ if (item.requestStatus == 1)
+                                            @{ foreach (var item in Model) {
+
+                                                        <tr class="align-middle @{
+                                                            string deleteColor = "bg-danger text-white";
+                                                            if (item.requestStatus == 2)
+                                                                @deleteColor
+                                                            } ">
+                                                            <td><img src=" /images/@item.requestImage" style="width:50px; height:50px;"></td>
+                                                            <td class="align-middle">@item.user.userName &nbsp; @item.user.userSurname</td>
+                                                            <td class="align-middle">@item.requestNo</td>
+                                                            <td class="align-middle">@item.requestDepartment</td>
+                                                            <td class="align-middle">@item.requestSteff</td>
+                                                            <td class="align-middle">@item.requestProject</td>
+                                                            <td class="align-middle">@item.requestExpensePlace</td>
+                                                            <td class="align-middle">@item.requestSpecies</td>
+                                                            <td class="align-middle">@item.requestProductFeatures</td>
+                                                            <td class="align-middle">@item.requestDescription</td>
+                                                            <td class="align-middle">@item.requestQuantity</td>
+                                                            <td class="align-middle">@item.requestEstimatedPrice</td>
+                                                            <td class="align-middle">@item.requestDeliveryDate</td>
+                                                            <td class="align-middle">@item.requestSupplyCompany1 <br> @item.requestSupplyCompany2 <br>@item.requestSupplyCompany3 </td>
+                                                            <td class="align-middle">
+                                                                @{ if (item.requestStatus == 1)
+                                                                    {
+                                                                        <p>Onaylandı</p>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <p>Beklemede</p>
+                                                                    }
+
+                                                                }
+                                                            <td class="align-middle">
+                                                                @{ if (item.requestStatus == 1)
+                                                                    {
+                                                                        @Html.ActionLink("Beklemeye Al", "StatusEdit", "Request", new { id = item.requestId }, new { @class = "btn btn-sm btn-dark" })
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @Html.ActionLink("Onayla", "StatusEdit", "Request", new { id = item.requestId }, new { @class = "btn btn-success" })
+                                                                    }
+
+                                                                }
+                                                            </td>
+                                                            <td class="align-middle">
+                                                                @Html.ActionLink("Düzenle", "Index", "EditRequest", new { id = item.requestId }, new { @class = "btn btn-warning" })
+
+                                                                @if (item.requestStatus != 2)
                                                                 {
-                                                                    <p>Onaylandı</p>
+                                                                    <button onclick="deleteItem(@item.requestId)" class="btn btn-danger" type="button">Sil</button>
                                                                 }
                                                                 else
                                                                 {
-                                                                    <p>Beklemede</p>
+                                                                    <button onclick="bringBack(@item.requestId)" class="btn btn-info text-white" type="button">Geri Getir</button>
                                                                 }
-
-                                                            }
-                                                        <td class="align-middle">
-                                                            @{ if (item.requestStatus == 1)
-                                                                {
-                                                                    @Html.ActionLink("Beklemeye Al", "StatusEdit", "Request", new { id = item.requestId }, new { @class = "btn btn-sm btn-dark" })
-                                                                }
-                                                                else
-                                                                {
-                                                                    @Html.ActionLink("Onayla", "StatusEdit", "Request", new { id = item.requestId }, new { @class = "btn btn-success" })
-                                                                }
-                                                            
-                                                            }
-                                                        </td>
-
-                                                        <td class="align-middle">
-                                                            @Html.ActionLink("Düzenle", "Index", "EditRequest", new { id = item.requestId }, new { @class = "btn btn-warning" })
-                                                            @Html.ActionLink("Reddet", "Delete", "AllRequests", new { id = item.requestId }, new { @class = "btn btn-danger " })
-                                                        </td>
-                                                    </tr>
-                                                }
-
+                                                            </td>
+                                                        </tr>
+                                                    }
                                             }
                                         </tbody>
                                     </table>
@@ -113,3 +129,77 @@
     </div>
 </div>
 <!-- /page content -->
+
+<script>
+
+    function bringBack(id) {
+         let postData = {
+                'id': id
+            }
+            $.ajax({
+                type: "post",
+                data:postData,
+            headers: {
+                "RequestVerificationToken": '@GetAntiXsrfRequestToken()'
+            },
+            url: '@Url.Action("BringBack", "AllRequests")',
+                success: function (result) {
+                    result = JSON.parse(result);
+                    if (result == "success") {
+                        location.reload();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Geri alma işlemi',
+                            text: 'Geri alma işlemi yapılırken bir hata oluştur...'
+                        })
+                    }
+            }
+        });
+    }
+
+
+    async function deleteItem(id) {
+
+        const { value: text } = await Swal.fire({
+            input: 'textarea',
+            inputPlaceholder: 'Neden siliyorsunuz? ',
+            inputAttributes: {
+                'aria-label': 'Neden siliyorsunuz? '
+            },
+            showCancelButton: true
+        })
+
+        if (text) {
+           // Swal.fire(text)
+            let postData = {
+                'id': id,
+                'requestDeleteDescription': text
+            }
+            $.ajax({
+                type: "post",
+                data:postData,
+            headers: {
+                "RequestVerificationToken": '@GetAntiXsrfRequestToken()'
+            },
+            url: '@Url.Action("Delete", "AllRequests")',
+                success: function (result) {
+                    result = JSON.parse(result);
+                    if (result == "success") {
+                        location.reload();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Silme işlemi',
+                            text: 'Silme işlemi yapılırken bir hata oluştur...'
+                        })
+                    }
+            }
+        });
+        }
+
+
+
+    }
+
+</script>

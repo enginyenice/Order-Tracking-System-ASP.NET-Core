@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using SiparisTakip.Models;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,23 +40,47 @@ namespace SiparisTakip.Controllers
             return View(_siparisTakipDB.Requests.Include(r => r.user).ToList());
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        public ActionResult Delete(int id,string requestDeleteDescription)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var request = await _siparisTakipDB.Requests
-                .FirstOrDefaultAsync(m => m.requestId == id);
+            string result = "error";
+            var request = _siparisTakipDB.Requests
+                .FirstOrDefault(m => m.requestId == id);
             if (request == null)
             {
-                return RedirectToAction("Index", "Home");
+                result = "error";
+                result = JsonConvert.SerializeObject(result);
+                return new JsonResult(result);
             }
 
-            _siparisTakipDB.Requests.Remove(request);
-            await _siparisTakipDB.SaveChangesAsync();
-            return RedirectToAction("Index", "AllRequests");
+            request.requestStatus = 2;
+            request.requestDeleteDescription = requestDeleteDescription;
+            _siparisTakipDB.Update(request);
+            _siparisTakipDB.SaveChanges();
+            result = "success";
+            result = JsonConvert.SerializeObject(result);
+            return new JsonResult(result);
+        }
+
+
+        public ActionResult BringBack(int id)
+        {
+            string result = "error";
+            var request = _siparisTakipDB.Requests
+                .FirstOrDefault(m => m.requestId == id);
+            if (request == null)
+            {
+                result = "error";
+                result = JsonConvert.SerializeObject(result);
+                return new JsonResult(result);
+            }
+
+            request.requestStatus = 0;
+            request.requestDeleteDescription = "";
+            _siparisTakipDB.Update(request);
+            _siparisTakipDB.SaveChanges();
+            result = "success";
+            result = JsonConvert.SerializeObject(result);
+            return new JsonResult(result);
         }
     }
 }
