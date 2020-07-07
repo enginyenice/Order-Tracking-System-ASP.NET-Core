@@ -46,7 +46,7 @@
                                                 <th class="align-middle">Tederaikçi Firmalar</th>
                                                 <th class="align-middle">Durum</th>
                                                 <th class="align-middle">Beklemeye Al</th>
-                                                <th class="align-middle">Sil</th>
+                                                <th class="align-middle">İşlem Yap</th>
                                             </tr>
                                         </thead>
 
@@ -83,18 +83,19 @@
                                                         <td class="align-middle">
                                                             @{ if (item.requestStatus == 1)
                                                                 {
-                                                                    @Html.ActionLink("Beklemeye Al", "StatusEdit", "Request", new { id = item.requestId }, new { @class = "btn btn-sm btn-warning" })
+                                                                    @Html.ActionLink("Beklemeye Al", "StatusEdit", "Request", new { id = item.requestId }, new { @class = "btn btn-sm btn-dark" })
                                                                 }
                                                                 else
                                                                 {
                                                                     @Html.ActionLink("Onayla", "StatusEdit", "Request", new { id = item.requestId }, new { @class = "btn btn-success" })
                                                                 }
-
+                                                            
                                                             }
                                                         </td>
 
                                                         <td class="align-middle">
-                                                            @Html.ActionLink("Sil", "Delete", "AllRequests  ", new { id = item.requestId }, new { @class = "btn btn-dark" })
+                                                            @Html.ActionLink("Düzenle", "Index", "EditRequest", new { id = item.requestId }, new { @class = "btn btn-warning" })
+                                                            @Html.ActionLink("Reddet", "Delete", "AllRequests", new { id = item.requestId }, new { @class = "btn btn-danger " })
                                                         </td>
                                                     </tr>
                                                 }

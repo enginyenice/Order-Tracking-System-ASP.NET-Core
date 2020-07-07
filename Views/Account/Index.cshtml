@@ -45,9 +45,12 @@
                 <strong>@TempData["Info"]</strong>
             </div>
         }
+       
         <div class="login_wrapper">
+
             <div class="animate form login_form">
                 <section class="login_content">
+                    <img src="~/images/MainLogo.png" style="width:55%; margin-bottom:10%">
                     @using (Html.BeginForm("LoginPost", "Account", FormMethod.Post, new { }))
                     {
                         <h1>Giriş</h1>
@@ -61,7 +64,7 @@
                         <button type="submit" class="btn-block btn btn-dark">Giriş Yap</button>
 
                         <br>
-                
+
 
                         <div class="clearfix"></div>
                         <br>
@@ -75,11 +78,8 @@
                             <br />
 
                             <div>
-                                <h1><img src="~/images/MainLogo.png"> Sipariş Portalı</h1>
-                                <p>
-                                    Copyright &copy;
-                                    StorkBilisim
-                                </p>
+                                <h1>Talep Yönetim Portalı</h1>
+                           
                             </div>
                         </div>
                     }
@@ -126,11 +126,8 @@
                             <br />
 
                             <div>
-                                <h1><img src="~/images/MainLogo.png"> Sipariş Portalı</h1>
-                                <p>
-                                    Copyright &copy;
-                                    StorkBilisim
-                                </p>
+                                <h1>Talep Yönetim Portalı</h1>
+                           
                             </div>
                         </div>
                     }
