@@ -26,150 +26,185 @@
         </div>
 
         <div class="clearfix"></div>
-        @using (Html.BeginForm("Edit", "EditRequest", FormMethod.Post))
+
+        @using (Html.BeginForm("EditImage", "EditRequest", FormMethod.Post,
+     new { enctype = "multipart/form-data" }))
         {
             <div class="row">
                 <!-- form input mask -->
-                <div class="col-md-6 col-sm-12  ">
+                <div class="col-md-12 col-sm-12  ">
                     <div class="x_panel">
                         <div class="">
 
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <br />
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <input type="hidden" asp-for="requestId" />
-
-
-                            <div class="form-group">
-                                <label asp-for="requestNo" class="control-label">Talep No</label>
-                                <input required="required" name="requestNo" asp-for="requestNo" class="form-control" readonly />
-                                <span asp-validation-for="requestNo" class="text-danger"></span>
+                            <div class="row">
+                                <div class="form-group">
+                                    <img src="/images/@Model.requestImage" style="width:200px; height:200px;">
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
+                                        Ürün Resmi
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <input type="file" name="ImageFile" multiple />
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="requestDepartment" class="control-label">Departman</label>
-                                <select name="requestDepartment" asp-for="requestDepartment" class="form-control">
-                                    @foreach (var item in ViewBag.data)
-                                    {
-                                        <option value="@item.depName">@item.depName</option>
-                                    }
-                                    </select>
-                                <span asp-validation-for="requestSpecies" class="text-danger"></span>
                             </div>
-
-                            <div class="form-group">
-                                <label asp-for="requestSteff" class="control-label">Talep Eden Personel</label>
-                                <input name="requestSteff" required="required" asp-for="requestSteff" class="form-control" />
-                                <span asp-validation-for="requestSteff" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="requestProject" class="control-label">Proje</label>
-                                <input name="requestProject" required="required" asp-for="requestProject" class="form-control" />
-                                <span asp-validation-for="requestProject" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="requestExpensePlace" class="control-label">Gider Yeri</label>
-                                <input name="requestExpensePlace" required="required" asp-for="requestExpensePlace" class="form-control" />
-                                <span asp-validation-for="requestExpensePlace" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="requestProductFeatures" class="control-label">Ürün Özellikleri</label>
-                                <input name="requestProductFeatures" required="required" asp-for="requestProductFeatures" class="form-control" />
-                                <span asp-validation-for="requestProductFeatures" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="requestDescription" class="control-label">Açıklama</label>
-                                <input name="requestDescription" required="required" asp-for="requestDescription" class="form-control" />
-                                <span asp-validation-for="requestDescription" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="requestQuantity" class="control-label">Adet</label>
-                                <input name="requestQuantity" required="required" asp-for="requestQuantity" class="form-control" />
-                                <span asp-validation-for="requestQuantity" class="text-danger"></span>
-                            </div>
-
                         </div>
-                    </div>
-                </div>
-                <!-- /form input mask -->
-                <!-- form color picker -->
-                <div class="col-md-6 col-sm-12  ">
-                    <div class="x_panel">
-                        <div class="">
-
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-
-
-
-
-
-                            <div class="form-group">
-                                <label asp-for="requestSpecies" class="control-label">Tipi</label>
-                                <select name="requestSpecies" asp-for="requestSpecies" class="form-control">
-                                    <option value="Masraf">Masraf</option>
-                                    <option value="Stok">Stok</option>
-                                </select>
-                                <span asp-validation-for="requestSpecies" class="text-danger"></span>
-                            </div>
-
-                            <!--
-    <div class="form-group">
-        <label asp-for="requestImage" class="control-label">Talep Görseli</label>
-        <input required="required" required="required" asp-for="requestImage" class="form-control" />
-        <span asp-validation-for="requestImage" class="text-danger"></span>
-    </div>
-        -->
-                            <div class="form-group">
-                                <label asp-for="requestEstimatedPrice" class="control-label">Tahmini Fiyat</label>
-                                <input required="required" asp-for="requestEstimatedPrice" class="form-control" />
-                                <span asp-validation-for="requestEstimatedPrice" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="requestDeliveryDate" class="control-label">Teslim Tarihi</label>
-                                <input required="required" asp-for="requestDeliveryDate" class="form-control" />
-                                <span asp-validation-for="requestDeliveryDate" class="text-danger"></span>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label asp-for="requestSupplyCompany1" class="control-label">Tedarik Firma 1</label>
-                                <input required="required" asp-for="requestSupplyCompany1" class="form-control" />
-                                <span asp-validation-for="requestSupplyCompany1" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="requestSupplyCompany2" class="control-label">Tedarik Firma 2</label>
-                                <input asp-for="requestSupplyCompany2" class="form-control" />
-                                <span asp-validation-for="requestSupplyCompany2" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="requestSupplyCompany3" class="control-label">Tedarik Firma 3</label>
-                                <input  asp-for="requestSupplyCompany3" class="form-control" />
-                                <span asp-validation-for="requestSupplyCompany3" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Talebi Oluşturan</label><br>
-                                <input required="required" class="form-control" value="@adSoyad" readonly>
-                                <span class="text-danger"></span>
-                            </div>
-
-
-                            <div class="form-group text-center ml-5 mt-4 mb-4">
-                                <input type="submit" value="Kaydet" class="btn btn-success mid_center" />
-                            </div>
-
-
-
-
-                        </div>
-                    </div>
                 </div>
             </div>
         }
+
+
+
+
+            @using (Html.BeginForm("Edit", "EditRequest", FormMethod.Post))
+            {
+                <div class="row">
+                    <!-- form input mask -->
+                    <div class="col-md-6 col-sm-12  ">
+                        <div class="x_panel">
+                            <div class="">
+
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <br />
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="requestId" />
+
+
+                                <div class="form-group">
+                                    <label asp-for="requestNo" class="control-label">Talep No</label>
+                                    <input required="required" name="requestNo" asp-for="requestNo" class="form-control" readonly />
+                                    <span asp-validation-for="requestNo" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="requestDepartment" class="control-label">Departman</label>
+                                    <select name="requestDepartment" asp-for="requestDepartment" class="form-control">
+                                        @foreach (var item in ViewBag.data)
+                                        {
+                                            <option value="@item.depName">@item.depName</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="requestSpecies" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="requestSteff" class="control-label">Talep Eden Personel</label>
+                                    <input name="requestSteff" required="required" asp-for="requestSteff" class="form-control" />
+                                    <span asp-validation-for="requestSteff" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="requestProject" class="control-label">Proje</label>
+                                    <input name="requestProject" required="required" asp-for="requestProject" class="form-control" />
+                                    <span asp-validation-for="requestProject" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="requestExpensePlace" class="control-label">Gider Yeri</label>
+                                    <input name="requestExpensePlace" required="required" asp-for="requestExpensePlace" class="form-control" />
+                                    <span asp-validation-for="requestExpensePlace" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="requestProductFeatures" class="control-label">Ürün Özellikleri</label>
+                                    <input name="requestProductFeatures" required="required" asp-for="requestProductFeatures" class="form-control" />
+                                    <span asp-validation-for="requestProductFeatures" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="requestDescription" class="control-label">Açıklama</label>
+                                    <input name="requestDescription" required="required" asp-for="requestDescription" class="form-control" />
+                                    <span asp-validation-for="requestDescription" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="requestQuantity" class="control-label">Adet</label>
+                                    <input name="requestQuantity" required="required" asp-for="requestQuantity" class="form-control" />
+                                    <span asp-validation-for="requestQuantity" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /form input mask -->
+                    <!-- form color picker -->
+                    <div class="col-md-6 col-sm-12  ">
+                        <div class="x_panel">
+                            <div class="">
+
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+
+
+
+
+
+                                <div class="form-group">
+                                    <label asp-for="requestSpecies" class="control-label">Tipi</label>
+                                    <select name="requestSpecies" asp-for="requestSpecies" class="form-control">
+                                        <option value="Masraf">Masraf</option>
+                                        <option value="Stok">Stok</option>
+                                    </select>
+                                    <span asp-validation-for="requestSpecies" class="text-danger"></span>
+                                </div>
+
+                                <!--
+                            <div class="form-group">
+                                <label asp-for="requestImage" class="control-label">Talep Görseli</label>
+                                <input required="required" required="required" asp-for="requestImage" class="form-control" />
+                                <span asp-validation-for="requestImage" class="text-danger"></span>
+                            </div>
+                                -->
+                                <div class="form-group">
+                                    <label asp-for="requestEstimatedPrice" class="control-label">Tahmini Fiyat</label>
+                                    <input required="required" asp-for="requestEstimatedPrice" class="form-control" />
+                                    <span asp-validation-for="requestEstimatedPrice" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="requestDeliveryDate" class="control-label">Teslim Tarihi</label>
+                                    <input required="required" asp-for="requestDeliveryDate" class="form-control" />
+                                    <span asp-validation-for="requestDeliveryDate" class="text-danger"></span>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label asp-for="requestSupplyCompany1" class="control-label">Tedarik Firma 1</label>
+                                    <input required="required" asp-for="requestSupplyCompany1" class="form-control" />
+                                    <span asp-validation-for="requestSupplyCompany1" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="requestSupplyCompany2" class="control-label">Tedarik Firma 2</label>
+                                    <input asp-for="requestSupplyCompany2" class="form-control" />
+                                    <span asp-validation-for="requestSupplyCompany2" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="requestSupplyCompany3" class="control-label">Tedarik Firma 3</label>
+                                    <input asp-for="requestSupplyCompany3" class="form-control" />
+                                    <span asp-validation-for="requestSupplyCompany3" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Talebi Oluşturan</label><br>
+                                    <input required="required" class="form-control" value="@adSoyad" readonly>
+                                    <span class="text-danger"></span>
+                                </div>
+
+
+                                <div class="form-group text-center ml-5 mt-4 mb-4">
+                                    <input type="submit" value="Kaydet" class="btn btn-success mid_center" />
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
-</div>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+                    </div>
+                    @section Scripts {
+                        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+                    }
