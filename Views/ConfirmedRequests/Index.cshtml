@@ -73,7 +73,7 @@
                                                                                             <td class="align-middle">@item.requestSupplyCompany1 <br> @item.requestSupplyCompany2 <br>@item.requestSupplyCompany3 </td>
                                                                                             <td class="align-middle">
                                                                                                 @{
-                                                                                                    if (item.requestPDF.Length > 0 && item.requestPDF != null)
+                                                                                                    if (item.requestPDF != "" || item.requestPDF != null)
                                                                                                     {
                                                                                                         <a target="_blank" href="~/pdf/@item.requestPDF" class="btn btn-danger btn-sm">PDF</a>
                                                                                                     }
@@ -85,7 +85,7 @@
                                                                                             </td>
                                                                                             <td class="align-middle">
                                                                                                 @{
-                                                                                                    if (item.requestExcel.Length > 0 && item.requestExcel != null)
+                                                                                                    if (item.requestExcel != "" || item.requestExcel != null)
                                                                                                     {
                                                                                                         <a target="_blank" href="~/excel/@item.requestExcel" class="btn btn-success btn-sm">Excel</a>
                                                                                                     }

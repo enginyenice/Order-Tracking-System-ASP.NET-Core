@@ -223,7 +223,7 @@
                     $("#requestSupplyCompany1").text(result.requestSupplyCompany1);
                     $("#requestSupplyCompany2").text(result.requestSupplyCompany2);
                     $("#requestSupplyCompany3").text(result.requestSupplyCompany3);
-                    if (result.requestExcel.length > 0) {
+                    if (result.requestPDF != "" || result.requestPDF != null) {
                         var a = document.createElement('a');
 
                         // Create the text node for anchor element. 
@@ -247,7 +247,7 @@
 
 
 
-                    if (result.requestExcel.length > 0) {
+                    if (result.requestExcel != "" || result.requestExcel != null) {
                         var a = document.createElement('a');
 
                         // Create the text node for anchor element. 
