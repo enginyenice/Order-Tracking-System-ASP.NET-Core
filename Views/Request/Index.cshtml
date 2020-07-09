@@ -48,6 +48,8 @@
                         <p><strong>Tedarik Firma 1: </strong><span id="requestSupplyCompany1">requestSupplyCompany1</span></p>
                         <p><strong>Tedarik Firma 2: </strong><span id="requestSupplyCompany2">requestSupplyCompany2</span></p>
                         <p><strong>Tedarik Firma 3: </strong><span id="requestSupplyCompany3">requestSupplyCompany3</span></p>
+                        <p><strong>Excel: </strong><span id="requestExcel"></span></p>
+                        <p><strong>PDF: </strong><span id="requestPDF"></span></p>
 
                     </div>
                 </div>
@@ -199,6 +201,8 @@
                         text = `<span class="text-success"><strong>Onaylandı</strong></span">`;
 
                     let image = "images/" + result.requestImage;
+                    let pdf   = "pdf/" + result.requestPDF;
+                    let excel = "excel/" + result.requestExcel;
                     $("#userName").text(result.user.userName);
                     $("#userSurname").text(result.user.userSurname);
                     $("#userMail").text(result.user.userMail);
@@ -219,6 +223,54 @@
                     $("#requestSupplyCompany1").text(result.requestSupplyCompany1);
                     $("#requestSupplyCompany2").text(result.requestSupplyCompany2);
                     $("#requestSupplyCompany3").text(result.requestSupplyCompany3);
+                    if (result.requestExcel.length > 0) {
+                        var a = document.createElement('a');
+
+                        // Create the text node for anchor element. 
+                        var link = document.createTextNode("PDF İndir");
+
+                        // Append the text node to anchor element. 
+                        a.appendChild(link);
+
+                        // Set the title. 
+                        a.title = "PDF";
+
+                        // Set the href property. 
+                        a.href = pdf;
+                        a.className = "btn btn-danger btn-sm";
+
+                        // Append the anchor element to the body. 
+                        document.getElementById('requestPDF').appendChild(a);  
+                    } else {
+                        $("#requestPDF").text("PDF Eklenmedi");
+                    }
+
+
+
+                    if (result.requestExcel.length > 0) {
+                        var a = document.createElement('a');
+
+                        // Create the text node for anchor element. 
+                        var link = document.createTextNode("Excel İndir");
+
+                        // Append the text node to anchor element. 
+                        a.appendChild(link);
+
+                        // Set the title. 
+                        a.title = "Excel";
+
+                        // Set the href property. 
+                        a.href = excel;
+                        a.className = "btn btn-primary btn-sm";
+
+                        // Append the anchor element to the body. 
+                        document.getElementById('requestExcel').appendChild(a);
+                    } else {
+                        $("#requestExcel").text("Excel Eklenmedi");
+                    }
+
+
+
       
 
                     $('.modal').modal('show');

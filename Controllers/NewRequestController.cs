@@ -54,15 +54,51 @@ namespace SiparisTakip.Controllers
             "requestSpecies","requestEstimatedPrice",
             "date","requestSupplyCompany1",
             "requestSupplyCompany1","requestSupplyCompany2",
-            "requestSupplyCompany3","requestUser,","ImageFile"
+            "requestSupplyCompany3","requestUser,",
+            "ImageFile","PDFFile","ExcelFile"
+
             )] Request request)
         {
             try
             {
+                string resimPath = "resimYok.jpg";
+                string excelPath = "";
+                string pdfPath = "";
+
                 Random rastgele = new Random();
                 int sayi = rastgele.Next(5555, 25000);
                 string resimler = Path.Combine(_evrimoment.WebRootPath, "images");
-                string resimPath = "resimYok.jpg";
+                string pdfler = Path.Combine(_evrimoment.WebRootPath, "pdf");
+                string Exceller = Path.Combine(_evrimoment.WebRootPath, "excel");
+                if(request.PDFFile != null)
+                {
+                    string[] parcalaPath = request.PDFFile.FileName.Split(".");
+                    if(parcalaPath[parcalaPath.Length - 1] == "pdf" && request.PDFFile.Length > 0)
+                    {
+                        using (var fileStream = new FileStream(Path.Combine(pdfler, sayi + "-" + request.PDFFile.FileName), FileMode.Create))
+                        {
+                            request.PDFFile.CopyTo(fileStream);
+                        }
+                        pdfPath = sayi + "-" + request.PDFFile.FileName;
+                    }
+                }
+
+                if (request.PDFFile != null)
+                {
+                    string[] parcalaPath = request.ExcelFile.FileName.Split(".");
+                    if (parcalaPath[parcalaPath.Length - 1] == "xls" || parcalaPath[parcalaPath.Length - 1] == "xlsx" && request.ExcelFile.Length > 0)
+                    {
+                        using (var fileStream = new FileStream(Path.Combine(Exceller, sayi + "-" + request.ExcelFile.FileName), FileMode.Create))
+                        {
+                            request.ExcelFile.CopyTo(fileStream);
+                        }
+                        excelPath = sayi + "-" + request.ExcelFile.FileName;
+                    }
+                }
+
+
+
+
                 if (request.ImageFile != null)
                 {
                     if (request.ImageFile.Length > 0)
@@ -99,6 +135,8 @@ namespace SiparisTakip.Controllers
 
                 request.requestDeliveryDate = Convert.ToDateTime(request.date);
                 request.requestImage = resimPath;
+                request.requestPDF = pdfPath;
+                request.requestExcel = excelPath;
                 request.userId = Int32.Parse(HttpContext.Session.GetString("userId"));
                 request.requestCreateAt = DateTime.Now.ToShortDateString();
                 request.requestNo = "T" + year + mount + day + "-" + alldataString;

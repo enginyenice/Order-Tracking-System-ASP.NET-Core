@@ -59,6 +59,9 @@ namespace SiparisTakip.Migrations
                     b.Property<double>("requestEstimatedPrice")
                         .HasColumnType("float");
 
+                    b.Property<string>("requestExcel")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("requestExpensePlace")
                         .HasColumnType("nvarchar(max)");
 
@@ -66,6 +69,9 @@ namespace SiparisTakip.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("requestNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("requestPDF")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("requestProductFeatures")

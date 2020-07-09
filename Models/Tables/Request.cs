@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,6 +20,14 @@ namespace SiparisTakip.Models.Tables
         public int requestQuantity { get; set; }
         public string requestSpecies { get; set; }
         public string requestImage { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [DefaultValue("")]
+        public string requestExcel { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [DefaultValue("")]
+        public string requestPDF { get; set; }
         public Double requestEstimatedPrice { get; set; }
         public string requestDeleteDescription { get; set; }
 
@@ -36,6 +45,12 @@ namespace SiparisTakip.Models.Tables
 
         [NotMapped]
         public Microsoft.AspNetCore.Http.IFormFile ImageFile { get; set; }
+
+        [NotMapped]
+        public Microsoft.AspNetCore.Http.IFormFile PDFFile { get; set; }
+
+        [NotMapped]
+        public Microsoft.AspNetCore.Http.IFormFile ExcelFile { get; set; }
 
         [NotMapped]
         public string date { get; set; }

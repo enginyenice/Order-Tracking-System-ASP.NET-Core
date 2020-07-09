@@ -29,7 +29,7 @@
                                     <table id="datatable" class="table table-striped table-bordered" style="width:100%; text-align:center">
                                         <thead>
                                             <tr class="align-middle">
-                                                <th class="align-middle">Ürün Resmi</th>                           
+                                                <th class="align-middle">Ürün Resmi</th>
                                                 <th class="align-middle">Talep Numarası</th>
                                                 <th class="align-middle">Talep Eden Departman</th>
                                                 <th class="align-middle">Talep Eden Personel</th>
@@ -42,6 +42,8 @@
                                                 <th class="align-middle">Tahmini Fiyat</th>
                                                 <th class="align-middle">Teslim Tarihi</th>
                                                 <th class="align-middle">Tederaikçi Firmalar</th>
+                                                <th class="align-middle">PDF</th>
+                                                <th class="align-middle">Excel</th>
                                             </tr>
                                         </thead>
 
@@ -49,21 +51,51 @@
                                             @{
                                                 foreach (var item in Model)
                                                 {
-                                                    <tr class="align-middle">
-                                                        <td><img src="images/@item.requestImage" style="width:50px; height:50px;"></td>                          
-                                                        <td class="align-middle">@item.requestNo</td>
-                                                        <td class="align-middle">@item.requestDepartment</td>
-                                                        <td class="align-middle">@item.requestSteff</td>
-                                                        <td class="align-middle">@item.requestProject</td>
-                                                        <td class="align-middle">@item.requestExpensePlace</td>
-                                                        <td class="align-middle">@item.requestSpecies</td>
-                                                        <td class="align-middle">@item.requestProductFeatures</td>
-                                                        <td class="align-middle">@item.requestDescription</td>
-                                                        <td class="align-middle">@item.requestQuantity</td>
-                                                        <td class="align-middle">@item.requestEstimatedPrice</td>
-                                                        <td class="align-middle">@item.requestDeliveryDate</td>
-                                                        <td class="align-middle">@item.requestSupplyCompany1 <br> @item.requestSupplyCompany2 <br>@item.requestSupplyCompany3 </td>
-                                                    </tr>
+                                                                                        <tr class="align-middle">
+                                                                                            <td>
+                                                                                                <a href="images/@item.requestImage" data-fancybox="gallery-@item.requestNo" data-caption="Talep No : @item.requestNo">
+
+                                                                                                    <img src="images/@item.requestImage" style="width:50px; height:50px;" />
+                                                                                                </a>
+
+                                                                                            </td>
+                                                                                            <td class="align-middle">@item.requestNo</td>
+                                                                                            <td class="align-middle">@item.requestDepartment</td>
+                                                                                            <td class="align-middle">@item.requestSteff</td>
+                                                                                            <td class="align-middle">@item.requestProject</td>
+                                                                                            <td class="align-middle">@item.requestExpensePlace</td>
+                                                                                            <td class="align-middle">@item.requestSpecies</td>
+                                                                                            <td class="align-middle">@item.requestProductFeatures</td>
+                                                                                            <td class="align-middle">@item.requestDescription</td>
+                                                                                            <td class="align-middle">@item.requestQuantity</td>
+                                                                                            <td class="align-middle">@item.requestEstimatedPrice</td>
+                                                                                            <td class="align-middle">@item.requestDeliveryDate</td>
+                                                                                            <td class="align-middle">@item.requestSupplyCompany1 <br> @item.requestSupplyCompany2 <br>@item.requestSupplyCompany3 </td>
+                                                                                            <td class="align-middle">
+                                                                                                @{
+                                                                                                    if (item.requestPDF.Length > 0 && item.requestPDF != null)
+                                                                                                    {
+                                                                                                        <a target="_blank" href="~/pdf/@item.requestPDF" class="btn btn-danger btn-sm">PDF</a>
+                                                                                                    }
+                                                                                                    else
+                                                                                                    {
+                                                                                                        <span>PDF Eklenmedi</span>
+                                                                                                    }
+                                                                                                }
+                                                                                            </td>
+                                                                                            <td class="align-middle">
+                                                                                                @{
+                                                                                                    if (item.requestExcel.Length > 0 && item.requestExcel != null)
+                                                                                                    {
+                                                                                                        <a target="_blank" href="~/excel/@item.requestExcel" class="btn btn-success btn-sm">Excel</a>
+                                                                                                    }
+                                                                                                    else
+                                                                                                    {
+                                                                                                        <span>Excel Eklenmedi</span>
+                                                                                                    }
+                                                                                                }
+                                                                                            </td>
+                                                                                        </tr>
                                                 }
 
                                             }
