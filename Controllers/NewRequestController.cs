@@ -102,11 +102,14 @@ namespace SiparisTakip.Controllers
                 request.userId = Int32.Parse(HttpContext.Session.GetString("userId"));
                 request.requestCreateAt = DateTime.Now.ToShortDateString();
                 request.requestNo = "T" + year + mount + day + "-" + alldataString;
+                request.requestDeleteDescription = "";
+                request.user = _siparisTakipDB.Users.Where(m => m.userId == request.userId).FirstOrDefault();
                 _siparisTakipDB.Add(request);
                 _siparisTakipDB.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
+                return RedirectToAction("Index", "Home");
             }
             return RedirectToAction("Index", "PendingRequests");
         }
