@@ -62,8 +62,8 @@ namespace SiparisTakip.Controllers
             try
             {
                 string resimPath = "resimYok.jpg";
-                string excelPath = "";
-                string pdfPath = "";
+                string excelPath = "-";
+                string pdfPath = "-";
 
                 Random rastgele = new Random();
                 int sayi = rastgele.Next(5555, 25000);

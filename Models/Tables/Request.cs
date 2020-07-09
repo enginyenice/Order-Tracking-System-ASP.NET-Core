@@ -21,7 +21,6 @@ namespace SiparisTakip.Models.Tables
         public string requestSpecies { get; set; }
         public string requestImage { get; set; }
         public string requestExcel { get; set; }
-
         public string requestPDF { get; set; }
         public Double requestEstimatedPrice { get; set; }
         public string requestDeleteDescription { get; set; }

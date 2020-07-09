@@ -176,6 +176,8 @@
     }
 
     function RequestDetails(id) {
+        $("#PDFButton").remove();
+        $("#ExcelButton").remove();
         let postData = {
             'id': id
         }
@@ -199,10 +201,48 @@
                         text = `<span class="text-info"><strong>Onay Bekliyor</strong></span">`;
                     else
                         text = `<span class="text-success"><strong>Onaylandı</strong></span">`;
-
+                    console.log(result.requestNo+"<<<");
                     let image = "images/" + result.requestImage;
                     let pdf   = "pdf/" + result.requestPDF;
                     let excel = "excel/" + result.requestExcel;
+
+
+
+                    $("#userName").text("");
+                    $("#userSurname").text("");
+                    $("#userMail").text("");
+                    $("#RequestImage").attr('src', "");
+                    $("#requestDeliveryDate").text("");
+                    $("#requestNo").text("");
+                    $("#requestSpecies").text("");
+                    $("#requestDepartment").text("");
+                    $("#requestDescription").text("");
+                    $("#requestEstimatedPrice").text("");
+                    $("#requestExpensePlace").text("");
+                    $("#requestProductFeatures").text("");
+                    $("#requestProject").text("");
+                    $("#requestStatus").html("");
+                    $("#myModalLabel").text("");
+                    $("#requestQuantity").text("");
+                    $("#requestSteff").text("");
+                    $("#requestSupplyCompany1").text("");
+                    $("#requestSupplyCompany2").text("");
+                    $("#requestSupplyCompany3").text("");
+                    $("#requestPDF").text("");
+                    $("#requestExcel").text("");
+
+
+
+
+
+
+
+
+
+
+
+
+
                     $("#userName").text(result.user.userName);
                     $("#userSurname").text(result.user.userSurname);
                     $("#userMail").text(result.user.userMail);
@@ -223,7 +263,7 @@
                     $("#requestSupplyCompany1").text(result.requestSupplyCompany1);
                     $("#requestSupplyCompany2").text(result.requestSupplyCompany2);
                     $("#requestSupplyCompany3").text(result.requestSupplyCompany3);
-                    if (result.requestPDF != "" || result.requestPDF != null) {
+                    if (result.requestPDF != "-") {
                         var a = document.createElement('a');
 
                         // Create the text node for anchor element. 
@@ -234,6 +274,7 @@
 
                         // Set the title. 
                         a.title = "PDF";
+                        a.id = "PDFButton";
 
                         // Set the href property. 
                         a.href = pdf;
@@ -247,7 +288,7 @@
 
 
 
-                    if (result.requestExcel != "" || result.requestExcel != null) {
+                    if (result.requestExcel != "-") {
                         var a = document.createElement('a');
 
                         // Create the text node for anchor element. 
@@ -258,7 +299,7 @@
 
                         // Set the title. 
                         a.title = "Excel";
-
+                        a.id = "ExcelButton";
                         // Set the href property. 
                         a.href = excel;
                         a.className = "btn btn-primary btn-sm";

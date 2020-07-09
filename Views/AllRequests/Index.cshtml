@@ -87,7 +87,7 @@
 
                                                                                             <td class="align-middle">
                                                                                                 @{
-                                                                                                    if (item.requestPDF != "" || item.requestPDF != null)
+                                                                                                    if (item.requestPDF != "-")
                                                                                                     {
                                                                                                         <a target="_blank" href="~/pdf/@item.requestPDF" class="btn btn-danger btn-sm">PDF</a>
                                                                                                     } else
@@ -98,7 +98,7 @@
                                                                                             </td>
                                                                                             <td class="align-middle">
                                                                                                 @{
-                                                                                                    if (item.requestExcel != "" || item.requestExcel != null)
+                                                                                                    if (item.requestExcel != "-")
                                                                                                     {
                                                                                                         <a target="_blank" href="~/excel/@item.requestExcel" class="btn btn-success btn-sm">Excel</a>
                                                                                                     }

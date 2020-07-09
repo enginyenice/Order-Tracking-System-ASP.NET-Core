@@ -231,7 +231,7 @@
                             @using (Html.BeginForm("EditPDF", "EditRequest", FormMethod.Post,
 new { enctype = "multipart/form-data" }))
                             {
-                                if (Model.requestPDF != null && Model.requestPDF.Length > 0)
+                                if (Model.requestPDF != "-")
                                 {
                                     <a href="~/pdf/@Model.requestPDF" class="btn btn-danger"> PDF İndir </a>
                                 }
@@ -259,7 +259,7 @@ new { enctype = "multipart/form-data" }))
                             @using (Html.BeginForm("EditExcel", "EditRequest", FormMethod.Post,
 new { enctype = "multipart/form-data" }))
                             {
-                                if (Model.requestExcel != null && Model.requestExcel.Length > 0)
+                                if (Model.requestExcel != "-")
                                 {
                                     <a href="~/excel/@Model.requestExcel" class="btn btn-danger"> Excel İndir </a>
                                 }

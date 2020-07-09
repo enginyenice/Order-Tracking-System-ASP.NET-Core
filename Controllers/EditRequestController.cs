@@ -146,7 +146,7 @@ namespace SiparisTakip.Controllers
                 Random rastgele = new Random();
                 int sayi = rastgele.Next(5555, 25000);
                 string pdfler = Path.Combine(_evrimoment.WebRootPath, "pdf");
-                string pdfPath = "";
+                string pdfPath = "-";
                 if (request.PDFFile != null)
                 {
                     string[] parcalaPath = request.PDFFile.FileName.Split(".");
@@ -186,7 +186,7 @@ namespace SiparisTakip.Controllers
                 Random rastgele = new Random();
                 int sayi = rastgele.Next(5555, 25000);
                 string Exceller = Path.Combine(_evrimoment.WebRootPath, "excel");
-                string excelPath = "";
+                string excelPath = "-";
                 if (request.ExcelFile != null)
                 {
                     string[] parcalaPath = request.ExcelFile.FileName.Split(".");
