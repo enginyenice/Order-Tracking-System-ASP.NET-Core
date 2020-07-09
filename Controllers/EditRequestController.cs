@@ -132,5 +132,97 @@ namespace SiparisTakip.Controllers
         }
 
 
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Obsolete]
+        public IActionResult EditPDF(
+          [Bind("requestId", "PDFFile")] Request request)
+        {
+            try
+            {
+                Random rastgele = new Random();
+                int sayi = rastgele.Next(5555, 25000);
+                string pdfler = Path.Combine(_evrimoment.WebRootPath, "pdf");
+                string pdfPath = "";
+                if (request.PDFFile != null)
+                {
+                    string[] parcalaPath = request.PDFFile.FileName.Split(".");
+                    if (parcalaPath[parcalaPath.Length - 1] == "pdf" && request.PDFFile.Length > 0)
+                    {
+                        using (var fileStream = new FileStream(Path.Combine(pdfler, sayi + "-" + request.PDFFile.FileName), FileMode.Create))
+                        {
+                            request.PDFFile.CopyTo(fileStream);
+                        }
+                        pdfPath = sayi + "-" + request.PDFFile.FileName;
+                    }
+                }
+
+
+                var thisRequest = _siparisTakipDB.Requests.Where(m => m.requestId == request.requestId).FirstOrDefault();
+                thisRequest.requestPDF = pdfPath;
+
+                _siparisTakipDB.Update(thisRequest);
+                var result = _siparisTakipDB.SaveChanges();
+
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+            }
+            return RedirectToAction("Index", "AllRequests");
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Obsolete]
+        public IActionResult EditExcel(
+       [Bind("requestId", "ExcelFile")] Request request)
+        {
+            try
+            {
+                Random rastgele = new Random();
+                int sayi = rastgele.Next(5555, 25000);
+                string Exceller = Path.Combine(_evrimoment.WebRootPath, "excel");
+                string excelPath = "";
+                if (request.ExcelFile != null)
+                {
+                    string[] parcalaPath = request.ExcelFile.FileName.Split(".");
+                    if (parcalaPath[parcalaPath.Length - 1] == "xls" || parcalaPath[parcalaPath.Length - 1] == "xlsx" && request.ExcelFile.Length > 0)
+                    {
+                        using (var fileStream = new FileStream(Path.Combine(Exceller, sayi + "-" + request.ExcelFile.FileName), FileMode.Create))
+                        {
+                            request.ExcelFile.CopyTo(fileStream);
+                        }
+                        excelPath = sayi + "-" + request.ExcelFile.FileName;
+                    }
+                }
+
+
+                var thisRequest = _siparisTakipDB.Requests.Where(m => m.requestId == request.requestId).FirstOrDefault();
+                thisRequest.requestExcel = excelPath;
+
+                _siparisTakipDB.Update(thisRequest);
+                var result = _siparisTakipDB.SaveChanges();
+
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+            }
+            return RedirectToAction("Index", "AllRequests");
+        }
+
+
+
+
+
+
+
+
+
+
+
     }
 }

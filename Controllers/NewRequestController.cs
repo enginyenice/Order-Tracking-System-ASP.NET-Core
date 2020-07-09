@@ -83,7 +83,7 @@ namespace SiparisTakip.Controllers
                     }
                 }
 
-                if (request.PDFFile != null)
+                if (request.ExcelFile != null)
                 {
                     string[] parcalaPath = request.ExcelFile.FileName.Split(".");
                     if (parcalaPath[parcalaPath.Length - 1] == "xls" || parcalaPath[parcalaPath.Length - 1] == "xlsx" && request.ExcelFile.Length > 0)

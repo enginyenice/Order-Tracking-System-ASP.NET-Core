@@ -28,7 +28,7 @@
         <div class="clearfix"></div>
 
         @using (Html.BeginForm("EditImage", "EditRequest", FormMethod.Post,
-     new { enctype = "multipart/form-data" }))
+   new { enctype = "multipart/form-data" }))
         {
             <div class="row">
                 <!-- form input mask -->
@@ -43,7 +43,7 @@
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <input type="hidden" asp-for="requestId" />
                                 <div class="form-group">
-                                    
+
                                     <a href="/images/@Model.requestImage" data-fancybox="gallery-@Model.requestNo" data-caption="Talep No : @Model.requestNo">
 
                                         <img src="/images/@Model.requestImage" style="width:200px; height:200px;" />
@@ -51,23 +51,24 @@
                                 </div>
                                 <div class="form-group pl-4">
 
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align pl-4" for="last-name">
-                                     <strong>   Ürün Resmi </strong> 
+                                    <label class="col-form-label" for="last-name">
+                                        <strong>   Ürün Resmi </strong>
                                     </label>
                                     <div class="col-md-12 col-sm-12 mt-4">
                                         <input type="file" name="ImageFile" multiple />
                                     </div>
-                                    <div class="form-group col-md-12 col-sm-12 mt-4 pl-5 ">
+                                    <div class="form-group col-md-12 col-sm-12 mt-4">
+
                                         <input type="submit" value="Kaydet" class="btn btn-success" />
                                     </div>
 
                                 </div>
 
-                            
+
                             </div>
-                             
-                            </div>
+
                         </div>
+                    </div>
                 </div>
             </div>
         }
@@ -75,150 +76,216 @@
 
 
 
-            @using (Html.BeginForm("Edit", "EditRequest", FormMethod.Post))
-            {
-                <div class="row">
-                    <!-- form input mask -->
-                    <div class="col-md-6 col-sm-12  ">
-                        <div class="x_panel">
-                            <div class="">
+        @using (Html.BeginForm("Edit", "EditRequest", FormMethod.Post))
+        {
+            <div class="row">
+                <!-- form input mask -->
+                <div class="col-md-6 col-sm-12  ">
+                    <div class="x_panel">
+                        <div class="">
 
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                                <br />
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <input type="hidden" asp-for="requestId" />
-
-
-                                <div class="form-group">
-                                    <label asp-for="requestNo" class="control-label">Talep No</label>
-                                    <input required="required" name="requestNo" asp-for="requestNo" class="form-control" readonly />
-                                    <span asp-validation-for="requestNo" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="requestDepartment" class="control-label">Departman</label>
-                                    <select name="requestDepartment" asp-for="requestDepartment" class="form-control">
-                                        @foreach (var item in ViewBag.data)
-                                        {
-                                            <option value="@item.depName">@item.depName</option>
-                                        }
-                                    </select>
-                                    <span asp-validation-for="requestSpecies" class="text-danger"></span>
-                                </div>
-
-                                <div class="form-group">
-                                    <label asp-for="requestSteff" class="control-label">Talep Eden Personel</label>
-                                    <input name="requestSteff" required="required" asp-for="requestSteff" class="form-control" />
-                                    <span asp-validation-for="requestSteff" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="requestProject" class="control-label">Proje</label>
-                                    <input name="requestProject" asp-for="requestProject" class="form-control" />
-                                    <span asp-validation-for="requestProject" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="requestExpensePlace" class="control-label">Gider Yeri</label>
-                                    <input name="requestExpensePlace" asp-for="requestExpensePlace" class="form-control" />
-                                    <span asp-validation-for="requestExpensePlace" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="requestProductFeatures" class="control-label">Ürün Özellikleri</label>
-                                    <input name="requestProductFeatures" asp-for="requestProductFeatures" class="form-control" />
-                                    <span asp-validation-for="requestProductFeatures" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="requestDescription" class="control-label">Açıklama</label>
-                                    <input name="requestDescription" asp-for="requestDescription" class="form-control" />
-                                    <span asp-validation-for="requestDescription" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="requestQuantity" class="control-label">Adet</label>
-                                    <input name="requestQuantity" required="required" asp-for="requestQuantity" class="form-control" />
-                                    <span asp-validation-for="requestQuantity" class="text-danger"></span>
-                                </div>
-
-                            </div>
+                            <div class="clearfix"></div>
                         </div>
-                    </div>
-                    <!-- /form input mask -->
-                    <!-- form color picker -->
-                    <div class="col-md-6 col-sm-12  ">
-                        <div class="x_panel">
-                            <div class="">
-
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
+                        <div class="x_content">
+                            <br />
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="requestId" />
 
 
-
-
-
-                                <div class="form-group">
-                                    <label asp-for="requestSpecies" class="control-label">Tipi</label>
-                                    <select name="requestSpecies" asp-for="requestSpecies" class="form-control">
-                                        <option value="Masraf">Masraf</option>
-                                        <option value="Stok">Stok</option>
-                                    </select>
-                                    <span asp-validation-for="requestSpecies" class="text-danger"></span>
-                                </div>
-
-                                <!--
                             <div class="form-group">
-                                <label asp-for="requestImage" class="control-label">Talep Görseli</label>
-                                <input required="required" required="required" asp-for="requestImage" class="form-control" />
-                                <span asp-validation-for="requestImage" class="text-danger"></span>
+                                <label asp-for="requestNo" class="control-label">Talep No</label>
+                                <input required="required" name="requestNo" asp-for="requestNo" class="form-control" readonly />
+                                <span asp-validation-for="requestNo" class="text-danger"></span>
                             </div>
-                                -->
-                                <div class="form-group">
-                                    <label asp-for="requestEstimatedPrice" class="control-label">Tahmini Fiyat</label>
-                                    <input type="number" step="0.01" required="required" asp-for="requestEstimatedPrice" class="form-control" />
-                                    <span class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="requestDeliveryDate" class="control-label">Teslim Tarihi</label>
-                                    <input required="required" asp-for="requestDeliveryDate" class="form-control" />
-                                    <span asp-validation-for="requestDeliveryDate" class="text-danger"></span>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label asp-for="requestSupplyCompany1" class="control-label">Tedarik Firma 1</label>
-                                    <input asp-for="requestSupplyCompany1" class="form-control" />
-                                    <span asp-validation-for="requestSupplyCompany1" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="requestSupplyCompany2" class="control-label">Tedarik Firma 2</label>
-                                    <input asp-for="requestSupplyCompany2" class="form-control" />
-                                    <span asp-validation-for="requestSupplyCompany2" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="requestSupplyCompany3" class="control-label">Tedarik Firma 3</label>
-                                    <input asp-for="requestSupplyCompany3" class="form-control" />
-                                    <span asp-validation-for="requestSupplyCompany3" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Talebi Oluşturan</label><br>
-                                    <input required="required" class="form-control" value="@adSoyad" readonly>
-                                    <span class="text-danger"></span>
-                                </div>
-
-
-                                <div class="form-group text-center ml-5 mt-4 mb-4">
-                                    <input type="submit" value="Kaydet" class="btn btn-success mid_center" />
-                                </div>
-
-
-
-
+                            <div class="form-group">
+                                <label asp-for="requestDepartment" class="control-label">Departman</label>
+                                <select name="requestDepartment" asp-for="requestDepartment" class="form-control">
+                                    @foreach (var item in ViewBag.data)
+                                    {
+                                        <option value="@item.depName">@item.depName</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="requestSpecies" class="text-danger"></span>
                             </div>
+
+                            <div class="form-group">
+                                <label asp-for="requestSteff" class="control-label">Talep Eden Personel</label>
+                                <input name="requestSteff" required="required" asp-for="requestSteff" class="form-control" />
+                                <span asp-validation-for="requestSteff" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="requestProject" class="control-label">Proje</label>
+                                <input name="requestProject" asp-for="requestProject" class="form-control" />
+                                <span asp-validation-for="requestProject" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="requestExpensePlace" class="control-label">Gider Yeri</label>
+                                <input name="requestExpensePlace" asp-for="requestExpensePlace" class="form-control" />
+                                <span asp-validation-for="requestExpensePlace" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="requestProductFeatures" class="control-label">Ürün Özellikleri</label>
+                                <input name="requestProductFeatures" asp-for="requestProductFeatures" class="form-control" />
+                                <span asp-validation-for="requestProductFeatures" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="requestDescription" class="control-label">Açıklama</label>
+                                <input name="requestDescription" asp-for="requestDescription" class="form-control" />
+                                <span asp-validation-for="requestDescription" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="requestQuantity" class="control-label">Adet</label>
+                                <input name="requestQuantity" required="required" asp-for="requestQuantity" class="form-control" />
+                                <span asp-validation-for="requestQuantity" class="text-danger"></span>
+                            </div>
+
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+                <!-- /form input mask -->
+                <!-- form color picker -->
+                <div class="col-md-6 col-sm-12  ">
+                    <div class="x_panel">
+                        <div class="">
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+
+
+
+
+                            <div class="form-group">
+                                <label asp-for="requestSpecies" class="control-label">Tipi</label>
+                                <select name="requestSpecies" asp-for="requestSpecies" class="form-control">
+                                    <option value="Masraf">Masraf</option>
+                                    <option value="Stok">Stok</option>
+                                </select>
+                                <span asp-validation-for="requestSpecies" class="text-danger"></span>
+                            </div>
+
+                            <!--
+                        <div class="form-group">
+                            <label asp-for="requestImage" class="control-label">Talep Görseli</label>
+                            <input required="required" required="required" asp-for="requestImage" class="form-control" />
+                            <span asp-validation-for="requestImage" class="text-danger"></span>
+                        </div>
+                            -->
+                            <div class="form-group">
+                                <label asp-for="requestEstimatedPrice" class="control-label">Tahmini Fiyat</label>
+                                <input type="number" step="0.01" required="required" asp-for="requestEstimatedPrice" class="form-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="requestDeliveryDate" class="control-label">Teslim Tarihi</label>
+                                <input required="required" asp-for="requestDeliveryDate" class="form-control" />
+                                <span asp-validation-for="requestDeliveryDate" class="text-danger"></span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label asp-for="requestSupplyCompany1" class="control-label">Tedarik Firma 1</label>
+                                <input asp-for="requestSupplyCompany1" class="form-control" />
+                                <span asp-validation-for="requestSupplyCompany1" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="requestSupplyCompany2" class="control-label">Tedarik Firma 2</label>
+                                <input asp-for="requestSupplyCompany2" class="form-control" />
+                                <span asp-validation-for="requestSupplyCompany2" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="requestSupplyCompany3" class="control-label">Tedarik Firma 3</label>
+                                <input asp-for="requestSupplyCompany3" class="form-control" />
+                                <span asp-validation-for="requestSupplyCompany3" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Talebi Oluşturan</label><br>
+                                <input required="required" class="form-control" value="@adSoyad" readonly>
+                                <span class="text-danger"></span>
+                            </div>
+
+
+                            <div class="form-group text-center ml-5 mt-4 mb-4">
+                                <input type="submit" value="Kaydet" class="btn btn-success mid_center" />
+                            </div>
+
+
+
+
+                        </div>
                     </div>
-                    @section Scripts {
-                        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-                    }
+                </div>
+            </div>
+        }
+
+
+
+
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <div class="row">
+                            @using (Html.BeginForm("EditPDF", "EditRequest", FormMethod.Post,
+new { enctype = "multipart/form-data" }))
+                            {
+                                if (Model.requestPDF != null && Model.requestPDF.Length > 0)
+                                {
+                                    <a href="~/pdf/@Model.requestPDF" class="btn btn-danger"> PDF İndir </a>
+                                }
+                                else
+                                {
+                                    <span>PDF Yüklenmedi</span>
+                                }
+
+                            
+                        <div class="form-group">
+                            <input type="hidden" asp-for="requestId" />
+                            <input type="file" name="PDFFile" />
+                            <input type="submit" value="Kaydet" class="btn btn-success" />
+                        </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <div class="row">
+                            @using (Html.BeginForm("EditExcel", "EditRequest", FormMethod.Post,
+new { enctype = "multipart/form-data" }))
+                            {
+                                if (Model.requestExcel != null && Model.requestExcel.Length > 0)
+                                {
+                                    <a href="~/excel/@Model.requestExcel" class="btn btn-danger"> Excel İndir </a>
+                                }
+                                else
+                                {
+                                    <span>Excel Yüklenmedi</span>
+                                }
+
+                                <div class="form-group">
+                                    <input type="hidden" name="requestId" value="@Model.requestId" />
+                                    <input type="file" name="ExcelFile" multiple />
+                                    <input type="submit" value="Kaydet" class="btn btn-success" />
+                                </div>
+
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+                        </div>
+                        @section Scripts {
+                            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+                        }
